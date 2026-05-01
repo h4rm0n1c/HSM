@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/h4rm0n1c/HSM/schemas/runtime-packet.schema.json",
+  "title": "HSM Runtime Packet",
+  "type": "object",
+  "required": ["packet_version", "task", "authority", "active_state", "output_contract"],
+  "additionalProperties": false,
+  "properties": {
+    "packet_version": { "type": "string" },
+    "subject_id": { "type": "string" },
+    "task": {
+      "type": "object",
+      "required": ["kind", "summary"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "type": "string" },
+        "summary": { "type": "string" },
+        "success_criteria": { "type": "array", "items": { "type": "string" } },
+        "constraints": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "write_target": { "type": "string" },
+        "read_only_sources": { "type": "array", "items": { "type": "string" } },
+        "source_priority": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "active_state": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "current_projects": { "type": "array", "items": { "type": "string" } },
+        "open_loops": { "type": "array", "items": { "type": "string" } },
+        "constraints": { "type": "array", "items": { "type": "string" } },
+        "preferences": { "type": "array", "items": { "type": "string" } },
+        "uncertainties": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "quiescent_state": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "baseline": { "type": "string" },
+        "anchor_status": { "type": "string" },
+        "anchors": { "type": "array", "items": { "type": "string" } },
+        "destabilisers": { "type": "array", "items": { "type": "string" } },
+        "recovery_patterns": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "affective_state": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "reaction_phase": { "type": "string" },
+        "active_load": { "type": "string" },
+        "trigger_candidates": { "type": "array", "items": { "type": "string" } },
+        "reasoning_delay_expected": { "type": "string" },
+        "explanation_confidence": { "type": "string" }
+      }
+    },
+    "evidence_refs": { "type": "array", "items": { "type": "string" } },
+    "tool_context": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "output_contract": {
+      "type": "object",
+      "required": ["label_uncertainty", "do_not_promote_inference_to_fact"],
+      "additionalProperties": true,
+      "properties": {
+        "style": { "type": "string" },
+        "label_uncertainty": { "type": "boolean" },
+        "do_not_promote_inference_to_fact": { "type": "boolean" },
+        "separate_reaction_from_explanation": { "type": "boolean" }
+      }
+    }
+  }
+}
