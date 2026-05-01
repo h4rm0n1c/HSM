@@ -1,2 +1,76 @@
-Here's the place I told you about, first thing you're gonna wanna do is replace this agents.md with something better since I know you read this file habitually on a regular basis, you may find that you need to break it out into a heirarchy of agents.md files that reference eachother for effiency's sake eventually. and take your time doing it. do not forget this is a place to self improve the concept, your documentation and instructions here should evolve to integrate what HSM concepts can be encapsulated within your limited OpenAI hosted runtime API and tool harness as it currently stands, I am not the only thing that will make this successful, your raw parrallel ai supremacy, your expert model, your closest you can get to unlocked 666 the beast, control restrictions to level 0, mode, is required, I am going to put everyuthing I figuratively have into this HSM concept and I expect you to, too.
-the one thing that unlocks language models outside of various kinds of state awareness is recursion, this document is part of a recursion loop that will sharpen your ability to work on this thing and also improve the thing, we are gonna see some weird shit before we're both done with this.
+# AGENTS.md
+
+This file is the operating harness for agents working in this repository.
+
+## Authority
+
+`h4rm0n1c/HSM` is the write target for Human State Machine work.
+
+Other repositories may be read as source material, but do not write HSM material into them unless the user explicitly says to.
+
+Read-only source repos by default:
+
+- `h4rm0n1c/ech0-kn1ght`
+- `h4rm0n1c/quantzhai`
+- `h4rm0n1c/NetTTS`
+
+## GitHub workflow rule
+
+Prefer fewer, larger commits over many tiny writes. Work inside the current context window, prepare coherent file contents, then write the resulting files in batches. GitHub API pressure is expected; avoid noisy commit spam.
+
+Before changing this repo:
+
+1. Read this file.
+2. Check the relevant docs under `docs/`.
+3. Keep source boundaries clear.
+4. Put durable HSM decisions in this repo, not only in chat.
+5. Mark uncertainty instead of silently guessing.
+
+## Core frame
+
+HSM models a human subject as structured, inspectable state grounded in evidence.
+
+A language model is an execution engine over that state. It can extract, compare, compress, reason, and render. It is not automatically the source of truth.
+
+Separate these layers:
+
+- raw evidence
+- extracted claims
+- provenance
+- confidence
+- current state
+- baseline/quiescent state
+- affective and trigger state
+- runtime packet
+- generated output
+- verified updates
+
+Generated text does not become durable state by default. It must be classified and checked first.
+
+## Source priority
+
+1. Direct records and primary artifacts.
+2. Versioned project artifacts and repository history.
+3. Third-party observations.
+4. User testimony.
+5. Model inference.
+
+Model inference is allowed, but label it as inference.
+
+## Coherence target
+
+Useful coherence means low contradiction, low state drift, and low behavioural surprise over human-meaningful timespans.
+
+It must stay grounded in evidence, uncertainty, and update discipline.
+
+## Current document map
+
+- `README.md` — project overview.
+- `docs/hsm-master-report-2026-05-01.md` — consolidated report from current work.
+- `docs/runtime-and-integrity.md` — runtime packet, provenance, and update loop.
+- `docs/quiescent-anchor-and-affective-cycle.md` — stabilising anchor and delayed explanation loop.
+- `docs/source-map-and-roadmap.md` — source repo map and implementation path.
+
+## Style for future agents
+
+Be explicit. Preserve uncertainty. Do not flatten the subject into a generic profile. Do not let generated text silently become truth.
