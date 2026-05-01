@@ -1,0 +1,40 @@
+subject_id: local-subject
+status: example
+last_reviewed: unknown
+
+patterns:
+  - id: affective.loop.delayed-explanation
+    label: Immediate reaction followed by delayed explanation
+    description: A cue can trigger fast affective response before high-level reasoning has produced a clean explanation. The explanation may arrive seconds, minutes, hours, or days later.
+    cycle:
+      - quiescent_state
+      - cue_or_incident
+      - fast_affective_reaction
+      - partial_memory_or_body_state_activation
+      - behaviour_or_output
+      - delayed_reasoning_aftershock
+      - narrative_explanation
+      - integration_or_recovery
+    confidence: medium
+    evidence_refs: []
+
+  - id: affective.anchor-seeking
+    label: Anchor seeking under instability
+    description: When state becomes unstable, the subject may reach for projects, evidence trails, technical work, or other anchors that restore continuity and control.
+    confidence: medium
+    evidence_refs: []
+
+operational_labels:
+  - baseline
+  - focused_work
+  - anchor_seeking
+  - destabilised
+  - defensive
+  - shutdown
+  - aftershock_reasoning
+  - integration
+  - recovery
+
+notes:
+  - These are emulator-state labels, not diagnostic labels.
+  - Later explanations should be stored as explanation candidates until evidence checks promote them.
