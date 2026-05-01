@@ -1,0 +1,37 @@
+subject_id: local-subject
+status: example
+last_reviewed: unknown
+
+identity:
+  stable_traits: []
+  values: []
+  recurring_patterns: []
+  contradictions: []
+
+current_projects:
+  - HSM
+  - ech0-kn1ght
+  - quantzhai
+
+preferences:
+  technical:
+    - Prefer explicit diagnostics over guesses.
+    - Prefer lower-level fixes over surface workarounds when practical.
+    - Prefer reproducible commands and versioned notes.
+  writing:
+    - Prefer direct prose over vague AI-style filler.
+    - Preserve uncertainty.
+
+constraints:
+  environment: []
+  health_or_capacity: []
+  social_or_contextual: []
+
+open_loops:
+  - Build HSM repo spine.
+  - Define schemas and state compiler v0.
+  - Keep source repos read-only unless instructed otherwise.
+
+uncertainties:
+  - This file is an example scaffold, not a complete subject model.
+  - Claims here should be promoted only after evidence/provenance review.
