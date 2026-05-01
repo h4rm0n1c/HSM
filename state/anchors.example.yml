@@ -1,0 +1,41 @@
+subject_id: local-subject
+status: example
+last_reviewed: unknown
+
+anchors:
+  - id: anchor.project.hsm
+    type: project
+    description: HSM as the central write target for human-state architecture work.
+    stabilises_by:
+      - durable external state
+      - coherent project boundary
+      - recursive improvement loop
+    failure_mode_if_lost: unknown
+    confidence: medium
+    evidence_refs: []
+
+  - id: anchor.project.evidence
+    type: archive
+    description: Evidence/provenance trails that keep claims grounded instead of guessed.
+    stabilises_by:
+      - source traceability
+      - contradiction checking
+      - anti-fabrication pressure
+    failure_mode_if_lost: unknown
+    confidence: medium
+    evidence_refs: []
+
+  - id: anchor.mode.technical-directness
+    type: cognitive_style
+    description: Direct, inspectable technical work with concrete state and reproducible commands.
+    stabilises_by:
+      - clarity
+      - control
+      - testable next action
+    failure_mode_if_lost: frustration, drift, wasted effort
+    confidence: medium
+    evidence_refs: []
+
+notes:
+  - Anchor records should eventually cite evidence.
+  - Keep examples sparse until populated from reviewed material.
