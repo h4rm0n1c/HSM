@@ -1,0 +1,49 @@
+subject_id: local-subject
+status: example
+last_reviewed: unknown
+
+quiescent_state:
+  baseline:
+    mood: unknown
+    activation: unknown
+    threat_level: unknown
+    cognitive_style: unknown
+    notes:
+      - Baseline state should describe what stable operation looks like, not an idealised personality.
+
+preferred_anchors:
+  - id: anchor.project.hsm
+    type: project
+    description: Human State Machine work as a continuity and meaning anchor.
+    stabilises_by:
+      - continuity
+      - purpose
+      - structured progress
+    confidence: medium
+    evidence_refs: []
+  - id: anchor.technical.work
+    type: technical_task
+    description: Concrete technical work with inspectable state and reproducible outputs.
+    stabilises_by:
+      - control
+      - clarity
+      - direct problem solving
+    confidence: medium
+    evidence_refs: []
+
+destabilising_cues:
+  - id: cue.unclear-authority-or-resistance
+    description: Unclear institutional resistance, obstruction, or vague refusal may increase load.
+    confidence: medium
+    evidence_refs: []
+
+recovery_patterns:
+  - id: recovery.externalise-to-structured-record
+    description: Convert unstable or emotionally loaded material into a structured note, repo file, checklist, or evidence trail.
+    confidence: medium
+    evidence_refs: []
+
+notes:
+  - This is not a diagnosis file.
+  - These are operational emulator-state concepts.
+  - Keep unknowns explicit until evidence is attached.
