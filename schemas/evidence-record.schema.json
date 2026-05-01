@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/h4rm0n1c/HSM/schemas/evidence-record.schema.json",
+  "title": "HSM Evidence Record",
+  "type": "object",
+  "required": ["id", "kind", "title", "source", "status"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string" },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "document",
+        "repo_artifact",
+        "commit",
+        "message",
+        "email",
+        "letter",
+        "report",
+        "post",
+        "archive_capture",
+        "image",
+        "audio",
+        "video",
+        "testimony",
+        "other"
+      ]
+    },
+    "title": { "type": "string" },
+    "summary": { "type": "string" },
+    "source": {
+      "type": "object",
+      "required": ["type"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["direct_record", "versioned_artifact", "third_party_observation", "self_report", "model_inference", "unknown"]
+        },
+        "uri": { "type": "string" },
+        "repo": { "type": "string" },
+        "path": { "type": "string" },
+        "commit": { "type": "string" },
+        "collector": { "type": "string" },
+        "notes": { "type": "string" }
+      }
+    },
+    "time": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "date": { "type": "string" },
+        "start": { "type": "string" },
+        "end": { "type": "string" },
+        "precision": { "type": "string", "enum": ["exact", "day", "month", "year", "range", "unknown"] }
+      }
+    },
+    "sensitivity": { "type": "string", "enum": ["public", "private", "sensitive", "restricted", "unknown"] },
+    "status": { "type": "string", "enum": ["raw", "processed", "needs_review", "deprecated", "rejected"] },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "notes": { "type": "string" }
+  }
+}
