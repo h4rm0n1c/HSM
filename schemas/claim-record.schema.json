@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/h4rm0n1c/HSM/schemas/claim-record.schema.json",
+  "title": "HSM Claim Record",
+  "type": "object",
+  "required": ["id", "claim", "claim_type", "support", "confidence", "status"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string" },
+    "claim": { "type": "string" },
+    "claim_type": {
+      "type": "string",
+      "enum": [
+        "fact",
+        "event",
+        "preference",
+        "constraint",
+        "skill",
+        "relationship",
+        "style",
+        "anchor",
+        "affective_pattern",
+        "interpretation",
+        "hypothesis",
+        "contradiction",
+        "open_question"
+      ]
+    },
+    "support": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["evidence_id", "support_type"],
+        "additionalProperties": false,
+        "properties": {
+          "evidence_id": { "type": "string" },
+          "support_type": { "type": "string", "enum": ["direct", "indirect", "contextual", "contradicts", "unknown"] },
+          "quote_or_span": { "type": "string" },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "confidence": { "type": "string", "enum": ["low", "medium", "high", "unknown"] },
+    "status": { "type": "string", "enum": ["draft", "active", "needs_review", "superseded", "rejected"] },
+    "time": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "date": { "type": "string" },
+        "period": { "type": "string" },
+        "precision": { "type": "string", "enum": ["exact", "day", "month", "year", "range", "unknown"] }
+      }
+    },
+    "sensitivity": { "type": "string", "enum": ["public", "private", "sensitive", "restricted", "unknown"] },
+    "contradictions": { "type": "array", "items": { "type": "string" } },
+    "notes": { "type": "string" }
+  }
+}
