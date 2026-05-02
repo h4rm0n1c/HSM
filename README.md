@@ -17,6 +17,10 @@ human artifacts + testimony + records
 
 The model is not the person. The model is an execution engine over state.
 
+## Documentation
+
+Start with the [documentation index](docs/README.md) for the current map of HSM architecture notes, runtime/state design, source boundaries, and research seeds.
+
 ## What this repo is for
 
 This repository is the dedicated write target for HSM work:
@@ -90,11 +94,16 @@ A generated explanation may be useful. It is not automatically true.
 
 ## Current docs
 
+See the [documentation index](docs/README.md) for the browsable current map.
+
 - `AGENTS.md` — operating harness for future agents.
+- `docs/README.md` — documentation index and task-oriented entry points.
 - `docs/hsm-master-report-2026-05-01.md` — consolidated HSM report.
 - `docs/runtime-and-integrity.md` — runtime packet, provenance, and integrity loop.
 - `docs/quiescent-anchor-and-affective-cycle.md` — baseline/anchor/trigger/reasoning-aftershock model.
 - `docs/source-map-and-roadmap.md` — source map and build path.
+- `docs/active-state-harness-lessons-2026-05-02.md` — runtime state harness lessons.
+- `docs/human-analogy-and-memory-research-seed-2026-05-02.md` — human-human memory/state analogy research seed.
 
 ## Working standard
 
@@ -105,3 +114,4 @@ When adding to this repo:
 3. Preserve source boundaries.
 4. Prefer schemas and explicit state over vibes.
 5. Do not flatten the subject into a generic character card.
+6. Add new Markdown docs to `docs/README.md`.
