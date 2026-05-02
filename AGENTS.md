@@ -22,9 +22,11 @@ Before changing this repo:
 
 1. Read this file.
 2. Check the relevant docs under `docs/`.
-3. Keep source boundaries clear.
-4. Put durable HSM decisions in this repo, not only in chat.
-5. Mark uncertainty instead of silently guessing.
+3. Start with `docs/README.md` when browsing or adding documentation.
+4. Keep source boundaries clear.
+5. Put durable HSM decisions in this repo, not only in chat.
+6. Mark uncertainty instead of silently guessing.
+7. Add any new Markdown document to `docs/README.md` in the same change.
 
 ## Core frame
 
@@ -65,11 +67,16 @@ It must stay grounded in evidence, uncertainty, and update discipline.
 
 ## Current document map
 
+Start with `docs/README.md` for the browsable index.
+
 - `README.md` — project overview.
+- `docs/README.md` — documentation index and task-oriented entry points.
 - `docs/hsm-master-report-2026-05-01.md` — consolidated report from current work.
 - `docs/runtime-and-integrity.md` — runtime packet, provenance, and update loop.
 - `docs/quiescent-anchor-and-affective-cycle.md` — stabilising anchor and delayed explanation loop.
 - `docs/source-map-and-roadmap.md` — source repo map and implementation path.
+- `docs/active-state-harness-lessons-2026-05-02.md` — hosted-runtime state harness lessons relevant to HSM.
+- `docs/human-analogy-and-memory-research-seed-2026-05-02.md` — seed for human-human memory, trust, state repair, and social integrity research.
 
 ## Style for future agents
 
