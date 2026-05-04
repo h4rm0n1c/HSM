@@ -8,16 +8,18 @@ Use it to find the current architecture notes, runtime/state design, source boun
 
 1. [Project README](../README.md) — repo purpose, core thesis, architecture, and source boundaries.
 2. [Agent harness](../AGENTS.md) — rules for agents working in this repo.
-3. [HSM master report](hsm-master-report-2026-05-01.md) — consolidated project definition and design frame.
-4. [Runtime state and integrity loop](runtime-and-integrity.md) — runtime packet, model boundary, update gate, and truth discipline.
-5. [Source map and roadmap](source-map-and-roadmap.md) — nearby repositories, implementation phases, and next files.
+3. [Anti-agreement harness](anti-agreement-harness.md) — claim classification, uncertainty, challenge, and falsification discipline.
+4. [HSM master report](hsm-master-report-2026-05-01.md) — consolidated project definition and design frame.
+5. [Runtime state and integrity loop](runtime-and-integrity.md) — runtime packet, model boundary, update gate, and truth discipline.
+6. [Source map and roadmap](source-map-and-roadmap.md) — nearby repositories, implementation phases, and next files.
 
 ## Documentation by area
 
 | Area | Document | Use it for |
 | --- | --- | --- |
 | Project overview | [README](../README.md) | What HSM is, what belongs in this repo, source repos, architecture, and working standard. |
-| Agent workflow | [AGENTS](../AGENTS.md) | Operating rules for agents: repo authority, source boundaries, confidence, provenance, and write discipline. |
+| Agent workflow | [AGENTS](../AGENTS.md) | Operating rules for agents: repo authority, source boundaries, confidence, provenance, write discipline, and anti-agreement requirement. |
+| Truth discipline | [Anti-agreement harness](anti-agreement-harness.md) | Preventing agreement-machine drift; classifying claims; preserving uncertainty, contradictions, source boundaries, and falsification paths. |
 | Core architecture | [HSM master report](hsm-master-report-2026-05-01.md) | The main HSM concept: evidence, extraction, provenance, state, runtime packet, integrity loop, and failure modes. |
 | Runtime design | [Runtime state and integrity loop](runtime-and-integrity.md) | Runtime packet structure, update gate, provenance rules, packet levels, and coherence metrics. |
 | Human state model | [Quiescent anchor and affective cycle](quiescent-anchor-and-affective-cycle.md) | Baseline state, anchors, destabilising cues, affective trigger cycle, delayed explanation, and operating modes. |
@@ -54,6 +56,7 @@ Read:
 
 - [Runtime state and integrity loop](runtime-and-integrity.md)
 - [Active state harness lessons](active-state-harness-lessons-2026-05-02.md)
+- [Anti-agreement harness](anti-agreement-harness.md)
 - [Source map and roadmap](source-map-and-roadmap.md)
 
 Focus on:
@@ -63,6 +66,7 @@ Focus on:
 - provenance and confidence labels
 - update gate after generation
 - no generated-memory contamination
+- preserving uncertainty and contradiction markers under compression
 
 ### I want to work on quiescent/anchor/trigger state
 
@@ -71,6 +75,7 @@ Read:
 - [Quiescent anchor and affective cycle](quiescent-anchor-and-affective-cycle.md)
 - [HSM master report](hsm-master-report-2026-05-01.md#quiescent-state-and-anchor-model)
 - [Human analogy and memory research seed](human-analogy-and-memory-research-seed-2026-05-02.md)
+- [Anti-agreement harness](anti-agreement-harness.md)
 
 Focus on:
 
@@ -79,6 +84,7 @@ Focus on:
 - destabilising cues
 - reaction versus later explanation
 - state modes such as baseline, focused work, defensive, aftershock, integration, and recovery
+- not treating later explanation as automatic truth
 
 ### I want to work on evidence/provenance/extraction
 
@@ -86,6 +92,7 @@ Read:
 
 - [HSM master report](hsm-master-report-2026-05-01.md#architecture-layers)
 - [Runtime state and integrity loop](runtime-and-integrity.md#integrity-loop)
+- [Anti-agreement harness](anti-agreement-harness.md)
 - [Source map and roadmap](source-map-and-roadmap.md)
 
 Source priority:
@@ -97,6 +104,25 @@ Source priority:
 5. Model inference.
 
 Model inference is allowed. Label it as inference.
+
+### I want to avoid agreement-machine drift
+
+Read:
+
+- [Anti-agreement harness](anti-agreement-harness.md)
+- [AGENTS: Anti-agreement harness](../AGENTS.md#anti-agreement-harness)
+- [Runtime state and integrity loop](runtime-and-integrity.md#truth-discipline)
+
+Working rule:
+
+```text
+Do not optimize for agreement.
+Classify claims.
+Preserve uncertainty.
+Challenge overreach.
+Keep emotional coherence separate from evidence.
+Do not let generated explanation become durable state without checks.
+```
 
 ### I want to know what belongs in which repo
 
@@ -120,6 +146,7 @@ README.md
 AGENTS.md
 docs/README.md
 docs/active-state-harness-lessons-2026-05-02.md
+docs/anti-agreement-harness.md
 docs/hsm-master-report-2026-05-01.md
 docs/human-analogy-and-memory-research-seed-2026-05-02.md
 docs/quiescent-anchor-and-affective-cycle.md
