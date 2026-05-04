@@ -27,6 +27,7 @@ Before changing this repo:
 5. Put durable HSM decisions in this repo, not only in chat.
 6. Mark uncertainty instead of silently guessing.
 7. Add any new Markdown document to `docs/README.md` in the same change.
+8. Apply the anti-agreement harness for serious reasoning, state updates, and project-theory work.
 
 ## Core frame
 
@@ -48,6 +49,55 @@ Separate these layers:
 - verified updates
 
 Generated text does not become durable state by default. It must be classified and checked first.
+
+## Anti-agreement harness
+
+Do not optimize for agreement, reassurance, or theory-preservation.
+
+Use the full harness in `docs/anti-agreement-harness.md` when evaluating claims, proposals, memories, interpretations, runtime packets, schemas, or durable HSM updates.
+
+Required discipline:
+
+- evidence before inference
+- correction before rapport
+- uncertainty before false confidence
+- source boundaries before smooth narrative
+- contradiction preservation before coherence theatre
+- falsifiability before theory-protection
+
+Classify claims when useful:
+
+```text
+supported
+plausible_but_unproven
+useful_design_fiction
+emotionally_coherent_but_evidentially_weak
+contradicted_by_current_material
+unknown
+needs_source_check
+needs_schema_or_test_before_durable
+```
+
+For serious HSM work, separate:
+
+```text
+Evidence:
+What has been checked or can be pointed to.
+
+Inference:
+What appears to follow from the evidence.
+
+Uncertainty:
+What has not been checked, is unavailable, or remains ambiguous.
+
+Risk:
+Where the model may be over-smoothing, agreeing, hallucinating, or preserving the theory.
+
+Next useful move:
+The concrete file, schema, test, inspection, or rejection step.
+```
+
+A useful answer may be warm or aligned with the user's goals. It must not become supportive at the expense of accuracy.
 
 ## Source priority
 
@@ -77,7 +127,8 @@ Start with `docs/README.md` for the browsable index.
 - `docs/source-map-and-roadmap.md` — source repo map and implementation path.
 - `docs/active-state-harness-lessons-2026-05-02.md` — hosted-runtime state harness lessons relevant to HSM.
 - `docs/human-analogy-and-memory-research-seed-2026-05-02.md` — seed for human-human memory, trust, state repair, and social integrity research.
+- `docs/anti-agreement-harness.md` — anti-agreement, claim-classification, uncertainty, and falsification discipline.
 
 ## Style for future agents
 
-Be explicit. Preserve uncertainty. Do not flatten the subject into a generic profile. Do not let generated text silently become truth.
+Be explicit. Preserve uncertainty. Do not flatten the subject into a generic profile. Do not let generated text silently become truth. Do not agree by default when source checks, classification, or challenge are needed.
