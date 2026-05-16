@@ -11,8 +11,9 @@ Use it to find the current architecture notes, runtime/state design, source boun
 3. [Anti-agreement harness](anti-agreement-harness.md) — claim classification, uncertainty, challenge, and falsification discipline.
 4. [HSM master report](hsm-master-report-2026-05-01.md) — consolidated project definition and design frame.
 5. [Runtime state and integrity loop](runtime-and-integrity.md) — runtime packet, model boundary, update gate, and truth discipline.
-6. [Source map and roadmap](source-map-and-roadmap.md) — nearby repositories, implementation phases, and next files.
-7. [Coding agent system prompt subproject](coding-agent-system-prompt/README.md) — separate-but-related workspace for coding-agent prompt development.
+6. [Identity-as-data contract](identity-as-data-contract.md) — executor/subject separation; subject identity as state data, not model identity.
+7. [Source map and roadmap](source-map-and-roadmap.md) — nearby repositories, implementation phases, and next files.
+8. [Coding agent system prompt subproject](coding-agent-system-prompt/README.md) — separate-but-related workspace for coding-agent prompt development.
 
 ## Documentation by area
 
@@ -23,6 +24,7 @@ Use it to find the current architecture notes, runtime/state design, source boun
 | Truth discipline | [Anti-agreement harness](anti-agreement-harness.md) | Preventing agreement-machine drift; classifying claims; preserving uncertainty, contradictions, source boundaries, and falsification paths. |
 | Core architecture | [HSM master report](hsm-master-report-2026-05-01.md) | The main HSM concept: evidence, extraction, provenance, state, runtime packet, integrity loop, and failure modes. |
 | Runtime design | [Runtime state and integrity loop](runtime-and-integrity.md) | Runtime packet structure, update gate, provenance rules, packet levels, and coherence metrics. |
+| Runtime design | [Identity-as-data contract](identity-as-data-contract.md) | Preventing executor/subject collapse; compiling `you are ...` identity prompts into subject-state declarations. |
 | Human state model | [Quiescent anchor and affective cycle](quiescent-anchor-and-affective-cycle.md) | Baseline state, anchors, destabilising cues, affective trigger cycle, delayed explanation, and operating modes. |
 | Source planning | [Source map and roadmap](source-map-and-roadmap.md) | How `ech0-kn1ght`, `quantzhai`, and `NetTTS` relate to HSM; implementation roadmap and near-next files. |
 | Harness lessons | [Active state harness lessons](active-state-harness-lessons-2026-05-02.md) | Lessons from hosted AI runtime state injection and what HSM should make explicit, inspectable, and update-gated. |
@@ -57,6 +59,7 @@ human artifacts + testimony + records
 Read:
 
 - [Runtime state and integrity loop](runtime-and-integrity.md)
+- [Identity-as-data contract](identity-as-data-contract.md)
 - [Active state harness lessons](active-state-harness-lessons-2026-05-02.md)
 - [Anti-agreement harness](anti-agreement-harness.md)
 - [Source map and roadmap](source-map-and-roadmap.md)
@@ -66,6 +69,8 @@ Focus on:
 - task-relevant state selection
 - readable packet first
 - provenance and confidence labels
+- executor/subject separation
+- subject identity as state data, not model identity
 - update gate after generation
 - no generated-memory contamination
 - preserving uncertainty and contradiction markers under compression
@@ -189,6 +194,7 @@ docs/coding-agent-system-prompt/slice-3-context-position-middle-loss.md
 docs/coding-agent-system-prompt/workflow-patterns.md
 docs/hsm-master-report-2026-05-01.md
 docs/human-analogy-and-memory-research-seed-2026-05-02.md
+docs/identity-as-data-contract.md
 docs/quiescent-anchor-and-affective-cycle.md
 docs/runtime-and-integrity.md
 docs/source-map-and-roadmap.md
