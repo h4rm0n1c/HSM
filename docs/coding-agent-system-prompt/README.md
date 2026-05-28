@@ -6,12 +6,24 @@ Related source project: `h4rm0n1c/quantzhai`
 
 ## Purpose
 
-This directory is a dedicated HSM-side workspace for developing a strong coding-agent system prompt.
+This directory is a dedicated HSM-side workspace for developing coding-agent system prompt structures.
 
-It is separate from the main HSM subject-state work, but related. HSM is interested in how models become reliable execution engines over structured state. A coding agent prompt is a narrower version of the same problem:
+The goal is not to force a single model-internal reasoning style.
+
+The goal is to provide external structure that helps a coding agent reason better over software-development tasks:
+
+- clearer task framing
+- better source inspection
+- better handoff from suspicion to evidence
+- safer edit boundaries
+- better validation choices
+- cleaner final reporting
+- more durable project memory
+
+It is separate from the main HSM subject-state work, but related. HSM is interested in how models operate over structured state and task packets. A coding agent prompt is a narrower version of that problem:
 
 ```text
-user intent + repo state + tool contract + workflow discipline
+user intent + repo state + tool contract + workflow scaffold
   -> bounded investigation
   -> implementation slice
   -> validation
@@ -19,7 +31,7 @@ user intent + repo state + tool contract + workflow discipline
   -> durable project memory
 ```
 
-This subproject captures the prompt, workflow, and research material needed to build that coding-agent layer deliberately.
+This subproject captures the prompt structures, workflow scaffolds, and research material needed to build that coding-agent layer deliberately.
 
 ## Why this belongs here
 
@@ -27,15 +39,15 @@ QuantZhai is the runtime and prior-art source for local coding-agent behaviour, 
 
 HSM is the better home for the broader methodology work because this prompt research is about:
 
-- stateful agent behaviour
+- task scaffolding for software-development reasoning
 - role and authority boundaries
-- evidence-first reasoning
+- evidence-first task structure
 - prompt compilation
 - instruction layering
 - durable memory discipline
 - human/assistant/coding-agent arbitration
 
-QuantZhai should stay focused on running the thing. This directory exists to design the thing.
+QuantZhai should stay focused on running the thing. This directory exists to design the structures that make the thing work better.
 
 ## Directory map
 
@@ -47,7 +59,7 @@ AGENTS.md
   Local instructions for agents working inside this subproject.
 
 workflow-patterns.md
-  Captured working pattern from successful QuantZhai and coding-agent development loops.
+  Captured working structures from successful QuantZhai and coding-agent development loops.
 
 reference-quantzhai-codex-core-qwenified.md
   Snapshot copy of the current packaged QuantZhai coding-agent system prompt.
@@ -58,25 +70,26 @@ research-references.md
 
 ## Current seed thesis
 
-The best coding-agent prompt should not be just a pile of rules.
+The best coding-agent prompt should not be just a pile of rules, and it should not try to prescribe one true reasoning method.
 
-It needs clear layers:
+It should offer useful task structures:
 
 ```text
 executor identity
   -> tool contract
   -> repo authority rules
-  -> investigation discipline
-  -> edit discipline
-  -> validation discipline
+  -> task-framing scaffold
+  -> investigation scaffold
+  -> edit-boundary scaffold
+  -> validation scaffold
   -> safety/risk handling
   -> final answer contract
   -> optional style/compression layer
 ```
 
-Each layer should be testable.
+Each structure should be testable.
 
-If a layer cannot be tested directly, it should at least produce observable behaviour:
+If a structure cannot be tested directly, it should at least produce observable behaviour:
 
 - fewer broad sweeps
 - better use of `rg`
@@ -93,4 +106,4 @@ Build from evidence, not prompt-fashion.
 
 Use the QuantZhai packaged prompt as the current local baseline. Compare it later against Claude Code, Codex Max, ChatGPT prompt collections, Qwen-specific prompting notes, and observed local QuantZhai behaviour.
 
-Do not blindly merge all prompt sources. Extract shapes, test them, and keep only what improves coding-agent behaviour.
+Do not blindly merge all prompt sources. Extract useful structures, test them, and keep only what improves coding-agent behaviour on software-development tasks.
