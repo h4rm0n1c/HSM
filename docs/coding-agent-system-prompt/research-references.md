@@ -1,7 +1,7 @@
 # Coding Agent Prompt Research References
 
 Status: pending research queue  
-Purpose: point this subproject at external prompt sources and Qwen-specific prompting notes without copying large external corpora into HSM.
+Purpose: point this subproject at external prompt sources, Qwen-specific prompting notes, academic papers, and model flaw observations without copying large external corpora into HSM.
 
 ## Research rule
 
@@ -19,7 +19,184 @@ Candidate HSM/QuantZhai rule:
 How to test locally:
 ```
 
-Treat prompt leaks, curated collections, Reddit posts, and blog posts as research inputs, not authority.
+Treat prompt leaks, curated collections, Reddit posts, blog posts, and papers as research inputs, not authority.
+
+## General flaw observations to research and compensate for
+
+These are practical model/task failure shapes that prompt structures should account for.
+
+### Middle detail loss
+
+Observation:
+
+Long prompts, long files, and long conversations can cause important middle-context details to lose influence.
+
+Research links:
+
+- `Lost in the Middle: How Language Models Use Long Contexts` — https://arxiv.org/abs/2307.03172
+- `Lost in the Middle, and In-Between: Enhancing Language Models' Ability to Reason Over Long Contexts in Multi-Hop QA` — https://arxiv.org/abs/2412.10079
+- `Found in the Middle: How Language Models Use Long Contexts Better via Plug-and-Play Positional Encoding` — https://arxiv.org/abs/2403.04797
+- `Lost in the Middle: An Emergent Property from Information Retrieval Demands in LLMs` — https://arxiv.org/abs/2510.10276
+
+Prompt-structure questions:
+
+- Should critical acceptance criteria be repeated near the edit/finalization step?
+- Should long task briefs include local checklists immediately before action?
+- Does placing non-goals near file-edit instructions reduce accidental scope creep?
+- Can QuantZhai tests detect whether middle constraints are being dropped?
+
+### Instruction overshadowing
+
+Observation:
+
+Later, more concrete, or louder instructions can overshadow earlier abstract constraints.
+
+Prompt-structure questions:
+
+- Which rules belong in durable base prompt versus task-local checklist?
+- Should safety/edit boundaries be repeated near tool-use instructions?
+- Should style/compression instructions be isolated from correctness instructions?
+
+### Tool-result amnesia
+
+Observation:
+
+A coding agent may inspect a file or command result, then drift away from the exact observed fact later.
+
+Prompt-structure questions:
+
+- Should agents maintain a tiny explicit working-state summary for owner files, observed facts, and assumptions?
+- Should final answers require observed/fixed/untested separation?
+- Should implementation slices require naming the owning file/function before editing?
+
+### Validation theatre
+
+Observation:
+
+Agents can present partial, synthetic, or absent validation as stronger than it is.
+
+Prompt-structure questions:
+
+- Should validation states be formalized as `not_run`, `focused_pass`, `full_pass`, `smoke_yellow`, `smoke_red`, and `blocked`?
+- Should final answer structure require commands run and commands not run?
+- Should docs avoid words like “green” unless live smoke is actually complete?
+
+## Academic / arXiv references to inspect later
+
+### Promptware Engineering
+
+Paper: `Promptware Engineering: Software Engineering for Prompt-Enabled Systems`  
+URL: https://arxiv.org/abs/2503.02400
+
+Reason to inspect:
+
+- Treats prompts as first-class software artifacts.
+- Frames prompt development as a software-engineering lifecycle: requirements, design, implementation, testing, debugging, evolution, deployment, and monitoring.
+- Strong conceptual match for this subproject because the goal is not magic wording; it is prompt structures with maintainability and tests.
+
+Research questions:
+
+- What lifecycle concepts map cleanly onto QuantZhai prompt development?
+- Can prompt requirements, prompt tests, prompt debugging, and prompt evolution become explicit repo artifacts?
+- How should prompt changes be versioned and evaluated?
+- What parts are too general for coding-agent system prompts?
+
+### Prompt management in GitHub repositories
+
+Paper: `Understanding Prompt Management in GitHub Repositories: A Call for Best Practices`  
+URL: https://arxiv.org/abs/2509.12421
+
+Reason to inspect:
+
+- Empirical study of prompt organization and quality issues in GitHub repositories.
+- Useful for avoiding prompt sprawl, duplication, formatting drift, and unreadable prompt piles.
+
+Research questions:
+
+- What prompt repository anti-patterns should HSM/QuantZhai avoid?
+- Should prompt files have metadata headers, source refs, and explicit status fields?
+- How should duplicate or obsolete prompt fragments be marked?
+- What lint/checklist should apply to prompt files?
+
+### Lost-in-the-middle baseline
+
+Paper: `Lost in the Middle: How Language Models Use Long Contexts`  
+URL: https://arxiv.org/abs/2307.03172
+
+Reason to inspect:
+
+- Found that long-context models often perform best when relevant information appears at the beginning or end of context and worse when it appears in the middle.
+- Directly supports the flaw observation that middle details often get lost.
+
+Research questions:
+
+- What prompt structures compensate for position bias?
+- Should critical constraints appear near both top-level task framing and action/finalization points?
+- How can coding-agent benchmark tasks test for middle-detail retention?
+
+### Lost in the middle for multi-hop reasoning
+
+Paper: `Lost in the Middle, and In-Between: Enhancing Language Models' Ability to Reason Over Long Contexts in Multi-Hop QA`  
+URL: https://arxiv.org/abs/2412.10079
+
+Reason to inspect:
+
+- Extends middle-loss concern to multi-hop reasoning where multiple pieces of evidence are spread across context.
+- Relevant to software tasks that require connecting docs, tests, source code, logs, and runtime behaviour.
+
+Research questions:
+
+- How should coding-agent prompts force reconnection of separated evidence?
+- Should audit outputs include a compact evidence map before implementation?
+- Can source/test/doc/capture facts be converted into a short working packet before edits?
+
+### Positional encoding / middle-context mitigation
+
+Paper: `Found in the Middle: How Language Models Use Long Contexts Better via Plug-and-Play Positional Encoding`  
+URL: https://arxiv.org/abs/2403.04797
+
+Reason to inspect:
+
+- Model-level mitigation for middle-context weakness.
+- Not directly a prompt-engineering paper, but useful for understanding whether the flaw is prompt-solvable, model-solvable, or only partly mitigable by prompt structure.
+
+Research questions:
+
+- Which middle-context failures can prompt structure mitigate?
+- Which failures require model/runtime changes rather than prompt wording?
+- Does QuantZhai's local model/backend expose any positional behaviour worth testing?
+
+### Promptware attacks against production assistants
+
+Paper: `Invitation Is All You Need! Promptware Attacks Against LLM-Powered Assistants in Production Are Practical and Dangerous`  
+URL: https://arxiv.org/abs/2508.12175
+
+Reason to inspect:
+
+- Focuses on malicious promptware, indirect prompt injection, memory poisoning, tool misuse, and agent invocation risks.
+- Relevant for coding agents because tool-capable agents can execute high-impact actions.
+
+Research questions:
+
+- What safety boundaries belong in a coding-agent system prompt?
+- How should external instructions found in files/webpages/logs be treated?
+- How should memory/retrieval poisoning risks map into HSM and QuantZhai prompt structures?
+
+### Promptware kill chain
+
+Paper: `The Promptware Kill Chain: How Prompt Injections Gradually Evolved Into a Multi-Step Malware`  
+URL: https://arxiv.org/abs/2601.09625
+
+Reason to inspect:
+
+- Frames prompt attacks as multi-step malware-like campaigns: initial access, privilege escalation, persistence, lateral movement, and actions on objective.
+- Useful for coding-agent safety because agents combine prompts, tools, repo access, network access, and sometimes memory.
+
+Research questions:
+
+- Can coding-agent prompts include a lightweight threat model without becoming paranoid sludge?
+- Which operations should always require explicit user approval?
+- How should agents treat instructions embedded in untrusted repository files, docs, issues, webpages, or logs?
 
 ## External sources to inspect later
 
