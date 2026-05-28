@@ -10,7 +10,9 @@ These instructions apply to:
 docs/coding-agent-system-prompt/**
 ```
 
-The goal is to develop a coding-agent system prompt and its surrounding research method.
+The goal is to develop coding-agent system prompt structures and the surrounding research method.
+
+This is not an attempt to force one specific internal reasoning style. It is a design workspace for external structures that improve reasoning over software-development tasks.
 
 This is not the main HSM subject-state schema area. It is not the QuantZhai runtime repo. It is a design and research workspace for coding-agent prompt development.
 
@@ -60,13 +62,13 @@ When copying a QuantZhai prompt snapshot into this directory:
 
 ## Working method
 
-Use the same evidence-first loop captured in `workflow-patterns.md`:
+Use the same evidence-first loop captured in `workflow-patterns.md`, but treat it as a scaffold, not a mandated inner reasoning style:
 
 ```text
 suspicion / prompt idea
   -> source audit
   -> behavioural hypothesis
-  -> prompt slice
+  -> prompt structure or slice
   -> testable expectation
   -> candidate wording
   -> local evaluation
@@ -81,28 +83,31 @@ A good finding says:
 Observed:
 Inferred:
 Risk:
-Candidate rule:
+Candidate structure:
 How to test:
 ```
 
 ## Prompt design rules
 
-Prefer modular prompt layers over one giant undifferentiated prompt.
+Prefer modular prompt structures over one giant undifferentiated prompt.
 
 Separate:
 
 - executor identity
 - tool contract
 - repo authority
-- planning discipline
-- exploration discipline
-- edit discipline
-- validation discipline
+- task-framing scaffold
+- planning scaffold
+- exploration scaffold
+- edit-boundary scaffold
+- validation scaffold
 - safety/escalation handling
 - final answer contract
 - optional style/compression layer
 
 Do not mix style compression with core correctness unless the experiment is explicitly about compression.
+
+Do not write as though the project is trying to invent a single correct reasoning process. Write as though it is building reusable structures that help the agent reason over different software-development task shapes.
 
 ## Output quality
 
