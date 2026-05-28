@@ -76,6 +76,7 @@ Read:
 
 - [Coding agent system prompt subproject](coding-agent-system-prompt/README.md)
 - [Coding agent subproject instructions](coding-agent-system-prompt/AGENTS.md)
+- [Research plan](coding-agent-system-prompt/research-plan.md)
 - [Workflow patterns](coding-agent-system-prompt/workflow-patterns.md)
 - [QuantZhai prompt reference snapshot](coding-agent-system-prompt/reference-quantzhai-codex-core-qwenified.md)
 - [Research references](coding-agent-system-prompt/research-references.md)
@@ -86,7 +87,8 @@ Focus on:
 - keeping QuantZhai as runtime/prior art and HSM as the methodology workspace
 - separating core correctness rules from optional style/compression layers
 - treating external prompt dumps as research inputs, not authority
-- producing candidate prompt slices that can be tested locally
+- slicing research into research, verification, adversarial review, correction, and conclusion phases
+- producing candidate prompt structures that can be tested locally
 
 ### I want to work on quiescent/anchor/trigger state
 
@@ -171,6 +173,7 @@ docs/anti-agreement-harness.md
 docs/coding-agent-system-prompt/README.md
 docs/coding-agent-system-prompt/AGENTS.md
 docs/coding-agent-system-prompt/reference-quantzhai-codex-core-qwenified.md
+docs/coding-agent-system-prompt/research-plan.md
 docs/coding-agent-system-prompt/research-references.md
 docs/coding-agent-system-prompt/workflow-patterns.md
 docs/hsm-master-report-2026-05-01.md
