@@ -2,7 +2,7 @@
 
 This is the front door for the Human State Machine repo.
 
-Use it to find the current architecture notes, runtime/state design, source boundaries, and research seeds without treating `docs/` like a sock drawer with filenames.
+Use it to find the current architecture notes, runtime/state design, source boundaries, research seeds, and related prompt-development subprojects without treating `docs/` like a sock drawer with filenames.
 
 ## Start here
 
@@ -12,6 +12,7 @@ Use it to find the current architecture notes, runtime/state design, source boun
 4. [HSM master report](hsm-master-report-2026-05-01.md) — consolidated project definition and design frame.
 5. [Runtime state and integrity loop](runtime-and-integrity.md) — runtime packet, model boundary, update gate, and truth discipline.
 6. [Source map and roadmap](source-map-and-roadmap.md) — nearby repositories, implementation phases, and next files.
+7. [Coding agent system prompt subproject](coding-agent-system-prompt/README.md) — separate-but-related workspace for coding-agent prompt development.
 
 ## Documentation by area
 
@@ -26,6 +27,7 @@ Use it to find the current architecture notes, runtime/state design, source boun
 | Source planning | [Source map and roadmap](source-map-and-roadmap.md) | How `ech0-kn1ght`, `quantzhai`, and `NetTTS` relate to HSM; implementation roadmap and near-next files. |
 | Harness lessons | [Active state harness lessons](active-state-harness-lessons-2026-05-02.md) | Lessons from hosted AI runtime state injection and what HSM should make explicit, inspectable, and update-gated. |
 | Research seed | [Human analogy and memory research seed](human-analogy-and-memory-research-seed-2026-05-02.md) | Seed notes for human-human state maintenance, trust, memory, exhaustion, hyperfocus, and social integrity. |
+| Coding-agent prompt development | [Coding agent system prompt subproject](coding-agent-system-prompt/README.md) | Separate workspace for building a coding-agent system prompt from QuantZhai prior art, workflow observations, and external prompt references. |
 
 ## Task-oriented entry points
 
@@ -67,6 +69,24 @@ Focus on:
 - update gate after generation
 - no generated-memory contamination
 - preserving uncertainty and contradiction markers under compression
+
+### I want to work on coding-agent system prompt development
+
+Read:
+
+- [Coding agent system prompt subproject](coding-agent-system-prompt/README.md)
+- [Coding agent subproject instructions](coding-agent-system-prompt/AGENTS.md)
+- [Workflow patterns](coding-agent-system-prompt/workflow-patterns.md)
+- [QuantZhai prompt reference snapshot](coding-agent-system-prompt/reference-quantzhai-codex-core-qwenified.md)
+- [Research references](coding-agent-system-prompt/research-references.md)
+
+Focus on:
+
+- building from observed coding-agent behaviour, not generic prompt fashion
+- keeping QuantZhai as runtime/prior art and HSM as the methodology workspace
+- separating core correctness rules from optional style/compression layers
+- treating external prompt dumps as research inputs, not authority
+- producing candidate prompt slices that can be tested locally
 
 ### I want to work on quiescent/anchor/trigger state
 
@@ -138,6 +158,7 @@ Working rule:
 - Treat `h4rm0n1c/ech0-kn1ght` as evidence/provenance input.
 - Treat `h4rm0n1c/quantzhai` as runtime/compression/harness prior art.
 - Treat `h4rm0n1c/NetTTS` as deterministic token weighting/segmentation prior art.
+- Treat `docs/coding-agent-system-prompt/` as a separate HSM subproject for coding-agent prompt methodology and research.
 
 ## Current document inventory
 
@@ -147,6 +168,11 @@ AGENTS.md
 docs/README.md
 docs/active-state-harness-lessons-2026-05-02.md
 docs/anti-agreement-harness.md
+docs/coding-agent-system-prompt/README.md
+docs/coding-agent-system-prompt/AGENTS.md
+docs/coding-agent-system-prompt/reference-quantzhai-codex-core-qwenified.md
+docs/coding-agent-system-prompt/research-references.md
+docs/coding-agent-system-prompt/workflow-patterns.md
 docs/hsm-master-report-2026-05-01.md
 docs/human-analogy-and-memory-research-seed-2026-05-02.md
 docs/quiescent-anchor-and-affective-cycle.md
