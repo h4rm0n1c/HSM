@@ -1,4 +1,4 @@
-# Coding Agent Workflow Patterns
+# Coding Agent Workflow Structures
 
 Status: seed notes from QuantZhai/HSM conversation  
 Use: behavioural target material for coding-agent system prompt development
@@ -25,9 +25,92 @@ human suspicion / friction / idea
   -> next slice or subdivision
 ```
 
-This is the workflow the coding-agent system prompt should support.
+This is not meant to prescribe one internal reasoning method.
 
-The prompt should not train the agent to be an oracle. It should train the agent to be a reliable worker inside an evidence and validation loop.
+It is an external workflow structure the coding-agent system prompt should support. The structure gives the agent rails for software-development tasks: what to inspect, how to bound the edit, how to validate, and how to report.
+
+The prompt should not train the agent to be an oracle or force it into one fixed cognitive style. It should provide reusable scaffolds that improve reasoning over different software task shapes.
+
+## General model flaw observations
+
+These are recurring failure shapes that prompt structures should compensate for.
+
+They are not moral failings and not proof that a model is useless. They are engineering constraints.
+
+### Middle detail often gets lost
+
+Long prompts, long files, and long conversations can overweight the start and end of the context while details in the middle lose influence.
+
+Coding-agent implication:
+
+- Repeat critical constraints near the action point.
+- Put acceptance criteria close to implementation instructions.
+- Keep file-specific constraints near the file-edit step.
+- Use short checklists before edits and before final reporting.
+- Avoid burying non-goals in the middle of long prose.
+
+### Instruction overshadowing
+
+Later, louder, or more concrete instructions can overshadow earlier abstract constraints.
+
+Coding-agent implication:
+
+- Separate durable rules from task-local instructions.
+- Put non-goals and red lines in explicit lists.
+- Keep safety/edit boundaries visible near tool-use instructions.
+- Avoid mixing style instructions with correctness instructions.
+
+### Context shape beats intention
+
+The model often follows the shape of the surrounding context more than the author's hidden intention.
+
+Coding-agent implication:
+
+- Give the agent the shape of the work product you want.
+- Use small templates for audits, implementation slices, validation reports, and final answers.
+- Do not rely on vague requests like “be careful” when a concrete checklist is possible.
+
+### Tool-result amnesia
+
+Agents can inspect a file or command output, then drift away from the exact observed fact later in the task.
+
+Coding-agent implication:
+
+- Promote key observations into a short working state.
+- Make the agent name the exact owner file/function before editing.
+- Require final answers to distinguish observed facts from assumptions.
+
+### Validation theatre
+
+Agents can report tests or confidence in a success-shaped way even when validation is partial, synthetic, or not run.
+
+Coding-agent implication:
+
+- Use explicit validation states: not run, focused pass, full pass, smoke yellow, smoke red, blocked.
+- Do not let “looks good” substitute for a command, test, or live workflow check.
+- Keep validation claims tied to concrete commands or observed results.
+
+### Over-broad autonomy
+
+A coding agent can turn a narrow task into broad cleanup, architecture churn, or endpoint/file sweeps.
+
+Coding-agent implication:
+
+- Define the smallest useful slice.
+- Track non-goals.
+- Prefer one narrow diagnostic over broad exploration.
+- Stop when the task is proven.
+
+### Prompt cargo culting
+
+A rule copied from a strong prompt may be useless or harmful in a different harness, model, or repo.
+
+Coding-agent implication:
+
+- Treat external prompts as source material, not authority.
+- Extract structures and test them locally.
+- Preserve QuantZhai-specific runtime constraints.
+- Avoid merging Anthropic, OpenAI, Qwen, and local harness assumptions into one undifferentiated blob.
 
 ## Human role
 
@@ -35,9 +118,9 @@ The user often starts with an intuition, suspicion, or operational annoyance.
 
 That intuition is valuable, but it is not treated as proof.
 
-The best agent behaviour is to convert the suspicion into a testable claim, then gather evidence.
+A useful structure converts the suspicion into a testable claim, then gathers evidence.
 
-Useful pattern:
+Useful scaffold:
 
 ```text
 Suspicion:
@@ -55,6 +138,8 @@ Slice:
 Validation:
   how to prove it
 ```
+
+This is a scaffold, not a mandatory answer format.
 
 ## Assistant / reviewer role
 
@@ -99,9 +184,9 @@ It should not:
 - overwrite unrelated work
 - treat a plan as the deliverable
 
-## QuantZhai-derived development pattern
+## QuantZhai-derived development structure
 
-A recurring successful pattern in QuantZhai work:
+A recurring successful structure in QuantZhai work:
 
 ```text
 suspicion / inkling
@@ -116,6 +201,14 @@ suspicion / inkling
 ```
 
 The suspicion starts the work. It does not define the fix.
+
+This structure improves reasoning because it separates:
+
+- hunch from evidence
+- design from implementation
+- implementation from validation
+- local unit proof from live workflow proof
+- current task result from durable project memory
 
 ## Proven examples to preserve
 
@@ -216,7 +309,7 @@ Fix deadline ownership, not random timeout constants.
 
 ## Prompt implications
 
-The coding-agent system prompt should support this behaviour explicitly:
+The coding-agent system prompt should support these task structures explicitly:
 
 1. Treat user suspicion as a search heuristic, not proof.
 2. Inspect source before implementing.
@@ -226,21 +319,23 @@ The coding-agent system prompt should support this behaviour explicitly:
 6. Validate with focused tests before broad tests.
 7. Report yellow/red/blocked states honestly.
 8. Update durable docs when a discovery changes future agent behaviour.
+9. Keep critical middle-context details visible near the action point.
+10. Separate core correctness structures from optional style/compression structures.
 
-## Candidate instruction shapes
+## Candidate structure wording
 
-These are not final prompts. They are shapes to evaluate.
+These are not final prompts. They are structures to evaluate.
 
 ### Suspicion handling
 
 ```text
-When the user gives a suspicion, first convert it into a testable claim. Inspect source/captures/tests before implementing. Do not implement directly from suspicion unless the change is trivial and evidence is already present.
+When the user gives a suspicion, convert it into a testable claim. Inspect source/captures/tests before implementing. Do not implement directly from suspicion unless the change is trivial and evidence is already present.
 ```
 
 ### Slice discipline
 
 ```text
-For non-trivial changes, identify the smallest behaviour slice that can be implemented and validated. State non-goals internally. Do not expand into adjacent cleanup unless required by the slice.
+For non-trivial changes, identify the smallest behaviour slice that can be implemented and validated. Track non-goals. Do not expand into adjacent cleanup unless required by the slice.
 ```
 
 ### Evidence before edit
@@ -255,9 +350,15 @@ Before editing, inspect the owning file(s), relevant tests, and local instructio
 After editing, report focused validation, broader validation if run, and any untested or blocked areas. Do not call a result green if smoke or live evidence is still required.
 ```
 
+### Middle-detail guard
+
+```text
+Before editing or finalizing, re-check the task's explicit constraints, non-goals, and acceptance criteria. Do not rely on memory of a long prompt when the constraint can be restated in a short local checklist.
+```
+
 ## What this prompt should avoid
 
-Avoid training the coding agent into these failures:
+Avoid steering the coding agent into these failures:
 
 - over-planning instead of editing
 - broad research when a repo-local check would answer it
@@ -269,6 +370,8 @@ Avoid training the coding agent into these failures:
 - unbounded autonomy
 - style compression leaking into code/docs
 - treating generated explanations as durable truth
+- pretending one rigid reasoning method fits every software task
+- burying critical constraints in the middle of long prompt prose
 
 ## Research target
 
@@ -276,4 +379,4 @@ The eventual prompt should be compact enough for local Qwen, strong enough for C
 
 The target is not the longest prompt.
 
-The target is a prompt whose rules show up as better behaviour under local tests.
+The target is a set of prompt structures whose rules show up as better behaviour under local tests.
