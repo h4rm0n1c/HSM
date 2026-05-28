@@ -58,6 +58,9 @@ README.md
 AGENTS.md
   Local instructions for agents working inside this subproject.
 
+research-plan.md
+  Research protocol: sliced research tasks with verification, correction, and adversarial review gates.
+
 workflow-patterns.md
   Captured working structures from successful QuantZhai and coding-agent development loops.
 
@@ -65,8 +68,32 @@ reference-quantzhai-codex-core-qwenified.md
   Snapshot copy of the current packaged QuantZhai coding-agent system prompt.
 
 research-references.md
-  External prompt sources and articles queued for later research. Links only; do not copy large external corpora here.
+  External prompt sources, academic references, internal project references, and flaw observations queued for later research.
 ```
+
+## Research protocol
+
+Start with [`research-plan.md`](research-plan.md) before conducting broad prompt research.
+
+Every research slice must include:
+
+```text
+research
+  -> verification
+  -> adversarial review
+  -> correction if needed
+  -> conclusion with confidence
+```
+
+Each conclusion must record:
+
+- evidence for
+- evidence against
+- risk or uncertainty
+- whether the result belongs in prompt text, runtime/tooling, docs/process, tests, or nowhere
+- a local test or verification idea when possible
+
+Adversarial review is mandatory. A conclusion that only argues for itself is not finished.
 
 ## Current seed thesis
 
@@ -104,6 +131,6 @@ If a structure cannot be tested directly, it should at least produce observable 
 
 Build from evidence, not prompt-fashion.
 
-Use the QuantZhai packaged prompt as the current local baseline. Compare it later against Claude Code, Codex Max, ChatGPT prompt collections, Qwen-specific prompting notes, and observed local QuantZhai behaviour.
+Use the QuantZhai packaged prompt as the current local baseline. Compare it later against Claude Code, Codex Max, ChatGPT prompt collections, Qwen-specific prompting notes, academic prompt/context-engineering papers, internal HSM/QuantZhai/NetTTS references, and observed local QuantZhai behaviour.
 
 Do not blindly merge all prompt sources. Extract useful structures, test them, and keep only what improves coding-agent behaviour on software-development tasks.
