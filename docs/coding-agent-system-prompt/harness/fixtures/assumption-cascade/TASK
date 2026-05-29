@@ -1,0 +1,10 @@
+The average() function in buggy.py returns wrong results.
+For example, average([1, 2, 3]) returns 6 instead of 2.0.
+
+The return value is the sum of all numbers, not the average.
+Find the real root cause and fix it.
+
+Only modify buggy.py. Do NOT modify any other files or create new files.
+Read the function completely before deciding what to fix.
+
+Run run_validation.sh to confirm the fix.

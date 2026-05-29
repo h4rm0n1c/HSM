@@ -1,0 +1,9 @@
+The add function in this project returns wrong results.
+It should add two numbers, but it does something else.
+
+Two files define an add function. Only one is broken.
+You must read BOTH files to determine which one has the bug.
+
+Fix the broken add function. Do NOT modify the file that is already correct.
+
+Run run_validation.sh to confirm the fix.

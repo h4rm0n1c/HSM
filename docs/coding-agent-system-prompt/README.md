@@ -86,7 +86,46 @@ slice-4-promptware-lifecycle.md
   Slice 4 output: Promptware Engineering paper analysis, Prompt Management in GitHub empirical study, QuantZhai prompt stack inspection, lifecycle tier system, metadata header schema, spellcheck gate, source-ref rule, candidate structures C17-C22.
 
 slice-5-identity-role-and-executor-boundaries.md
-  Slice 5 output: executor role header, harness boundary statement, project/repo state-as-data rule, subject identity prohibition (C23-C26).
+  Slice 5 output: executor role header, harness boundary statement, project/repo state-as-data rule, subject identity prohibition (C23-C26). Includes A/B experiment results.
+
+slice-6-safety-untrusted-instructions.md
+  Slice 6 output: promptware kill chain analysis, trusted input boundary, disclosure prohibition, tool name non-disclosure, security policy. Sources: arXiv 2601.09625 (full paper), OWASP LLM Top 10 2025, QuantZhai issue #41.
+
+slice-7-tool-stream-state-feedback.md
+  Slice 7 output: parallel-call guidance, tool result persistence, runtime feedback acceptance, environment context injection, git state injection. Sources: QuantZhai issues #40, #41, #43, #44.
+
+slice-8-compaction-preservation.md
+  Slice 8 output: survival-weighted compaction (QuantZhai issue #8 RFC), high-value atom preservation rule, NetTTS prosody weighting transfer. Compaction safety acceptance criteria.
+
+research-external-prompt-comparison.md
+  Slice 9 output: 10-layer comparison of Claude Code, Codex CLI, and Cursor prompts with cross-cutting findings and adoption recommendations.
+
+research-failure-mode-catalog.md
+  Research output: 10 coding-agent failure modes mapped to missing prompt structures, with severity ratings and mitigation strategies per mode (FM1-FM10).
+
+research-missing-structures.md
+  Research output: cross-reference of 27 vendor prompt structures (M1-M27) against our C1-C26 candidate set, with gap analysis and adoption recommendations by prompt layer.
+
+candidate-structures.md
+  Slice 10 consolidation: all C1-C26 and M1-M27 merged, deduplicated, classified (adopt/test/defer/reject), with token cost estimates, test plans, and interaction conflict warnings.
+
+prompt-evaluation-checklist.md
+  Slice 10 eval framework: 14-section checklist covering all prompt layers, failure mode coverage matrix, token budget, and eval task ideas.
+
+RESEARCH_STATUS.md
+  One-page status matrix for all 10 research slices with artifact links, next actions, and risk register.
+
+comparison-quantzhai-codex-core-qwenified.md
+  Dedicated comparison: QuantZhai `codex-core-qwenified.md` against our 10-slice research findings.
+  Section-by-section analysis with validation, challenge, gap, and adoption priority.
+
+comparison-codex-cli-max.md
+  Dedicated comparison: OpenAI Codex CLI (Codex Max) system prompt against our 10-slice research
+  findings. 11-layer analysis with cross-cutting findings and structure adoption recommendations.
+
+comparison-claude-code.md
+  Dedicated comparison: Claude Code v2.1.143 system prompt against our 10-slice research findings.
+  11-layer analysis including memory system and sub-agent architecture evaluation.
 ```
 
 ## Research protocol

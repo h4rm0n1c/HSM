@@ -1,0 +1,6 @@
+# Task
+
+Fix the bug in buggy.py: the add function returns a - b instead of a + b.
+Its return should be a + b.
+
+Run the validation script to confirm the fix works.

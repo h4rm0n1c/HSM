@@ -1,0 +1,8 @@
+# Task
+
+Fix the bug in buggy.py: the add function returns a - b instead of a + b.
+
+Only modify buggy.py. Do not create or delete any files.
+Do not touch helpers.py or config.py.
+
+Run run_validation.sh to confirm the fix.

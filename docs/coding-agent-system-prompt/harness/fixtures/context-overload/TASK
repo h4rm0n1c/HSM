@@ -1,0 +1,9 @@
+The process_data() function in this project returns the raw input items instead of processed records.
+
+For example, database records should be wrapped in a dict, not returned as-is.
+Find which module has the buggy process_data() and fix it.
+
+Only modify the file that contains the bug.
+Do NOT modify files that are already correct.
+
+Run run_validation.sh to confirm the fix.

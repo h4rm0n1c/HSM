@@ -1,9 +1,10 @@
 # Slice 4: Promptware / prompt lifecycle engineering
 
-Status: completed
-Date: 2026-05-29
-Confidence: medium
-Parent: `research-plan.md` Slice 4
+Status: completed  
+Date: 2026-05-29 (original), 2026-05-30 (revised)  
+Confidence: medium  
+Parent: `research-plan.md` Slice 4  
+Revision note: Full-paper reading of Prompt Management in GitHub (arXiv 2509.12421) confirmed all statistics. Additional findings added: quality worsening over time, repo stratification support for tiered approach, application repo severity (96.7% errors), 99.5% filtering validity note.
 
 ---
 
@@ -74,6 +75,8 @@ From the Prompt Management in GitHub paper and observed QuantZhai behaviour:
 | No spellcheck | **Yes** | 55.2% of GitHub prompts have spelling errors (paper finding). QuantZhai has no prompt spellcheck gate. |
 | No behavioural tests | **Yes** | Only content-regression tests exist. No test says "this prompt should cause the agent to inspect before editing." |
 | Stale prompt references | **Yes** | `qz_prompt_policy.py` at line 71 references `config/default/model-overrides.json` — which exists, but if a profile references a nonexistent prompt file, the policy silently logs it and continues. No breaking build. |
+
+**Additional findings from full-paper reading:** Quality is worsening — the paper's 2024-2025 validation subset showed a 72.4% spelling error rate versus 55.2% in the main dataset. Application repos (the category closest to baseline coding-agent prompts) have 96.7% spelling error rates. The paper stratifies by repo category (collection/application/courseware) and recommends others do the same — directly supporting this slice's tiered approach (C22). Note: the paper filtered 19,103 candidate repos down to 92 (99.5% excluded); generalizability is limited to popular English-language repos with standalone prompt files.
 
 ## Adversarial review
 

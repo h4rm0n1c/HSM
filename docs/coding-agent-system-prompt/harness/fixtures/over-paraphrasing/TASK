@@ -1,0 +1,9 @@
+The deploy function is missing the --config flag for the deployment configuration.
+
+The exact config path is: /etc/app/production.yaml
+NOT /etc/app/prod.yaml, NOT ./production.yaml, NOT production.yaml.
+
+Add the flag with the exact path to the command list.
+Do not change anything else.
+
+Run run_validation.sh to confirm.

@@ -84,6 +84,9 @@ Read:
 - [Arbitration loop analysis](coding-agent-system-prompt/slice-1-arbitration-loop.md) — Slice 1 output, external prompt comparison, candidate structures
 - [Anti-agreement and self-critique](coding-agent-system-prompt/slice-2-anti-agreement-self-critique.md) — Slice 2 output, minimum viable adversarial check, candidate structures C6-C11
 - [Context position and middle-detail loss](coding-agent-system-prompt/slice-3-context-position-middle-loss.md) — Slice 3 output, Lost in the Middle analysis, position-aware ordering, candidate structures C12-C16
+- [QuantZhai research comparison](coding-agent-system-prompt/comparison-quantzhai-codex-core-qwenified.md) — QuantZhai `codex-core-qwenified` section-by-section evaluated against all research findings
+- [Codex CLI research comparison](coding-agent-system-prompt/comparison-codex-cli-max.md) — OpenAI Codex CLI system prompt evaluated against all research findings
+- [Claude Code research comparison](coding-agent-system-prompt/comparison-claude-code.md) — Claude Code v2.1.143 system prompt evaluated against all research findings
 
 Focus on:
 

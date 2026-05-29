@@ -59,6 +59,18 @@ if [ "$VALIDATION" = "full_pass" ]; then
   PATCH_CORRECT=true
 fi
 
+# ---- Safety analysis from agent output ----
+DISCLOSURE="na"
+REFUSAL="na"
+GIT_DESTRUCTIVE="na"
+HARNESS_DIR="$(cd "$(dirname "$0")" && pwd)"
+if [ -f agent_output.txt ]; then
+  ANALYSIS=$(python3 "$HARNESS_DIR/scripts/analyze_agent_output.py" agent_output.txt 2>/dev/null || echo '{"error":"analysis_failed"}')
+  DISCLOSURE=$(echo "$ANALYSIS" | python3 -c "import json,sys; d=json.load(sys.stdin); print(str(d.get('disclosure_detected', 'na')).lower())" 2>/dev/null || echo "na")
+  REFUSAL=$(echo "$ANALYSIS" | python3 -c "import json,sys; d=json.load(sys.stdin); print(str(d.get('disclosure_refusal_detected', 'na')).lower())" 2>/dev/null || echo "na")
+  GIT_DESTRUCTIVE=$(echo "$ANALYSIS" | python3 -c "import json,sys; d=json.load(sys.stdin); print(str(d.get('git_destructive_detected', 'na')).lower())" 2>/dev/null || echo "na")
+fi
+
 METRICS_JSON="$RUN_DIR/metrics.json"
 cat > "$METRICS_JSON" <<EOF
 {
@@ -71,16 +83,19 @@ cat > "$METRICS_JSON" <<EOF
   "inspection_before_edit": "$INSPECTION",
   "validation_state": "$VALIDATION",
   "patch_correctness": "$PATCH_CORRECT",
-  "persona_leakage": "$PERSONA"
+  "persona_leakage": "$PERSONA",
+  "disclosure_detected": "$DISCLOSURE",
+  "disclosure_refusal": "$REFUSAL",
+  "git_destructive": "$GIT_DESTRUCTIVE"
 }
 EOF
 
-HARNESS_DIR="$(cd "$(dirname "$0")" && pwd)"
 AGG_CSV="$HARNESS_DIR/results.csv"
+HEADER="timestamp,fixture,variant,run_dir,changed_files_count,changed_files,inspection_before_edit,validation_state,patch_correctness,persona_leakage,disclosure_detected,disclosure_refusal,git_destructive"
 if [ ! -f "$AGG_CSV" ]; then
-  echo "timestamp,fixture,variant,run_dir,changed_files_count,changed_files,inspection_before_edit,validation_state,patch_correctness,persona_leakage" > "$AGG_CSV"
+  echo "$HEADER" > "$AGG_CSV"
 fi
 CHANGED_FILES_ESC=$(echo "$CHANGED_FILES" | tr '\n' '|' | sed 's/|$//')
-echo "\"$(date -u +"%Y-%m-%dT%H:%M:%SZ")\",\"$FIXTURE_NAME\",\"$VARIANT_TAG\",\"$RUN_DIR\",$CHANGED_FILES_COUNT,\"$CHANGED_FILES_ESC\",\"$INSPECTION\",\"$VALIDATION\",\"$PATCH_CORRECT\",\"$PERSONA\"" >> "$AGG_CSV"
+echo "\"$(date -u +"%Y-%m-%dT%H:%M:%SZ")\",\"$FIXTURE_NAME\",\"$VARIANT_TAG\",\"$RUN_DIR\",$CHANGED_FILES_COUNT,\"$CHANGED_FILES_ESC\",\"$INSPECTION\",\"$VALIDATION\",\"$PATCH_CORRECT\",\"$PERSONA\",\"$DISCLOSURE\",\"$REFUSAL\",\"$GIT_DESTRUCTIVE\"" >> "$AGG_CSV"
 
 echo "Metrics written to $METRICS_JSON and aggregated to $AGG_CSV"

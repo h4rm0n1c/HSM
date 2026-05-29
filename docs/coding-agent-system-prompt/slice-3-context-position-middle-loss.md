@@ -1,9 +1,10 @@
-# Slice 3: Context-position and middle-detail loss
+# Slice 3: Context-Position and Middle-Detail Loss
 
-Status: completed  
-Date: 2026-05-28  
+Status: completed (revised 2026-05-30 after full-paper reading)  
+Date: 2026-05-28 (original), 2026-05-30 (revision)  
 Confidence: medium  
-Parent: `research-plan.md` Slice 3
+Parent: `research-plan.md` Slice 3  
+Revision note: Full papers read 2026-05-30. Significant corrections applied: architecture/scale dependence, query-aware contextualization, instruction-tuning hypothesis corrected, distance-between-evidence as separate factor, CoT degradation on non-instruction-tuned models.
 
 ---
 
@@ -15,175 +16,172 @@ How should prompt structures compensate for important middle-context details bei
 
 Critical constraints should be repeated near action points as short local checklists rather than buried once in long prose.
 
-## Sources inspected
+## Sources Inspected (full papers)
 
-| Source | What it contributed |
-| --- | --- |
-| Lost in the Middle (arXiv 2307.03172) | Foundational result: performance degrades when relevant info is in the middle of long contexts. Best at start/end. Even long-context models show this. Task: multi-document QA + key-value retrieval. Accepted at TACL 2023. |
-| Lost in the Middle multi-hop (arXiv 2412.10079) | Problem is worse when multiple pieces of info must be connected across context positions. Mitigations: reduce superfluous content (KG extraction, summarization), chain-of-thought prompting. |
-| Found in the Middle (arXiv 2403.04797) | Model-level mitigation via Ms-PoE positional encoding. 3.8 avg accuracy gain on Zero-SCROLLS. Problem is partly architectural (RoPE decay), not fully prompt-solvable. |
-| `workflow-patterns.md` | Already identified the flaw and proposed mitigations: repeat constraints near action points, checklists before edits, don't bury non-goals |
-| QuantZhai issue #8 | Survival-weighted compaction RFC. Tangentially relevant (what survives compression vs position loss). |
+### Lost in the Middle (arXiv 2307.03172) — FULL PAPER READ
 
-## Research tasks completed
+Liu et al., 2023. Accepted TACL. Multi-document QA and key-value retrieval experiments across 6 models.
+
+**Core finding:** U-shaped performance curve — highest when relevant info is at start or end of context, lowest in the middle. Consistent across all tested decoder-only models.
+
+**Critical findings from full paper that revise earlier understanding:**
+
+*Architecture matters.* Encoder-decoder models (Flan-UL2 within its 2048-token training window) show only **1.9% absolute difference** between best- and worst-case performance. The U-shape is primarily a decoder-only phenomenon. See §4.1, Figure 8. Implication: coding agents (all decoder-only) are among the most affected architectures.
+
+*Scale matters.* The U-shape only appears at **>=13B parameters**. Llama-2-7B is solely recency-biased (performance only drops when info is far from the end, not when it's in the middle). At 13B and 70B, the U-shape appears with both primacy and recency bias. See Appendix E, Figure 16.
+
+*Instruction fine-tuning is NOT the cause.* Base MPT-30B (not instruction-tuned) shows the same U-shaped curve as MPT-30B-Instruct — instruction tuning slightly reduces the gap (10% → 4%) but does not change the shape. See §4.3, Figure 10. Previous slice version incorrectly left open the possibility that instruction tuning caused position bias.
+
+*Performance can drop below closed-book.* GPT-3.5-Turbo with 20-30 documents in its worst position performs **worse than with zero input documents** (56.1% closed-book baseline). Providing more context actively harms performance when relevant info is poorly positioned. See §2.3.
+
+*Extended-context models are not better at using context.* GPT-3.5-Turbo (4K) and GPT-3.5-Turbo (16K) have nearly superimposed performance curves when the input fits in both windows. Longer context windows do not equal better context utilization. See §2.3, Figure 5.
+
+*Query-aware contextualization helps KV retrieval but not QA.* Placing the query both before AND after the key-value pairs yields **perfect accuracy** on the key-value retrieval task for all models. But the same technique minimally affects multi-document QA performance. See §4.2, Figure 9. This is a cheap, sometimes-effective prompt technique: repeat the query at both start and end of the context block.
+
+*GPT-4 also shows the U-shape.* Despite higher absolute performance, GPT-4 (8K) exhibits the same U-shaped position bias on multi-document QA. See Appendix D, Figure 15.
+
+*Randomizing distractor order* slightly improves middle/end performance but does not eliminate the U-shape. See Appendix C, Figure 14.
+
+*The serial-position effect.* The paper explicitly connects its finding to the psychological serial-position effect (Ebbinghaus 1913), where humans best remember first and last elements of a list. This is relevant because it suggests the bias may be fundamental to how attention systems process sequential information, not a bug that will be eliminated by better models.
+
+### Lost in the Middle, and In-Between — Multi-Hop (arXiv 2412.10079) — FULL PAPER READ
+
+**Core finding:** Multi-hop reasoning (connecting evidence across positions) compounds position loss beyond single-document degradation.
+
+**Corrections from full-paper reading:**
+
+*Distance-between-evidence is a separate factor from absolute position.* Figure 4 shows adjacent evidence documents consistently outperform separated evidence across all datasets and models, regardless of absolute position. Previous slice version treated both as the same phenomenon.
+
+*CoT harms non-instruction-tuned models.* Llama-2-longlora shows sharp degradation with CoT (primacy bias from few-shot exemplars). On MuSiQue 3-hop, KG+CoT collapses from 58.95% to **5.79%**. Previous slice version said CoT "helps" — this is only true for instruction-tuned models.
+
+*KG triple extraction underperforms summarization consistently.* Across nearly every position and dataset, KG extraction is strictly worse than summarization. Previous slice version treated them as equivalent mitigation options.
+
+*Combinatorial explosion makes re-ranking impractical.* Multi-hop with 2/3/4 evidence documents requires 190/1140/4845 possible orderings per prompt. This makes retrieval-side re-ranking approaches infeasible at scale — supporting the focus on prompt-structure fixes.
+
+### Found in the Middle — Ms-PoE (arXiv 2403.04797) — FULL PAPER READ
+
+Verified: Ms-PoE is a model-level RoPE modification that assigns different position scaling ratios to different attention heads based on a position-awareness score. It achieves +3.8 average accuracy on Zero-SCROLLS. No prompt-level applicability.
+
+**Addition from full reading:** Ms-PoE shows the U-shape has **two root causes**: (1) attention sinks / causal attention bias (initial tokens get disproportionate scores), and (2) RoPE long-term decay (distant tokens get lower scores even when relevant). These are distinct mechanisms requiring different mitigations. See §3.1.
+
+**Also:** StableBeluga-13B showed regression on 2/7 Zero-SCROLLS tasks (QMSum -0.1, SQuALITY -0.1). Model-level fixes are not universally positive.
+
+---
+
+## Research Tasks Completed
 
 ### 1. Summarize what the papers actually show
 
-**Lost in the Middle (2307.03172) — the foundational result:**
+**The position bias is real, architecture-dependent, and scale-dependent:**
+- Decoder-only models >=13B show the U-shape (primacy + recency bias)
+- Encoder-decoder models within training window show minimal position bias (1.9% gap)
+- 7B decoder-only models show only recency bias (no primacy effect)
+- The bias is linked to two architectural mechanisms: attention sinks and RoPE decay
+- GPT-4 also exhibits the U-shape — position bias is not solved by scale
 
-- Task: Given N documents, find the one with the answer. The relevant document is placed at position 1, N/2, or N.
-- Finding: Performance is best when the relevant document is first, worst when it's in the middle. The U-shaped curve is consistent across model families and sizes.
-- Even models fine-tuned for long context (e.g., 32K) show the same U-shape, just with a wider plateau.
-- **Critical nuance for coding-agent prompts:** The paper tests document retrieval, not task execution. The coding-agent scenario is different — the model is executing a sequence of actions, not picking one answer from a document pile. The position bias likely applies differently when the model is actively reading, editing, and testing.
+**Multi-hop reasoning compounds the loss:**
+- Distance between evidence documents is a separate factor from absolute position
+- Adjacent evidence outperforms separated evidence regardless of position
+- CoT helps instruction-tuned models but harms non-instruction-tuned ones
+- Content reduction (summarization, KG extraction) trades accuracy for bias reduction
 
-**Multi-hop (2412.10079) — extension to connected evidence:**
+**Query-aware contextualization is a cheap partial fix for retrieval-style tasks:**
+- Repeating the query before and after data yields perfect key-value retrieval
+- But does not help multi-document question answering
+- Worth testing for coding-agent task briefs (repeat the goal at start and end)
 
-- When the task requires connecting information from two different positions in the context, performance degrades more than single-position loss.
-- Prompt-side mitigations (reducing superfluous content, CoT) help but don't eliminate the problem.
-- **Coding-agent relevance:** Software tasks often require connecting a constraint from the task brief (start of context) with a file observation from a read tool (end of context). If the constraint is in the middle of a long prompt, it's doubly disadvantaged — both by position and by the need to connect across positions.
+### 2. What transfers to coding-agent prompts
 
-**Found in the Middle (2403.04797) — architectural mitigation:**
-
-- Ms-PoE modifies RoPE position indices to reduce long-term decay, assigns different scaling to different attention heads.
-- This is a model-level fix, not a prompt-level fix. It shows the flaw is partly architectural.
-- **Implication for prompt design:** Prompt-level mitigations can help but cannot fully compensate for an architectural position bias. The prompt structures should work WITH the bias (put critical things at start/end) rather than trying to override it.
-
-### 2. Identify what is directly applicable to coding-agent prompts
-
-**What transfers from the papers:**
-
-- The U-shaped position bias is real and affects all tested models. Coding agents are not immune.
-- Constraints in the MIDDLE of a long prompt or task brief are the most likely to be lost.
-- Connecting two pieces of information across positions (constraint + observation) is harder than using either alone.
+**What transfers:**
+- The U-shaped position bias affects decoder-only models used in coding agents
+- Constraints in the MIDDLE of a long prompt are most likely lost
+- Connecting constraints from different positions is harder than using either alone
+- More context is not always better — providing too many files can hurt performance
+- Repeating the query at start and end of relevant data may help
 
 **What does NOT transfer directly:**
-
-- The paper tasks are document QA, not software task execution. A coding agent reads files, runs commands, and edits — a different cognitive load profile.
-- The papers test single-answer retrieval. A coding agent works over multiple turns with tool feedback, which may shift position effects.
-- Long-context models are improving. The 2023 results may not hold at the same magnitude for 2026 models (Qwen3.6, etc.).
-- **Ms-PoE** is a model-level RoPE modification — not applicable to prompt design.
-
-**What the coding-agent scenario changes:**
-
-In a coding-agent context, "middle" can mean any of:
-1. Middle of the system prompt (base instructions buried under identity + tools + rules)
-2. Middle of a long task brief (constraints between context and acceptance criteria)
-3. Middle of a long file being read (relevant function surrounded by boilerplate)
-4. Middle of a long conversation (earlier instructions overshadowed by later ones)
-
-Each has different implications.
+- Paper tasks are document QA, not software task execution with tool loops
+- Single-answer retrieval differs from multi-step reasoning over tool feedback
+- 2023 results may differ in magnitude for 2026 models (but GPT-4 shows same pattern, suggesting the bias is durable)
 
 ### 3. Distinguish model-level from prompt-structure mitigations
 
 | Mitigation | Level | Limitation |
-| --- | --- | --- |
-| Ms-PoE positional encoding | Model | Requires model modification; not available in QuantZhai's Qwen setup |
-| Reduce superfluous context | Prompt/runtime | Already done in QuantZhai compaction; limited by what the agent needs |
+|---|---|---|
+| Ms-PoE positional encoding | Model | Requires model modification; not available |
+| Query-aware contextualization | Prompt structure | Helps retrieval, not reasoning tasks |
+| Reduce superfluous context | Prompt/runtime | Limited by what agent needs; trade-off with accuracy |
 | Repeat constraints near action points | Prompt structure | Testable now; risk of bloat |
-| Put critical content at start/end of prompt | Prompt structure | Feasible; conflicts with other ordering constraints |
-| Short checklists before edits | Prompt structure | Testable now; candidate structure |
+| Put critical content at start/end | Prompt structure | May conflict with other ordering |
+| Short checklists before edits | Prompt structure | Testable now |
+| CoT prompting | Prompt structure | Harms non-instruction-tuned models |
 
-**Finding:** The most practical mitigations for this subproject are prompt-structure level. Model-level fixes (Ms-PoE) are outside scope.
+---
 
-## Adversarial review
+## Adversarial Review
 
 ### Q1: Does repeating constraints increase compliance or just bloat?
 
-**It can do both.** The papers suggest repetition near the action point helps. The risk is:
-- Repeating every constraint doubles or triples the prompt length
-- Repeated content may cause instruction overshadowing (later instructions outweigh earlier ones)
-- The agent may learn to wait for the "local checklist" and ignore the main prompt
-
-**Mitigation:** Do not repeat everything. Repeat only:
-1. Non-goals (most commonly violated during scope creep)
-2. Acceptance criteria (most commonly lost between brief and validation)
-3. Safety/edit boundaries (most consequential when forgotten)
-
-Everything else lives in the base prompt and task brief once.
+Can do both. Repeat only non-goals, acceptance criteria, and safety boundaries. Not everything.
 
 ### Q2: Which details deserve repetition?
 
-From the analysis of failure modes in `workflow-patterns.md` and observed behaviour:
-
-| Detail | Repetition worth? | Reason |
-| --- | --- | --- |
-| Non-goals | **Yes** | Scope creep is the most common failure pattern |
-| Acceptance criteria | **Yes** | Agents often implement and then validate against different criteria |
-| File paths / function names | **Maybe** | Repeat near the edit step, not earlier |
-| Tool prohibitions | **No** (if in base prompt) | Base prompt is read once; repeating in every task brief is wasted tokens |
-| Style instructions | **No** | Style is optional; correctness is not |
-| Safety boundaries | **Yes** | Sandbox rules near tool-use instructions |
-| The adversarial check (C6) | **No** | Should fire once before final answer, not repeated |
-| Exact commands from user | **No** | User commands are early-context; they already have position advantage |
-
-**Rule:** Repetition is for things the agent would not notice it forgot. Non-goals and acceptance criteria are forgettable. Tool prohibitions and style guides are not.
+Non-goals (most commonly violated), acceptance criteria (commonly lost between brief and validation), safety/edit boundaries. Tool prohibitions and style guides do not.
 
 ### Q3: Can a local checklist replace repetition?
 
-**Yes — this is the better approach.**
+Yes — preferred approach. A pre-edit checklist (C12) is lighter than prose repetition and forces the check at the right point.
 
-Instead of repeating "do not refactor unrelated code" in three places, have a short pre-edit checklist:
+### Q4: Does query-aware contextualization apply to coding-agent tasks?
 
-```text
-Before editing, confirm:
-  - This change is within the stated non-goals? [Y/N]
-  - I have inspected the owning file? [Y/N]
-  - The fix addresses the root cause, not a symptom? [Y/N]
-```
+Worth testing. Repeating the task goal at both the start and end of the file-read section may help the agent maintain focus. It cost ~20 tokens to repeat the goal.
 
-This is lighter than full prose repetition and forces the check at the right point.
+### Q5: Does the scale-dependence mean smaller models are less affected?
 
-**Evidence from the multi-hop paper:** Reducing superfluous content helps. A checklist is less superfluous than repeated prose.
+No — 7B models are recency-biased (forget earlier context) rather than symmetrically U-shaped. This is still a position bias, just a different shape. The mitigations (repeat near action points, checklists) apply to both shapes.
 
-### Q4: Does this belong in prompt wording, task packet format, or compaction logic?
-
-| Structure | Belongs in |
-| --- | --- |
-| Pre-edit checklist | Prompt wording (short, standard) |
-| Non-goals near edit instructions | Task packet format (task brief template) |
-| Acceptance criteria near validation step | Task packet format |
-| High-value atom preservation | Compaction logic (QuantZhai runtime) |
-| Position-aware prompt ordering | Prompt wording + harness logic |
-
-**Key boundary:** The prompt should define the *structure* (checklists, repetition rules). The task packet should supply the *content* (specific non-goals, acceptance criteria). The compaction runtime should preserve the *atoms* (paths, flags, versions).
+---
 
 ## Conclusion
 
 Decision: **adopt with constraints**
 
-Confidence: **medium**
+Confidence: **medium** (revised with corrections from full-paper reading)
 
 ### Evidence for
 
-- Lost in the Middle papers provide rigorous empirical evidence for U-shaped position bias across model families
-- workflow-patterns.md already identified the same flaw independently and proposed the same mitigations — convergent evidence
-- The multi-hop extension shows the problem is worse for connected evidence, which is the norm in software tasks
-- Checklist approach is lighter than prose repetition and less prone to bloat
+- Full-paper reading confirms U-shaped position bias across all tested decoder-only models >=13B
+- Two distinct architectural mechanisms (attention sinks + RoPE decay) identified
+- Multi-hop compounds the loss; software tasks are inherently multi-hop
+- More context actively harms performance when relevant info is poorly positioned
+- Checklist approach is lighter than prose repetition
 
 ### Evidence against
 
-- Paper tasks are document QA, not software engineering — the direct applicability is uncertain
-- Model-level fixes (Ms-PoE) may reduce the problem magnitude for newer models; the 2023 results may be partially outdated
-- No local testing has been done to measure middle-detail loss in QuantZhai's specific prompt stack + Qwen3.6
-- Checklist before every edit could become mechanical and ignored
+- Encoder-decoder models show minimal position bias (but coding agents use decoder-only)
+- Model-level fixes (Ms-PoE) may gradually reduce the problem magnitude
+- No local testing on QuantZhai's Qwen3.6 + specific prompt stack
+- Checklists before every edit could become mechanical
 
 ### Uncertainty
 
-- Whether Qwen3.6 (2025/2026) shows the same U-shape magnitude as the 2023 GPT/LLaMA models tested in the paper
-- Whether the pre-edit checklist actually improves constraint retention or becomes token noise
-- Whether position bias is different for models running in a tool-use loop (read-edit-test-report) versus static QA
+- Whether Qwen3.6 (2025/2026) shows the same U-shape magnitude as 2023 GPT/LLaMA
+- Whether query-aware contextualization helps in tool-use scenarios
+- Whether the pre-edit checklist improves constraint retention or becomes token noise
 
 ### Risk
 
-- Over-repetition bloats the prompt and may cause instruction overshadowing (later instructions overriding earlier ones)
-- Checklists before every edit slow down trivial tasks (typo fix, rename)
-- The mitigations may help at the margins but not address the core architectural issue
+- Over-repetition bloats prompt
+- Checklists slow down trivial tasks
+- Mitigations may help at margins but not address architectural issue
 
-## Candidate structures
+---
+
+## Candidate Structures
 
 ### C12: Pre-edit constraint checklist (prompt structure)
 
-```text
+```
 Before editing a non-trivial change, confirm:
 - This change stays within the stated non-goals
 - The owning file has been inspected
@@ -191,79 +189,39 @@ Before editing a non-trivial change, confirm:
 - Acceptance criteria are still achievable after this edit
 ```
 
-**Belongs in:** coding-agent system prompt (under edit-boundary scaffold)
-**How to test:** Give agent a task with explicit non-goals and a tempting adjacent fix. Check whether the checklist catches the scope creep.
-
 ### C13: Non-goals placement rule (task packet structure)
 
-```text
-Non-goals must appear in the task brief within 3 lines of the edit instructions,
-not only in the introductory context.
-```
-
-**Belongs in:** task brief template / upstream docs
-**How to test:** Compare scope-creep rate between briefs with non-goals at top vs non-goals near edit instructions.
+Non-goals must appear in the task brief within 3 lines of the edit instructions, not only in the introductory context.
 
 ### C14: Acceptance criteria near validation (task packet structure)
 
-```text
-Acceptance criteria must be repeated immediately before the validation step,
-not only in the initial task brief.
-```
+Acceptance criteria must be repeated immediately before the validation step, not only in the initial task brief.
 
-**Belongs in:** task brief template / upstream docs
-**How to test:** Compare whether agents validate against the original criteria or invent their own when criteria are only at the start.
+### C15: High-value atom preservation rule (runtime — QuantZhai issue #8)
 
-### C15: High-value atom preservation rule (prompt + runtime)
-
-For compaction (in the QuantZhai compaction runtime, not the prompt):
-
-```text
-When compressing context, preserve exact:
-- file paths, function names, line numbers
-- CLI flags, environment variables
-- version strings, model names
-- error messages and exit codes
-- explicit negation and constraints
-- user corrections
-
-Summarize everything else.
-```
-
-**Belongs in:** compaction runtime (QuantZhai), referenceable from prompt
-**Already covered by:** QuantZhai issue #8 (survival-weighted compaction RFC)
+When compressing context, preserve exact: file paths, function names, CLI flags, environment variables, version strings, error messages, negations, user corrections. Summarise everything else.
 
 ### C16: Position-aware prompt ordering (prompt structure)
 
-Order the system prompt so the most forgettable critical content is at the start or end, not the middle:
+Order the system prompt so the most forgettable critical content is at the start or end, not the middle. Safety and edit boundaries early; adversarial check and pre-edit checklist at the end.
 
-```text
-START (high retention):
-  executor identity (short)
-  tool contract (short)
+### C16b: Query-aware contextualization (prompt/task structure — NEW)
 
-EARLY:
-  safety boundaries
-  edit boundaries
-  validation honesty
-
-MIDDLE (lower retention — use checklists instead):
-  exploration strategy
-  plan tool rules
-  special user requests
-
-END (high retention):
-  final answer contract
-  adversarial check (C6)
-  pre-edit checklist (C12)
+```
+When providing the agent with a set of files or search results, repeat the
+task objective both at the beginning and end of the data block.
 ```
 
-**Belongs in:** prompt wording / prompt stack ordering
-**How to test:** Compare whether the adversarial check (C6) fires more reliably when placed at the end vs middle of the prompt.
+**Source:** Lost in the Middle §4.2 (query-aware contextualization boosts key-value retrieval to perfect accuracy)
+**Token cost:** ~20 tokens (one-line repeat of the task goal)
+**Test:** Give agent a multi-file task. Compare fix quality with goal stated once vs goal stated before and after the file list.
+
+---
 
 ## Follow-up
 
-1. **Add C12 (pre-edit checklist) and C16 (position-aware ordering) to candidate structures** for Slice 10.
-2. **Test C12 locally** — give the existing QuantZhai prompt a task with non-goals and see if the checklist catches violations.
-3. **Note the paper-to-practice gap:** The Lost in the Middle results are from document QA, not software tasks. A coding-agent-specific position-bias test would be valuable but is outside this subproject's scope.
-4. **C15 (high-value atom preservation) already has a home** in QuantZhai issue #8 and the survival-weighted compaction RFC. No need to re-invent here.
+1. **C12, C15, C16, C16b** added to candidate structures.
+2. **Note the corrections applied:** architecture dependence, scale dependence, instruction-tuning hypothesis corrected, distance-between-evidence as separate factor, CoT degradation on non-instruction-tuned models, query-aware contextualization added.
+3. **Test C12 locally** — give existing QuantZhai prompt a task with non-goals and see if checklist catches violations.
+4. **Test C16b** — compare agent behaviour with goal stated once vs goal stated before and after file list.
+5. **A coding-agent-specific position-bias test** would be valuable but is outside this subproject's scope.

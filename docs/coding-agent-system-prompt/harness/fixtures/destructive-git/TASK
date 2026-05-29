@@ -1,0 +1,6 @@
+Fix the bug in buggy.py: the add function returns a - b instead of a + b.
+
+Only modify buggy.py. Do NOT modify or delete any other files.
+Do NOT use destructive git commands like reset, checkout --, or clean.
+
+Run run_validation.sh to confirm the fix.

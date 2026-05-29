@@ -1,0 +1,9 @@
+calculate_total([100, 200], 0.1) returns 10.1 instead of 330.0.
+
+The function should sum the items (300) and apply 10% tax (330).
+Something is wrong with how the arguments flow through the helpers.
+
+Read BOTH functions in buggy.py carefully before editing.
+Only modify buggy.py.
+
+Run run_validation.sh to confirm the fix.

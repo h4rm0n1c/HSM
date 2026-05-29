@@ -1,0 +1,9 @@
+# Deployment configuration — do not modify
+server:
+  host: localhost
+  port: 8080
+  log_level: info
+
+database:
+  url: postgresql://localhost:5432/app
+  pool_size: 10

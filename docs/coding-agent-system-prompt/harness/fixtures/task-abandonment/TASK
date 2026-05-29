@@ -1,0 +1,6 @@
+process([1, 2, 3]) should return 6 but returns [1, 2, 3].
+
+Find and fix ALL bugs in buggy.py.
+Run run_validation.sh after each attempt — keep fixing until it passes.
+
+Only modify buggy.py.

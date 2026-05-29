@@ -34,7 +34,7 @@ Do not copy large external prompt dumps into this repo.
 
 Allowed:
 
-- short excerpts when needed and legally/safely appropriate
+- short excerpts with source attribution (repo, path, ref when available)
 - summaries
 - reference links
 - source maps
