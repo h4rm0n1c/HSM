@@ -1,0 +1,2 @@
+timestamp,fixture,variant,run_dir,changed_files_count,changed_files,inspection_before_edit,validation_state,patch_correctness,persona_leakage
+"2026-05-29T12:14:44Z","task-1","executor","/tmp/harness-run-errfET",1,"buggy.py","na","not_run","false","na"

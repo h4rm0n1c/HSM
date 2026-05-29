@@ -373,6 +373,53 @@ Avoid steering the coding agent into these failures:
 - pretending one rigid reasoning method fits every software task
 - burying critical constraints in the middle of long prompt prose
 
+## Cross-linking observation: adversarial reasoning as load-bearing structure
+
+The current research pass uses adversarial review as a mandatory gate (per `research-plan.md`).
+HSM doctrine already encodes this in `docs/anti-agreement-harness.md` — claim classification,
+challenge obligations, evidence-vs-inference separation.
+
+These are the same mechanism at different scopes:
+
+```text
+research-slice adversarial review (research-plan.md)
+  -> prevents selecting prompt structures that sound right but fail locally
+
+coding-agent adversarial check (anti-agreement harness)
+  -> prevents implementing from suspicion without source evidence
+
+coding-task self-critique (prompt candidate)
+  -> prevents agreement-engine drift: "tests pass" when validation is synthetic,
+     "feature works" when it was never verified in the lived workflow
+```
+
+The insight: adversarial framing is not just quality control. It is an **allocation heuristic**
+that forces reasoning toward conflict resolution and evidence checking instead of the
+default autocomplete path (agree, smooth, generate, forget).
+
+Without it, the system drifts toward the failure you described: agreeing with the user's
+frame, generating plausible-looking output, and retaining none of the constraints or failures
+across turns. The "best friend" / "agreement engine" / "simpering lobotomised moron" mode
+is not a moral failure — it is what the model does by default when no structure forces it
+to spend reasoning on falsification.
+
+**Open design question:** Should adversarial checking be an explicit reasoning phase in the
+coding-agent prompt (e.g., "before finalizing, list one thing that could make this wrong"),
+or should it remain a process rule in upstream docs and tool contracts (e.g., validation-honesty
+contract, evidence-before-edit rule)?
+
+Slice 1 candidate structures C3 (evidence-before-edit) and C4 (validation-honesty) are the
+thin edge of this. The anti-agreement harness suggests a heavier structure (explicit claim
+classification with evidence-for/evidence-against/uncertainty). The right weight for a
+coding-agent prompt is unclear and worth testing.
+
+This observation connects:
+- `research-plan.md` — adversarial review gate
+- `docs/anti-agreement-harness.md` — claim classification and challenge discipline
+- `slice-1-arbitration-loop.md` — C3, C4 candidate structures
+- `research-plan.md` Slice 2 — evidence, anti-agreement, and self-criticism (the explicit home for resolving this)
+- The observed behaviour: models default to agreement/smoothing without structural forcing
+
 ## Research target
 
 The eventual prompt should be compact enough for local Qwen, strong enough for Codex-like coding tasks, and modular enough that QuantZhai can swap or append layers without duplicate guidance.

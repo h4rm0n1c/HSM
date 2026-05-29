@@ -69,6 +69,24 @@ reference-quantzhai-codex-core-qwenified.md
 
 research-references.md
   External prompt sources, academic references, internal project references, and flaw observations queued for later research.
+
+internal-project-references.md
+  Slice 0 output: source matrix with authority classification, freshness, verification findings, and adversarial review.
+
+slice-1-arbitration-loop.md
+  Slice 1 output: arbitration loop analysis, external prompt comparison, coding-agent vs upstream placement decision, candidate structures C1-C5.
+
+slice-2-anti-agreement-self-critique.md
+  Slice 2 output: anti-agreement harness adaptation, external review-prompt comparison, minimum viable adversarial check, candidate structures C6-C11.
+
+slice-3-context-position-middle-loss.md
+  Slice 3 output: Lost in the Middle paper analysis, position-aware prompt ordering, pre-edit checklist, non-goals placement rule, candidate structures C12-C16.
+
+slice-4-promptware-lifecycle.md
+  Slice 4 output: Promptware Engineering paper analysis, Prompt Management in GitHub empirical study, QuantZhai prompt stack inspection, lifecycle tier system, metadata header schema, spellcheck gate, source-ref rule, candidate structures C17-C22.
+
+slice-5-identity-role-and-executor-boundaries.md
+  Slice 5 output: executor role header, harness boundary statement, project/repo state-as-data rule, subject identity prohibition (C23-C26).
 ```
 
 ## Research protocol

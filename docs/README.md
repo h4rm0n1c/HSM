@@ -80,6 +80,10 @@ Read:
 - [Workflow patterns](coding-agent-system-prompt/workflow-patterns.md)
 - [QuantZhai prompt reference snapshot](coding-agent-system-prompt/reference-quantzhai-codex-core-qwenified.md)
 - [Research references](coding-agent-system-prompt/research-references.md)
+- [Internal source matrix](coding-agent-system-prompt/internal-project-references.md) — Slice 0 output, authority classifications, verification findings
+- [Arbitration loop analysis](coding-agent-system-prompt/slice-1-arbitration-loop.md) — Slice 1 output, external prompt comparison, candidate structures
+- [Anti-agreement and self-critique](coding-agent-system-prompt/slice-2-anti-agreement-self-critique.md) — Slice 2 output, minimum viable adversarial check, candidate structures C6-C11
+- [Context position and middle-detail loss](coding-agent-system-prompt/slice-3-context-position-middle-loss.md) — Slice 3 output, Lost in the Middle analysis, position-aware ordering, candidate structures C12-C16
 
 Focus on:
 
@@ -174,7 +178,11 @@ docs/coding-agent-system-prompt/README.md
 docs/coding-agent-system-prompt/AGENTS.md
 docs/coding-agent-system-prompt/reference-quantzhai-codex-core-qwenified.md
 docs/coding-agent-system-prompt/research-plan.md
+docs/coding-agent-system-prompt/internal-project-references.md
 docs/coding-agent-system-prompt/research-references.md
+docs/coding-agent-system-prompt/slice-1-arbitration-loop.md
+docs/coding-agent-system-prompt/slice-2-anti-agreement-self-critique.md
+docs/coding-agent-system-prompt/slice-3-context-position-middle-loss.md
 docs/coding-agent-system-prompt/workflow-patterns.md
 docs/hsm-master-report-2026-05-01.md
 docs/human-analogy-and-memory-research-seed-2026-05-02.md
