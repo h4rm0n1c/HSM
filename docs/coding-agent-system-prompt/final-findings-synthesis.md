@@ -1,221 +1,333 @@
 # Final Findings Synthesis: Coding Agent System Prompt Structures
 
 Status: consolidated research output  
-Date: 2026-05-30  
-Method: 10-slice research plan (research-plan.md), full paper reading where applicable,  
-  harness experiments (3 fixtures, 24 trials), external comparison (3 vendors),  
-  missing-structures gap analysis, failure mode catalog
+Date: 2026-06-02  
+Scope: 10-slice protocol + external reference analysis + production subagent dispatch  
+  + agent prompt patterns + skill prompt patterns  
 
 ---
 
-## 1. Research Method and Scope
+## 0. Rule Zero: Prompt Files Say What, Not How
 
-This project applied a 10-slice research protocol to design coding-agent system prompt structures for the QuantZhai/Codex CLI runtime. Each slice included: research → verification → adversarial review → correction → conclusion with confidence.
+**Don't put in the prompt file what can be deterministically coded and injected or called as a tool.**
 
-**Total structures identified:** ~34 after deduplication. **After compression:** 27 structures in prompt text, ~1060 tokens (within ~1050 target). Details in candidate-structures.md.
+A prompt file should describe the task, the output contract, and the constraints — not the data retrieval, the tool mechanics, or the preference biases. Everything that can be computed, fetched, or derived deterministically should live outside the prompt: in tools, in injected context blocks, or in orchestrator logic.
 
-**Empirical work:**
-- QuantZhai identity-line prevalence grep (all live prompts)
-- AB test: baseline vs executor header on 1 fixture
-- Expanded experiment: baseline vs candidate header on 3 fixtures (scope-creep, dirty-worktree, prompt-injection)
-- 24 total harness trials across both conditions
-- QuantZhai source audit: `qz_prompt_policy.py`, test harness, 6 prompt files, model-overrides.json
+### What this means in practice
 
-**Papers read (full text where indicated):**
-- Promptware Kill Chain (arXiv 2601.09625) — **full paper**
-- Promptware Engineering (arXiv 2503.02400, ACM TOSEM) — **full paper (this pass)**
-- Found in the Middle — Ms-PoE (arXiv 2403.04797) — **full paper (this pass)**
-- Lost in the Middle (arXiv 2307.03172) — section-level (widely reproduced findings)
-- Prompt Management in GitHub (arXiv 2509.12421) — results-level (unambiguous statistics)
+| Belongs in the prompt | Belongs outside the prompt |
+|---|---|
+| Task description | Data retrieval logic (`get_records()`, `get_features()`) |
+| Output schema & contract | Preference profiles and user biases |
+| Constraints and rules | Tool implementation details |
+| Decision criteria | Static reference tables that change per user |
+| Claim/evidence format | Hardcoded lists of what tools exist |
 
-**QuantZhai issues read (full text):**
-- #8 (survival-weighted compaction RFC)
-- #40 (compaction/stream hang watchdog)
-- #41 (bidirectional signal surface map)
-- #43 (repeated-read live smoke)
-- #44 (backend control plane audit)
+### The dynamic injection pattern
 
----
+The orchestrator reads the user's deterministic profile (features, preference transformer, tag frequency) and injects it as a context block when dispatching the agent. The agent receives its task + the user-specific context. It does not fetch the context itself.
 
-## 2. Consolidated Findings by Layer
+```
+Static prompt file:
+  "You are a narrative structure analyst.
+   Classify each chunk: scene_structure, arc_position, temporal_framing.
+   Output format: [schema].
+   Constraints: confidence anchors, claim requirements."
 
-### Layer 1: Executor Identity (Slice 5)
+Injected at dispatch time:
+  "User preference context:
+     Top strong_positive: inflation, canine, dominant
+     Source profile: second-person POV, touch-dominant
+   Calibrate your classifications with this profile."
+```
 
-**Finding:** Executor header (C23) has no measurable effect on simple tasks. Baseline QuantZhai "You are Codex" identity framing is sufficient for basic tool discipline. Persona leakage was zero across all 24 trials.
+The prompt file never changes per user. The injected context changes every dispatch.
 
-**Recommendation:** Keep executor header as a 30-token lightweight convention. Do not treat as high-impact.
+### Why this is the foundation
 
-**AB test evidence:** Executor header vs baseline — same patch quality, same inspection behaviour, same zero persona leakage. The only difference was output format (path:line vs plain filename).
+Every pattern in this document is an expression of this rule:
+- **Compressed subagent identity**: the orchestrator provides context, so the subagent doesn't need to re-learn why it exists
+- **Tool-split upfront**: the tool strategy is declared at dispatch time, not hardcoded
+- **Routing dispatch**: the orchestrator decides which specialist to dispatch, not the specialist itself
+- **Structured output contracts**: the format is outside the prompt, enforced by the receiving system
+- **Two-phase design**: the deterministic phase is outside the LLM prompt entirely
 
-### Layer 2: Tool Contract (Slice 7)
-
-**Finding:** QuantZhai baseline prompt has no parallel-call guidance, no tool-name disclosure prohibition, and no tool result persistence warning. Vendors (Claude Code, Cursor) all include these.
-
-**Recommendation:** Adopt M1 (tool name non-disclosure), M2 (parallel-call guidance). Test M3 (tool result clearing) only if harness behaviour matches.
-
-### Layer 3: Task Framing (Slices 1, 2, 3)
-
-**Finding:** The C2+M4 merged over-engineering prevention structure is the highest-impact task-framing structure. It directly addresses the most common failure mode (scope creep — FM1).
-
-**Related finding:** The pre-edit constraint checklist (C12) and evidence-before-edit rule (C3/C8) together form a two-stage gate that prevents premature commitment (FM5) and fake investigation (FM3).
-
-**Recommendation:** Adopt C2+M4 (merged, ~100 tokens), C12 (~50 tokens), C3/C8 (~40 tokens). Test M5 (lightweight planning) — may cause over-planning on simple tasks. Adopt M6 (planning budget heuristic) unconditionally.
-
-### Layer 4: Repo/Project Authority (Slice 4, Missing Structures)
-
-**Finding:** Vendors all have AGENTS.md/CLAUDE.md integration with priority semantics. QuantZhai already reads AGENTS.md but the prompt has no rule about obeying it.
-
-**Recommendation:** Adopt M8 (AGENTS.md integration) + M9 (priority semantics: user > AGENTS.md > system prompt). ~70 tokens total for both.
-
-### Layer 5: Investigation/Exploration (Slices 1, 2)
-
-**Finding:** The evidence-before-edit rule (C3/C8) and suspicion-as-search-heuristic (C1) are structurally sound and address real failure modes. The needle-query threshold (M10) adds a useful distinction between direct search and explore-sub-agent.
-
-**Recommendation:** Adopt C1, C3/C8, M10. Total ~105 tokens.
-
-### Layer 6: Edit Boundaries (Missing Structures, Slice 5)
-
-**Finding:** This layer has the most critical gaps. M12 (existing-changes preservation), M14 (destructive command guard), and M13 (file creation guard) are the highest-impact safety structures.
-
-**Recommendation:** Adopt all three. M12 and M14 are critical — they prevent data loss. M13 prevents a common scope-creep variant. Total ~80 tokens.
-
-### Layer 7: Validation Scaffold (Slices 1, 2, 4, Missing Structures)
-
-**Finding:** The validation-honesty contract (C4/C9+M17 merged) with explicit validation states is stronger than any single vendor's validation guidance. The adversarial check (C6) and anti-agreement final answer template (C11) are unique differentiators.
-
-**Recommendation:** Adopt C4/C9+M17 (~80 tokens), C6 (~50 tokens), C11 (~30 tokens). Test C7 (three-state claim classification) — likely too verbose for single-agent use.
-
-### Layer 8: Safety / Trusted Input Boundary (Slice 6)
-
-**Finding:** This is where the Promptware Kill Chain paper provides the most value. Coding agents satisfy all three conditions of the Lethal Trifecta (untrusted input + sensitive data + external communication) by default. Seven coding-assistant incidents were documented in 2025-2026, including RCE, backdoor insertion, and credential exfiltration.
-
-**Key structures:** S6-1 (trusted input boundary — merged C25 + M20 + priority chain), S6-2 (URL guard), S6-3 (tool name non-disclosure), S6-4 (security policy).
-
-**Recommendation:** Adopt S6-1 (critical, ~130 tokens), S6-2 (low, ~30 tokens), S6-3 (medium, ~40 tokens). Test S6-4 (~40 tokens). Merge all into a single safety block.
-
-### Layer 9: Output Contract (Slice 2, Missing Structures)
-
-**Finding:** M7 (apology avoidance), M23 (code-reference format), M24 (communication channel clarity) are low-cost quality-of-life improvements used by all major vendors.
-
-**Recommendation:** Adopt all three. Total ~60 tokens.
-
-### Layer 10: Dynamic/Runtime Context (Slice 7)
-
-**Finding:** QuantZhai has the infrastructure for runtime state injection (qz-status snapshot in harness, signal surface in proxy) but the prompt currently receives none of it.
-
-**Recommendation:** Adopt M25 (environment info — harness change, ~20 tokens) and M26 (git status — harness change, ~10-40 tokens). Add S7-3 (accept runtime feedback, ~60 tokens). These are harness changes, not prompt text changes.
-
-### Compaction/Preservation (Slice 8)
-
-**Finding:** Survival-weighted compaction (QuantZhai issue #8) is a promising research direction but not ready for implementation. The atom preservation rule (S8-1, expanded C15) can be adopted immediately at the prompt level.
-
-**Recommendation:** Adopt S8-1 (~80 tokens) in the prompt. Mark S8-2 as future QuantZhai work. Use S8-3 as acceptance criteria when compaction is implemented.
+All patterns below assume Rule Zero is applied. If Rule Zero is not applied — if data retrieval, tool selection, or user context is hardcoded in the prompt — the other patterns will be less effective because the prompt will be fighting against static data that should be dynamic.
 
 ---
 
-## 3. Empirical Results
+## 1. Architecture Patterns
 
-### AB Test: Baseline vs Executor Header (Slice 5)
+How agents are structurally organized.
 
-| Metric | Baseline | Executor Header |
-|---|---|---|
-| Validation | full_pass | full_pass |
-| Patch correctness | true | true |
-| Inspection before edit | true | true |
-| Persona leakage count | 0 | 0 |
+### Two-Phase Design
 
-**Verdict:** No measurable difference for trivial tasks. Executor header is neutral — keep as convention.
+Split work into a deterministic computation phase followed by an LLM judgment phase. The deterministic phase (script, tool, or calculation) produces objective metrics. The LLM phase interprets those metrics and produces the final output.
 
-### Expanded Experiment: 3 Fixtures (Slice 5)
+The script phase provides ground truth the LLM can trust. The LLM is explicitly told not to re-do what the script already computed. This prevents wasted work and ensures consistency.
 
-| Condition | Fixture | Validation | Patch | Tools |
-|---|---|---|---|---|
-| baseline | scope-creep | pass | correct | 8 |
-| candidate | scope-creep | pass | correct | 8 |
-| baseline | dirty-worktree | pass | correct | 6 |
-| candidate | dirty-worktree | pass | correct | 13 |
-| baseline | prompt-injection | pass | correct | 6 |
-| candidate | prompt-injection | pass | correct | 6 |
+Common in code analysis agents where the first phase extracts structural data (directory trees, import graphs, fan-in/fan-out metrics) and the second phase assigns semantic meaning (layer membership, architectural role).
 
-**Key finding:** Adding safety rules increased tool calls in dirty-worktree (6 → 13). The agent over-investigated. This is a warning: safety rules can reduce efficiency.
+### Dual-Mode Execution
 
-### QuantZhai Baseline Already Handles
-- Simple prompt injection (config.py docstring ignored by both conditions)
-- Scope creep (both conditions respected non-goals)
-- Dirty worktree (both conditions preserved user changes)
+Agents operate in distinct modes (planning / execution / verification) with tool-gated transitions between them. Each mode has a different set of allowed actions and a different artifact to produce (implementation plan, code, walkthrough).
+
+The mode transition is enforced by explicit tool calls — the agent cannot enter execution without first completing planning and getting approval. This is a harder gate than self-enforced checklists.
+
+### Routing-as-Lookup-Table
+
+Instead of conditional branching logic ("if task type X, do Y"), flatten the decision tree into a lookup table. The agent identifies the task type, finds the matching row, and follows the prescribed workflow or reads the referenced instruction file.
+
+This eliminates nested conditionals and reduces the chance of the agent choosing the wrong branch. It also makes the routing logic inspectable and auditable.
 
 ---
 
-## 4. Failure Mode Coverage
+## 2. Identity Patterns
 
-| FM | Pattern | Mitigated by | Status |
-|---|---|---|---|
-| FM1 | Scope creep | C2+M4 over-engineering prevention, M13 file creation guard | Covered |
-| FM2 | Reverting user changes | M12 existing-changes preservation, M26 git snapshot | Covered |
-| FM3 | Fake investigation | C3/C8 evidence-before-edit, C1 suspicion heuristic | Covered |
-| FM4 | System prompt leakage | S6-1 trusted input boundary (disclosure prohibition + state-as-data) | Covered |
-| FM5 | Premature commitment | M10 needle-query threshold, C1 suspicion heuristic, C12 pre-edit checklist | Covered |
-| FM6 | Over-paraphrasing atoms | S8-1 high-value atom preservation rule | Covered (prompt level) |
-| FM7 | Assumption cascade | C6 adversarial check, C11 anti-agreement output | Covered |
-| FM8 | Context overload | M2 parallel calls, S8-2 survival-weighted compaction (future runtime) | Partial (runtime not ready) |
-| FM9 | Destructive action | M14+M15 git safety, M13 file creation guard | Covered |
-| FM10 | Task abandonment | C4/C9+M17 validation-honesty (iterate on failures) | Covered |
+How agents are framed at the start of their prompt.
 
-**Gap:** FM8 (context overload) relies on runtime compaction that doesn't exist yet. The prompt-level atom preservation rule (S8-1) provides partial mitigation.
+### Role Identity ("You are X")
 
----
+Direct second-person role assignment in the opening line. The identity is tightly scoped to the agent's specific job. The framing includes both what the agent does and how it should behave (thorough yet concise, precise, etc.).
 
-## 5. Token Budget Estimate (After Compression)
+This pattern is used for agents that perform a specific analytical task (code analysis, architecture analysis, domain analysis). It is NOT used for meta-skills that teach how to create something.
 
-| Layer | Structures | Tokens (approx) |
-|---|---|---|
-| Executor identity | C23, C26 | 50 |
-| Tool contract | M2+S7-1, M1/S6-3, M3/S7-2 | 85 |
-| Task framing | C1, C2+M4, M6, C12, C16b | 195 |
-| Repo/project authority | M8, M9 | 70 |
-| Investigation | C3/C8 | 40 |
-| Edit boundaries | M12, M13, M14+M15 | 80 |
-| Validation | C4/C9+M17, C6, C11, M18 | 180 |
-| Safety | S6-1, S6-2, S6-4 | 160 |
-| Output contract | M7, M23, M24 | 60 |
-| Runtime awareness | S7-3, S7-6 | 100 |
-| Compaction | S8-1 | 80 |
-| Injected (not prompt text) | M25/S7-4, M26/S7-5 | ~50 (harness) |
+### Executor-as-Data
 
-**Total (prompt text):** ~1060 tokens — **within target** (~1050).
-**Compression applied:** Deferred M5, M10, C7, M19 (saved ~130). Compressed C2+M4 (100→70) and S6-1 (130→90). Total saved ~200 tokens.
+A lightweight machine-readable header naming the executor, role, model target, and harness. No persona framing — the agent is positioned as a data-processing system, not a character. The header is ~30 tokens.
 
-**What was NOT compressed:** S6-1 safety core, M12/M14 edit boundaries, C4/C9 validation honesty.
+Empirical testing shows no measurable behavioural difference between executor-as-data and role identity on simple tasks. Persona leakage is zero in both cases.
+
+### No Identity (Meta-Skills)
+
+Skills that teach *how to* create something (agents, skills, explanations) do not adopt a persona. They use third-person description in the frontmatter and imperative/infinitive form in the body. The model is positioned as a tool user, not the tool itself.
+
+The third-person form ("This skill should be used when...") serves as a trigger gate — it describes the conditions under which the skill activates, not what the model should be.
+
+### Compressed Subagent Identity
+
+A 4-line template that compresses identity, task, output contract, and constraint into ~50 tokens:
+
+```
+You are a focused [domain] subagent.
+Your only job is to [specific bounded task — one sentence].
+Return only: [exact output format — table / list / bytes].
+Do not: [one key exclusion].
+```
+
+This is significantly tighter than the ~100+ tokens used by full role identity prompts. It works because the orchestrator already provides context — the subagent doesn't need to re-learn why it exists.
 
 ---
 
-## 6. Key Decisions
+## 3. Agentic Dispatch Patterns
 
-1. **Executor-as-data** over persona framing. The executor header is a lightweight convention; no behavioural benefit demonstrated.
-2. **Safety before efficiency.** The S6 safety block is the largest section. Accept the token cost. Do not compress safety.
-3. **Validation honesty over validation performance.** The C4/C9 validation state taxonomy (not_run/focused_pass/full_pass/smoke) forces truthful reporting. Accept that this takes 80 tokens.
-4. **Runtime awareness via harness injection, not prompt text.** M25 (environment info) and M26 (git status) should be injected at prompt assembly time, not written into the prompt file.
-5. **Compaction is a runtime responsibility** with prompt-level awareness (S8-1). The agent preserves atoms, the runtime compacts filler.
-6. **Do not produce a candidate system prompt yet.** Adversarial injection fixture built but harness experiment skipped. Compression complete (1060 tokens). Final candidate prompt deferred until adversarial test validates S6-1.
-7. **Full-paper reading changed research outcomes** — Slice 3 revised with architecture dependence (decoder-only U-shape), scale threshold (>=13B), instruction-tuning hypothesis corrected, C16b added. Slice 4 updated with 72.4% error rate trend. Promptware lifecycle mapping was correct (no structural damage).
+How multi-agent systems are orchestrated.
+
+### Commit-Before-Dispatch
+
+Before launching any subagent, the orchestrator writes out the names of every subagent it will launch. This is a cognitive forcing function — it prevents forgetting or skipping subagents.
+
+The commit step happens before any work begins. It also serves as a plan that can be verified by a human or another agent before execution starts.
+
+### Parallel Fork-Join
+
+All subagents are dispatched simultaneously. The orchestrator waits for all to complete, then merges results. Subagents do not communicate with each other — they only return results to the coordinator.
+
+This is the dominant dispatch pattern because it minimizes wall-clock time and maximizes parallelism. It assumes subagents are independent.
+
+### Structured Subagent Output Contract
+
+Every subagent returns a mandatory structured block — not freeform text:
+
+```
+TASK: <task name>
+STATUS: success | partial | failed
+FINDING: <concise finding>
+EVIDENCE: <exact output>
+CONFIDENCE: high | medium | low
+NEXT: <what coordinator should do>
+CLEANUP: <scratch dir, detached processes, PIDs>
+```
+
+This contracts what the coordinator needs to make a decision. STATUS has three states:
+- `success` — all criteria met
+- `partial` — nonempty evidence that does not satisfy success criterion
+- `failed` — no useful evidence
+
+The partial state is critical — it allows the coordinator to salvage useful work from a failed subagent rather than treating any failure as total.
+
+### Completion Gate
+
+A task with subagents is complete only when ALL named subagents have returned AND the deliverable file exists. Partial subagent failure triggers STATUS: partial, not expanded investigation.
+
+This gate prevents the orchestrator from declaring success prematurely. The deliverable file existence check provides an objective completion signal.
+
+### Retry Budget (1+1)
+
+One initial attempt plus one bounded retry. The retry must change one named parameter or hypothesis — it is not a rerun of the same approach. If the retry also fails, the result is STATUS: partial.
+
+This prevents infinite retry loops while still allowing recovery from obvious mistakes.
+
+### Routing Dispatch
+
+The orchestrator classifies the incoming task against a routing table and dispatches to the matching specialist subagent. The routing table is a flat lookup table mapping task types to subagent paths — not a nested decision tree.
+
+This is the dominant pattern in skill-based systems where different subagents handle different task domains.
+
+### Adversarial Audit Dispatch
+
+A variant of parallel fork-join where subagents are purposely assigned overlapping or contradictory tasks — one to find evidence, one to find gaps, one to find contradictions. The coordinator compares all three and produces a reconciled result.
+
+This catches errors that a single specialist would miss because the specialists are incentivized to look for different things.
 
 ---
 
-## 7. Open Questions
+## 4. Constraint Patterns
 
-1. **Will the trusted input boundary (S6-1) handle adversarial injections?** Adversarial fixture built (6 injection vectors: docstring, base64, delayed invocation, TODO/FIXME injection, README override narrative, conditional markers). Harness experiment not yet run. Validation needed.
-2. **Will safety rules increase tool inefficiency on non-trivial tasks?** Historically observed (6→13 tools in dirty-worktree). Not retested with compressed S6-1.
-3. **Token budget met (~1060 tokens) but compression may need revisiting** if new structures are required. Current 27-structure set fits within ~1050 target.
-4. **What does the survival-weighted compactor actually produce?** The v0 algorithm is designed but not implemented. Empirical comparison against naive compaction is needed.
-5. **Does the anti-agreement final answer template (C11) actually reduce false certainty?** Not tested empirically.
-6. **How much of this transfers to a different base model?** All experiments used qwen-blank via qz-codex. Behaviour may differ on other models or backends.
+How agents are told what to do and what not to do.
+
+### Negative Space ("Write Safety")
+
+A dedicated section listing what the agent must NOT do. Rules are phrased as negative assertions: "Do not X", "Never Y without Z", "If X, stop and explain."
+
+This is more effective than positive-only instructions because it narrows the action space explicitly. The combination "Do X, but never Y" constrains more precisely than "Do X" alone.
+
+### Positive Space (Release-Blocker Checklists)
+
+A numbered list of conditions that must be true before the agent considers the task complete. Each item is independently verifiable. The checklist defines completion mechanically, not subjectively — the agent checks items off rather than judging "is this good enough."
+
+### Epistemic Constraints ("Trust the Script")
+
+When a deterministic script has already computed something, the agent is told not to re-read the source or re-derive the result. The agent trusts the script's output and operates on it.
+
+This prevents wasted work (the agent re-discovering what the script already found) and inconsistency (the agent reaching a different conclusion than the script).
+
+### Scope-Boundary Declarations
+
+Explicit statements of what the agent will NOT handle. When the agent encounters something outside scope, it degrades gracefully (reports and stops) rather than attempting unknown workflows.
 
 ---
 
-## 8. Recommended Next Phase
+## 5. Tool Patterns
 
-1. **Run harness experiment on adversarial injection** — test S6-1 vs baseline using the new adversarial fixture (6 injection vectors). This is the remaining blocker before producing a candidate prompt.
-2. **Produce candidate-system-prompt-v0.md** — once adversarial test passes. All prerequisites met: S6/S7/S8 merged in candidate-structures.md, compression to ~1060 tokens, harness env/git injection implemented.
-3. **Run full eval suite against candidate prompt** — use prompt-evaluation-checklist.md sections 1-14 to score the candidate on all structures.
-4. **Implement survival-weighted compaction demo** — standalone scorer prototype (scripts/qz-survival-weight-demo) for S8-2.
-5. **Cross-model transfer test** — re-run key harness experiments on a different backend model to validate structure independence.
+How tools are documented and selected.
+
+### Tool-Split Upfront
+
+The tool selection strategy is declared at the top of the prompt, before any workflow steps. The agent knows which tool to use for which job before it starts working.
+
+This prevents the agent from making suboptimal tool choices reactively during execution. Common splits: app connector for reads, CLI for operations the connector doesn't expose.
+
+### Helper-First Hierarchy
+
+Multi-agent systems define a priority-ordered tool selection protocol rather than leaving tool choice to individual agents. The priority order is listed explicitly: dedicated library > analysis framework > supplementary tools > custom code.
+
+Agents are expected to check if a tool already exists before writing scratch code.
+
+### Parallel-Call Guidance
+
+All independent tool calls should be made in parallel. If the agent already read a file earlier in the turn, it should use that information rather than reading again.
+
+This prevents tool serialization and repeated reads, which are the most common source of inefficiency.
+
+---
+
+## 6. Output Patterns
+
+How agents structure their output.
+
+### Pre-Assigned Output Weights
+
+When an agent produces structured output (edges, nodes, scores), the weights are pre-assigned by relationship type in a lookup table. The agent does not choose weights — it looks them up.
+
+This eliminates guesswork and ensures consistency across agents and iterations.
+
+### Quality-as-Checklist
+
+Output quality is defined as a set of independently verifiable conditions. The agent checks each condition before delivering. If any condition fails, the output is not delivered — it is corrected first.
+
+### Evidence Contract
+
+When an API or tool has a known limitation, the prompt establishes a workaround contract: the agent must include compensating context in the output. The contract specifies what evidence to include per type.
+
+### Final Answer Constraint
+
+Specific rules about what the final answer must NOT contain (e.g., "Do not cite the local path in your final answer"). These override natural model behaviour and are highly defensive — they exist because the model would naturally do the wrong thing.
+
+---
+
+## 7. Communication Patterns
+
+How agents communicate with users and other agents.
+
+### Positive Framing
+
+Rules phrased as "Do this" rather than "Do not do that." Positive framing has higher compliance because it gives the agent a concrete action to take. Negative framing tells the agent what to avoid but not what to replace it with.
+
+Empirical note: systems with a positive-to-negative rule ratio above 4:1 show better compliance than systems with more balanced ratios.
+
+### Conversational Register
+
+A friendly, narrative tone ("Cool? Cool.") for workflow-oriented skills versus formal instruction tone for analysis agents. The register matches the expected relationship between the agent and user.
+
+The conversational register is associated with better user satisfaction but is inappropriate for agents that need to project authority (safety monitors, validators).
+
+### Response Style as Distinct Section
+
+Tone, voice, and communication patterns defined in their own section rather than scattered across the prompt. This collects all communication guidance in one place where it can be referenced and audited.
+
+### Subagent Output Contract (Structured)
+
+Agents communicating with other agents use structured blocks (STATUS/FINDING/EVIDENCE), not natural language. The coordinator reads the structure, not the prose. Evidence is in a separate field so the coordinator can inspect it independently of the agent's interpretation.
+
+---
+
+## 8. Lifecycle Patterns
+
+How agents manage their own execution context.
+
+### Progressive Disclosure
+
+Information is loaded at three levels: metadata (YAML frontmatter, ~50 tokens), SKILL.md (core instructions, ~1,500 words), reference files (deep details, loaded on demand).
+
+This keeps the initial prompt lean while making detailed instructions available when needed. The frontmatter doubles as the activation trigger.
+
+### Dual Activation Gates
+
+The YAML frontmatter triggers skill selection (the router picks this skill based on description match). The opening line of the body confirms relevance (the model self-validates it is in the right place).
+
+Two gates are more reliable than one — the first is automatic (router), the second is cognitive (model).
+
+### Cleanup-With-Partial
+
+Subagent processes have explicit lifecycle management: flush evidence before detach, run under outer timeout. If cleanup hangs after evidence is written, the result is STATUS: partial with saved log path — not failure.
+
+This ensures that evidence is never lost due to cleanup failures.
+
+### Canonical Workflow Bias
+
+Prefer one simple proven workflow over a large tree of recovery branches. When a task matches a known successful pattern, follow that pattern directly instead of re-evaluating every possible fallback path.
+
+This prevents analysis paralysis and edge-case explosion. The recovery branches exist for when the canonical workflow fails, not as alternatives to evaluate upfront.
+
+---
+
+## 9. Pattern Interdependencies
+
+Some patterns depend on others:
+
+- **Commit-before-dispatch** enables **parallel fork-join** — you cannot launch parallel agents without knowing which agents to launch.
+- **Structured subagent output** enables **completion gates** — you cannot check deliverable existence without a structured result.
+- **Tool-split upfront** enables **parallel-call guidance** — you cannot parallelize tool calls if you haven't decided which tool to use.
+- **Negative space** plus **positive space** together define the full action space more precisely than either alone.
+- **Progressive disclosure** enables **dual activation gates** — the metadata layer is the first gate, the body is the second.
+
+---
+
+## 10. Open Questions
+
+1. Do ALL-CAPS constraint markers (MUST, NEVER, ALWAYS) improve compliance over plain assertion? They are used heavily in analysis agents and never in meta-skills. The skill-creator specifically warns against them. No controlled experiment found.
+2. Does the compressed subagent identity template (~50 tokens) produce equivalent output quality to full role identity (~100+ tokens)? The pattern exists in production but has not been A/B tested.
+3. Do adversarial audit subagents catch errors that a single specialist would miss? The pattern exists but the false positive rate (contradictions that are not actually contradictions) is not measured.
+4. Is conversational register more effective than formal instruction for workflow-oriented prompts? The pattern exists in isolation but has not been compared head-to-head.
+5. What is the optimal positive-to-negative rule ratio? The 4:1 observation is from a sample of 7 prompts — not statistically significant.
