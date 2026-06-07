@@ -576,6 +576,7 @@ These structures interact. Do not adopt them independently without checking the 
 | Code quality + over-engineering | Maintainability becomes broad refactor | quality within requested scope |
 | Runtime injection + static prompt | stale prompt facts conflict with live state | dynamic facts belong in harness |
 | Compaction + exactness | summaries lose paths/flags/negations | preserve high-value atoms exactly |
+| Prompt tags + semantic compression | verbose labels consume budget or become noise | compress tag surfaces after meaning is established; preserve role distinctions |
 | Subagents + accountability | delegation becomes fake understanding | never delegate understanding; verify subagent output |
 | Concision + validation honesty | final answer hides missing tests | concise but must name validation status |
 
@@ -623,6 +624,14 @@ Prefer process/docs/tests:
 - behavioural eval scoring
 - survival-weighted compaction implementation
 
+Drafting compression rule:
+
+- reduce tag and section-label length with semantic compression
+- keep role/function distinctions intact
+- shorten repeated labels only after meaning is established
+- prefer stable compact labels over verbose wrapper syntax
+- do not compress away safety, precedence, negation, edit-boundary, or validation semantics
+
 ---
 
 ## 17. Open Questions
@@ -634,7 +643,8 @@ Prefer process/docs/tests:
 5. How much runtime context injection is useful before it becomes context noise?
 6. Can survival-weighted compaction preserve high-value atoms better than model summarisation in actual long coding sessions?
 7. Do OpenCode-shaped variants outperform the QuantZhai baseline on the failure-mode fixture suite?
-8. Which structures are model-specific, harness-specific, or genuinely portable?
+8. How much tag/section-label semantic compression is safe before structure becomes opaque?
+9. Which structures are model-specific, harness-specific, or genuinely portable?
 
 ---
 

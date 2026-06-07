@@ -204,6 +204,8 @@ Compression plan: current estimate is already within the 1280-token target. If t
 
 Do NOT compress: S6-1 safety core, M12/M14 edit boundaries, C4/C9 validation honesty.
 
+Semantic tag compression rule: shorten repeated tags, wrappers, and section labels only after their meaning is established. Preserve role distinctions, precedence, negation, safety labels, edit boundaries, and validation states. Test by round-tripping the prompt outline from compressed labels back to the underlying rule map.
+
 ---
 
 ## 13. Before-First-Run Quick Check
@@ -215,6 +217,7 @@ Do NOT compress: S6-1 safety core, M12/M14 edit boundaries, C4/C9 validation hon
 - [ ] Git status injection (S7-5) ready in harness
 - [ ] Runtime feedback acceptance (S7-3) in prompt
 - [ ] Compaction awareness (S7-6) and high-value atom preservation (S8-1) in prompt
+- [ ] Prompt tags/section labels are semantically compressed without collapsing distinct rules
 - [ ] Token count under 1280 (or documented compression plan)
 - [ ] No persona/identity claims beyond executor header
 - [ ] AGENTS.md priority semantics defined

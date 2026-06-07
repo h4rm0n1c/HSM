@@ -612,6 +612,26 @@ Order the prompt so the most forgettable critical content is at the start or end
 **Source**: Slice 3 (revised 2026-05-30 with full-paper reading: attention sinks + RoPE decay are distinct mechanisms)
 **Decision**: prompt assembly ordering rule. Arranges other structures.
 
+### C16c: Semantic Tag Compression (drafting tactic)
+
+When drafting candidate prompt text, reduce tag and heading complexity by replacing verbose repeated wrappers with short stable labels after the label's meaning is established.
+
+Preserve semantic distinctions:
+
+- trusted vs untrusted input
+- runtime context vs repository evidence
+- instruction precedence
+- validation state
+- explicit negation and constraints
+- safety and edit-boundary rules
+
+Do not compress by merging rules that have different failure modes.
+
+**Source**: User correction, 2026-06-07 + C15/S8-1 compaction discipline + C16 position-aware ordering
+**Token cost**: 0 prompt tokens as a drafting tactic; expected to save prompt tokens in final wording.
+**Decision**: prompt drafting/compression tactic, not a runtime compactor.
+**Test**: Compare full-tag and compressed-tag prompt outlines. Verify that each safety, edit-boundary, precedence, and validation distinction can be recovered and fixture behaviour does not regress.
+
 ### C17: Prompt metadata header (process — file format)
 
 For baseline prompts: YAML front matter with version, author, source, model-target, status, changelog.
@@ -781,6 +801,7 @@ Checklist for any compaction implementation:
 | M26/S7-5 | Git status snapshot | harness assembly |
 | C13 | Non-goals placement rule | task packet template |
 | C14 | Acceptance criteria near validation | task packet template |
+| C16c | Semantic tag compression | prompt drafting/compression pass |
 | S8-2 | Survival-weighted compaction | future QuantZhai runtime |
 | S8-3 | Compaction acceptance criteria | evaluation checklist |
 
@@ -807,7 +828,7 @@ Checklist for any compaction implementation:
 ## Token Budget Check (After Compression)
 
 | Layer | Structures | Tokens (approx) |
-|---|---|---|---|
+|---|---|---|
 | Executor identity | C23, C26 | 50 |
 | Tool contract | M2+S7-1, M1/S6-3, M3/S7-2 | 80 |
 | Task framing | C1, C2+M4, M6, C12, C16b, C13, C14 | 210 |
@@ -821,8 +842,8 @@ Checklist for any compaction implementation:
 | Runtime awareness | S7-3, S7-6 | 100 |
 | Compaction | S8-1 | 80 |
 
-**Total (prompt text):** ~1235 tokens — **above target** (~1050) by ~185 tokens.
-**Total (with injected context):** ~1295 tokens.
+**Total (prompt text):** ~1235 tokens — **within target** (1280) by ~45 tokens.
+**Total (with injected context):** ~1295 tokens. Injected runtime context is harness text, not baseline prompt text.
 
 **Compression applied:**
 - Deferred: M5 (planning), M10 (needle-query), C7 (claim classification), M19 (linter cap) — saved ~130
@@ -831,9 +852,7 @@ Checklist for any compaction implementation:
 
 **Not compressed:** S6-1 safety core, M12/M14 edit boundaries, C4/C9 validation honesty.
 
-**Note:** Total now exceeds the ~1050 target. The comparison findings added ~175 net tokens. To stay within budget, either:
-- Compress further (S6-1, M8, C4/C9+M17 are the heaviest)
-- Or accept the expansion as research-justified (each addition earned its budget through direct failure-mode mitigation per the QuantZhai proportional-compactness constraint)
+**Note:** The comparison findings added ~175 net tokens. The 1280-token target accepts this as research-justified expansion because each addition earned its budget through direct failure-mode mitigation per the QuantZhai proportional-compactness constraint. If drafting pushes the baseline above 1280, compress further with C16c before dropping safety, edit-boundary, or validation semantics.
 
 ---
 
