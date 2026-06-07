@@ -178,7 +178,7 @@ Cross-reference against failure mode catalog:
 
 Current estimated total: **~1260 tokens** (31 structures, per candidate-structures.md).
 
-Target: **~1050 tokens**.
+Target: **1024 tokens**.
 
 | Prompt section | Structures | Current estimate (tokens) |
 |---|---|---|
@@ -196,7 +196,7 @@ Target: **~1050 tokens**.
 | Compaction | S8-1 | 80 |
 | **Total (prompt text)** | | **~1260** |
 
-Compression plan (saves ~210 tokens to reach ~1050):
+Compression plan (saves ~236 tokens to reach 1024):
 1. Drop M5 (planning step), C7 (claim classification), M19 (linter cap) — saves ~105
 2. Compress S6-1: ~130 → ~90 by tightening examples — saves ~40
 3. Compress C2+M4: ~100 → ~70 by removing redundant lines — saves ~30

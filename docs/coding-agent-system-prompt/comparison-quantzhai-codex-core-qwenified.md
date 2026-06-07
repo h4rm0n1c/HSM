@@ -38,7 +38,7 @@ few do trick." The prompt favours compact, dense rules over verbose explanation.
 Every line carries weight; ceremony is avoided.
 
 Expansion is justified when the value is proportional, but the ethos is:
-**no doubling or tripling.** 650 → ~900 is defensible. 650 → 1300+ is not.
+**no doubling or tripling.** 650 → 1024 is defensible. 650 → 1300+ is not.
 
 Concretely:
 
@@ -758,7 +758,7 @@ Using the 11-layer taxonomy from candidate-structures.md:
 1. **Token budget**: Adding all critical (S6-1, C2+M4) and high-priority
    (C4/C9+M17, M8, M9, M13) structures adds ~330 tokens. QuantZhai's current
    prompt is ~100 lines / ~650 tokens. The expanded version would be ~1000
-   tokens. This is within the ~1050 target from our research, but compression
+   tokens. This is within the 1024-token target from our research, but compression
    may be needed.
 2. **Behavioural regression**: Adding safety rules may increase tool calls
    (observed: 6→13 in dirty-worktree experiment from S5). The trusted input
