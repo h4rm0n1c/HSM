@@ -39,7 +39,7 @@ Candidate prompt drafting is paused.
 
 Do not produce `candidate-system-prompt-v0.md` until the user explicitly resumes candidate prompt work.
 
-The current work is research-level resynthesis only:
+The current OpenCode resynthesis sequence is complete at research level:
 
 ```text
 OpenCode source map
@@ -49,6 +49,8 @@ OpenCode source map
   -> OpenCode vs CLI-family synthesis
   -> final-findings-synthesis.md update
 ```
+
+Remaining work is fixture/TUI/runtime verification, not candidate prompt drafting.
 
 ## Why this belongs here
 
@@ -130,7 +132,7 @@ prompt-evaluation-checklist.md
   Slice 10 eval framework: 14-section checklist covering all prompt layers, failure mode coverage matrix, token budget, and eval task ideas.
 
 final-findings-synthesis.md
-  Final consolidated synthesis. Next update target: absorb the repaired OpenCode resynthesis at research level only.
+  Final consolidated synthesis, now updated with the repaired OpenCode prompt-system-family findings.
 
 RESEARCH_STATUS.md
   One-page status matrix, artifact list, next actions, and risk register.
