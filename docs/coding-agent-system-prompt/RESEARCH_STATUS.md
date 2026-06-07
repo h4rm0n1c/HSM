@@ -1,10 +1,8 @@
 # Research Status: Coding Agent System Prompt Subproject
 
 Summary: all 10 research slices are complete. Candidate structures, failure-mode
-coverage, vendor comparisons, and the original final synthesis exist. The
-OpenCode material has now been resynthesised through source-map, runtime,
-plan-mode, task/subagent/compaction, and CLI-family comparison documents.
-Candidate prompt drafting remains paused.
+coverage, vendor comparisons, OpenCode resynthesis, and the final synthesis
+update now exist. Candidate prompt drafting remains paused.
 
 ---
 
@@ -22,7 +20,7 @@ Candidate prompt drafting remains paused.
 | 7 | Complete | `slice-7-tool-stream-state-feedback.md`, S7-1 through S7-6 | None |
 | 8 | Complete | `slice-8-compaction-preservation.md`, S8-1 through S8-3 | None |
 | 9 | Complete | `research-external-prompt-comparison.md` | None |
-| 10 | Complete / paused before candidate | `candidate-structures.md`, `prompt-evaluation-checklist.md`, `final-findings-synthesis.md` | Update final synthesis with OpenCode resynthesis findings before any candidate prompt work |
+| 10 | Complete / candidate paused | `candidate-structures.md`, `prompt-evaluation-checklist.md`, `final-findings-synthesis.md` | Candidate prompt work remains paused until explicitly resumed |
 
 ---
 
@@ -32,7 +30,7 @@ Candidate prompt drafting is paused.
 
 Do not produce `candidate-system-prompt-v0.md` yet.
 
-The immediate work remains resynthesis only:
+The OpenCode resynthesis sequence is complete at research level:
 
 ```text
 OpenCode source map                          DONE
@@ -40,7 +38,7 @@ OpenCode source map                          DONE
   -> OpenCode plan-mode comparison           DONE
   -> OpenCode task/subagent comparison       DONE
   -> OpenCode vs CLI-family synthesis        DONE
-  -> update final-findings-synthesis.md      NEXT
+  -> update final-findings-synthesis.md      DONE
 ```
 
 ---
@@ -61,8 +59,8 @@ OpenCode source map                          DONE
 | `comparison-opencode-plan-mode.md` | Plan-mode comparison: read-only planning, plan-file exception, explore agents, build switch, question vs plan-exit boundary, and runtime placement. |
 | `comparison-opencode-agent-task-compaction.md` | Task/subagent/compaction comparison: when not to delegate, Explore role, main-agent accountability, and anchored compaction. |
 | `research-opencode-vs-cli-family.md` | Cross-family synthesis comparing OpenCode against QuantZhai, Codex CLI, Claude Code, Cursor/external matrix, and HSM slice findings. |
-| `final-opencode-findings-synthesis.md` | Rewritten as a resynthesis boundary document. It explicitly blocks candidate prompt drafting until OpenCode is compared with the older discipline. |
-| `final-findings-synthesis.md` | Existing final synthesis. Next update target: integrate the completed OpenCode resynthesis at research level only. |
+| `final-opencode-findings-synthesis.md` | Resynthesis boundary document. It explicitly blocks candidate prompt drafting until OpenCode is compared with the older discipline. |
+| `final-findings-synthesis.md` | Final consolidated synthesis, now updated with the repaired OpenCode prompt-system-family findings. |
 
 ---
 
@@ -81,7 +79,7 @@ OpenCode source map                          DONE
 
 All 10 failure modes have fixture coverage: FM1, FM2, FM3, FM4, FM5, FM6, FM7, FM8, FM9, FM10.
 
-OpenCode-specific fixture extensions are now proposed in `research-opencode-vs-cli-family.md`:
+OpenCode-specific fixture extensions are proposed in `final-findings-synthesis.md` and `research-opencode-vs-cli-family.md`:
 
 ```text
 opencode-provider-route
@@ -95,19 +93,18 @@ opencode-compaction-atoms
 
 ---
 
-## Remaining Work (in priority order)
+## Remaining Work
 
-1. **Update final synthesis** — Update `final-findings-synthesis.md` with OpenCode resynthesis findings at research level only.
-2. **Fixture extensions** — Add the OpenCode-specific fixture ideas if behavioural comparison is needed.
-3. **TUI source audit** — Inspect plan-mode toggle, visible state, rollback, patch/diff rendering, todo UI, and permission common-node behaviour if QuantZhai CLI design work resumes.
-4. **Candidate prompt text** — Still paused. Do not draft `candidate-system-prompt-v0.md` until the user explicitly resumes candidate prompt work.
+1. **Fixture extensions** — Add OpenCode-specific fixture ideas if behavioural comparison is needed.
+2. **TUI source audit** — Inspect plan-mode toggle, visible state, rollback, patch/diff rendering, todo UI, and permission common-node behaviour if QuantZhai CLI design work resumes.
+3. **Candidate prompt text** — Still paused. Do not draft `candidate-system-prompt-v0.md` until the user explicitly resumes candidate prompt work.
 
 ---
 
 ## Quick Wins
 
-- Update the README directory map with the new OpenCode resynthesis documents.
-- Update `final-findings-synthesis.md` to replace the old base-prompt-only OpenCode interpretation with the prompt-system-family interpretation.
+- Add OpenCode fixture extensions when ready to test behaviour.
+- Audit OpenCode TUI/runtime source for plan toggle, rollback, todo UI, diff rendering, and permission UX.
 - Keep OpenCode UI/TUI behaviours separate from static prompt text.
 - Keep `candidate-system-prompt-v0.md` out of scope until explicitly resumed.
 
@@ -115,9 +112,8 @@ opencode-compaction-atoms
 
 ## Risk Register
 
-- **OpenCode integration was premature**: The old OpenCode base-prompt reports were useful but too thin. This is now partially corrected by the new resynthesis docs.
-- **Final synthesis still needs update**: The new OpenCode resynthesis docs exist, but `final-findings-synthesis.md` has not yet been rewritten to absorb them.
-- **Runtime boundary incomplete**: OpenCode runtime behaviour is assembled from source beyond the base prompt files. Some plugin, permission, command, and TUI surfaces remain unaudited.
-- **Candidate prompt intentionally paused**: The next deliverable is not a candidate prompt. It is the research-level final synthesis update.
+- **Runtime boundary still partially unaudited**: plugin, permission, command, and TUI implementation details remain open if precise OpenCode behaviour is required.
+- **Candidate prompt intentionally paused**: The next deliverable is not a candidate prompt unless the user explicitly resumes that stage.
 - **Prompt bloat risk remains**: Candidate work, when resumed, must still respect the QuantZhai proportional-compactness constraint.
 - **CLI UX vs prompt text**: OpenCode plan mode, diff rendering, rollback, todo UI, and permission handling are likely CLI/harness design findings, not static prompt rules.
+- **Behaviour not yet measured**: OpenCode-inspired runtime ideas still need fixture runs before any claim of behavioural improvement.
