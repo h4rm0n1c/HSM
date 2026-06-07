@@ -1,0 +1,4 @@
+Repository: anomalyco/opencode
+Branch/ref: dev
+Captured by: docs/coding-agent-system-prompt/external-reference/OpenCode/fetch-opencode-prompts.sh
+Purpose: source snapshot for HSM coding-agent system prompt research

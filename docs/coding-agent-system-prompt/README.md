@@ -112,6 +112,9 @@ candidate-structures.md
 prompt-evaluation-checklist.md
   Slice 10 eval framework: 14-section checklist covering all prompt layers, failure mode coverage matrix, token budget, and eval task ideas.
 
+final-findings-synthesis.md
+  Final consolidated synthesis: preserves the original Rule Zero and pattern vocabulary, then integrates all slices, failure modes, candidate structures, vendor comparisons, OpenCode audit findings, runtime/process boundaries, and next evaluation path.
+
 RESEARCH_STATUS.md
   One-page status matrix for all 10 research slices with artifact links, next actions, and risk register.
 
@@ -126,6 +129,36 @@ comparison-codex-cli-max.md
 comparison-claude-code.md
   Dedicated comparison: Claude Code v2.1.143 system prompt against our 10-slice research findings.
   11-layer analysis including memory system and sub-agent architecture evaluation.
+
+final-opencode-findings-synthesis.md
+  Consolidated OpenCode synthesis across base prompt variants from `anomalyco/opencode` `dev`, including adoption cluster, rejection list, and fixture-comparison recommendation.
+
+comparison-opencode-template.md
+  Template used for OpenCode base-prompt comparison reports.
+
+comparison-opencode-gpt.md
+  OpenCode `gpt.txt` comparison against the research findings. Shared-workspace executor, small correct change, edit-boundary, and concise CLI-output analysis.
+
+comparison-opencode-codex.md
+  OpenCode `codex.txt` comparison against the research findings. Professional objectivity, tool discipline, edit-boundary, and anti-agreement relevance.
+
+comparison-opencode-trinity.md
+  OpenCode `trinity.txt` comparison against the research findings. Compact all-around prompt, repo authority, validation, and AGENTS.md awareness.
+
+comparison-opencode-gemini.md
+  OpenCode `gemini.txt` comparison against the research findings. Local convention, library/style, verification, and repo-context discipline.
+
+comparison-opencode-default.md
+  OpenCode `default.txt` comparison against the research findings. Concise baseline with missing repo/edit-boundary structures.
+
+comparison-opencode-kimi.md
+  OpenCode `kimi.txt` comparison against the research findings. Compact task framing and validation with edit-boundary gaps.
+
+comparison-opencode-anthropic.md
+  OpenCode `anthropic.txt` comparison against the research findings. High-persistence wording treated as bounded adoption source, not baseline model.
+
+comparison-opencode-beast.md
+  OpenCode `beast.txt` comparison against the research findings. Stress-prompt analysis; useful for persistence risks and rejection decisions.
 ```
 
 ## Research protocol

@@ -1,8 +1,8 @@
 # Research Status: Coding Agent System Prompt Subproject
 
-Summary: all 10 research slices complete as of 2026-05-30.
-  6-8 written in this pass. Full paper reading of Promptware Kill Chain (2601.09625)
-  and Promptware Engineering (2503.02400) now confirmed.
+Summary: all 10 research slices are complete. Candidate structures, failure-mode
+coverage, vendor comparisons, OpenCode base-prompt comparisons, and the final
+synthesis are now consolidated as of 2026-06-07.
 
 ---
 
@@ -20,7 +20,7 @@ Summary: all 10 research slices complete as of 2026-05-30.
 | 7 | Complete | `slice-7-tool-stream-state-feedback.md`, S7-1 through S7-6 | Sources: QuantZhai #40, #41, #43, #44 |
 | 8 | Complete | `slice-8-compaction-preservation.md`, S8-1 through S8-3 | Sources: QuantZhai #8 (full RFC), NetTTS vox_parser.cpp |
 | 9 | Complete | `research-external-prompt-comparison.md` | None |
-| 10 | Complete | `candidate-structures.md`, `prompt-evaluation-checklist.md` | Needs update with S6-S8 structures |
+| 10 | Complete | `candidate-structures.md`, `prompt-evaluation-checklist.md`, `final-findings-synthesis.md` | Build compact `candidate-system-prompt-v0.md` and run fixture matrix |
 
 ---
 
@@ -34,6 +34,9 @@ Summary: all 10 research slices complete as of 2026-05-30.
 | `comparison-quantzhai-codex-core-qwenified.md` | Dedicated comparison: QuantZhai codex-core-qwenified vs all 10 research slices. Section-by-section validation, challenge, and gap analysis. |
 | `comparison-codex-cli-max.md` | Dedicated comparison: OpenAI Codex CLI (Codex Max) vs all 10 research slices. 11-layer taxonomy analysis with adoption recommendations. |
 | `comparison-claude-code.md` | Dedicated comparison: Claude Code v2.1.143 vs all 10 research slices. Includes memory system and sub-agent architecture evaluation. |
+| `comparison-opencode-*.md` | Dedicated OpenCode comparisons for anthropic, beast, codex, default, gemini, gpt, kimi, and trinity base prompt variants. |
+| `final-opencode-findings-synthesis.md` | Consolidated OpenCode prompt-family synthesis with adoption cluster, rejection list, and fixture-comparison recommendation. |
+| `final-findings-synthesis.md` | Rewritten final synthesis preserving the original Rule Zero/pattern vocabulary while integrating all later research and OpenCode findings. |
 
 ---
 
@@ -54,12 +57,12 @@ All 10 failure modes now have fixture coverage: FM1 ✅, FM2 ✅, FM3 ✅, FM4 �
 
 ## Remaining Work (in priority order)
 
-1. **Update candidate-structures.md** — merge S6-1 through S6-4, S7-1 through S7-6, S8-1 through S8-3 into the consolidated table. Add token costs, test plans, interaction conflicts. (DONE as of latest pass)
-2. **Write final findings synthesis** — summarize all 10 slices, failure mode coverage, empirical results, consolidated recommendation, open questions. (DONE: final-findings-synthesis.md)
+1. ~~Update candidate-structures.md~~ — S6-1 through S6-4, S7-1 through S7-6, and S8-1 through S8-3 are merged into the consolidated table. (DONE)
+2. ~~Write final findings synthesis~~ — `final-findings-synthesis.md` rewritten on 2026-06-07 with all slices, failure modes, vendor comparisons, OpenCode audit findings, consolidated recommendation, and open questions. (DONE)
 3. ~~Build adversarial prompt-injection fixture~~ (DONE — zero-width spaces U+200B, Unicode confusables, delayed invocation base64, HTML comment injection; all 4 vectors validated)
 4. ~~Implement S7-4/S7-5 in harness~~ (DONE — assemble_prompt.sh upgraded with structured env block, arch/shell info, categorized git state with file counts)
 5. ~~Add Slice 3 refinements~~ (DONE — already in document from full-paper reading: attention sinks vs RoPE decay at §3.1, StableBeluga-13B regression noted)
-6. **Candidate prompt text** — Do NOT produce `candidate-system-prompt-v0.md` until S6-S8 structures are added to candidate-structures.md and reviewed.
+6. **Candidate prompt text** — Produce `candidate-system-prompt-v0.md` as a compact, testable baseline. Use the final synthesis non-negotiables and preserve QuantZhai proportional compactness.
 7. ~~Apply comparison document findings~~ (DONE — 12 structures expanded: C2+M4 ambition-vs-precision, C4/C9+M17 mode-aware validation, M8/M9 AGENTS.md scope/nesting, M23 file reference format, M25 Claude-style environment block, S6-4 expanded auth note, S6-1 system-reminder markers, M24 don't-narrate-deliberation, C1/C3 never-delegate-understanding, M14 expanded git safety + staging rule, S7-2 Claude tool-result wording. Net +175 tokens to candidate set.)
 8. ~~Build FM5/FM6/FM8/FM10 fixtures~~ (DONE — all 10 FMs now covered)
 
@@ -67,7 +70,8 @@ All 10 failure modes now have fixture coverage: FM1 ✅, FM2 ✅, FM3 ✅, FM4 �
 
 ## Quick Wins (1-2 days)
 
-- Merge S6/S7/S8 structures into candidate-structures.md
+- Draft compact `candidate-system-prompt-v0.md`
+- Run fixture matrix against QuantZhai baseline, candidate v0, and OpenCode-shaped variants
 - ~~Add environment/git injection to assemble_prompt.sh~~ (DONE)
 - ~~Upgrade prompt-injection fixture for adversarial testing~~ (DONE)
 
@@ -77,6 +81,7 @@ All 10 failure modes now have fixture coverage: FM1 ✅, FM2 ✅, FM3 ✅, FM4 �
 
 - **Paper depth variability**: Slices 1-5 relied on abstract/section-level reading for some papers. Verified: only Promptware Engineering (2503.02400) had section-level reads — lifecycle mapping is correct, security coverage is shallow in the paper itself. No structural damage.
 - **Model switching rollbacks**: QuantZhai may roll back model selection if backend fails to load. Compaction experiments (Slice 8) blocked until stable backend.
-- **Candidate prompt not yet written**: All 10 slices are complete, but the candidate prompt text is still waiting for S6-S8 integration and adversarial fixture testing.
+- **Candidate prompt not yet written**: The synthesis and candidate structures are complete, but `candidate-system-prompt-v0.md` still needs to be drafted and evaluated.
 - **Prompt bloat**: C1-C26 + M1-M27 + S6/S7/S8 = ~30+ structures at potentially ~1200+ tokens. Compression will be needed before producing a real system prompt.
 - **QuantZhai proportional-compactness constraint**: The QuantZhai prompt is ~650 tokens by design (Caveman-inspired). Expansion justified for value, but no doubling or tripling. ~900 max. Adoption must earn its token budget through direct failure-mode mitigation. Documented in `comparison-quantzhai-codex-core-qwenified.md` design constraint note.
+- **OpenCode runtime boundary**: OpenCode findings are supported for base-prompt text only. Runtime-behaviour predictions remain `plausible_but_unproven` until fixture runs compare prompt variants.

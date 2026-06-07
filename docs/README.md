@@ -89,9 +89,13 @@ Read:
 - [Arbitration loop analysis](coding-agent-system-prompt/slice-1-arbitration-loop.md) — Slice 1 output, external prompt comparison, candidate structures
 - [Anti-agreement and self-critique](coding-agent-system-prompt/slice-2-anti-agreement-self-critique.md) — Slice 2 output, minimum viable adversarial check, candidate structures C6-C11
 - [Context position and middle-detail loss](coding-agent-system-prompt/slice-3-context-position-middle-loss.md) — Slice 3 output, Lost in the Middle analysis, position-aware ordering, candidate structures C12-C16
+- [Final coding-agent prompt synthesis](coding-agent-system-prompt/final-findings-synthesis.md) — consolidated synthesis across all slices, candidate structures, failure modes, vendor comparisons, OpenCode audit, and runtime/process boundaries
+- [Candidate prompt structures](coding-agent-system-prompt/candidate-structures.md) — merged structure set with adoption/test/defer/reject status and token-cost implications
+- [Prompt evaluation checklist](coding-agent-system-prompt/prompt-evaluation-checklist.md) — evaluation framework, failure-mode matrix, token budget, and fixture ideas
 - [QuantZhai research comparison](coding-agent-system-prompt/comparison-quantzhai-codex-core-qwenified.md) — QuantZhai `codex-core-qwenified` section-by-section evaluated against all research findings
 - [Codex CLI research comparison](coding-agent-system-prompt/comparison-codex-cli-max.md) — OpenAI Codex CLI system prompt evaluated against all research findings
 - [Claude Code research comparison](coding-agent-system-prompt/comparison-claude-code.md) — Claude Code v2.1.143 system prompt evaluated against all research findings
+- [OpenCode prompt synthesis](coding-agent-system-prompt/final-opencode-findings-synthesis.md) — consolidated OpenCode base-prompt findings and adoption cluster
 
 Focus on:
 
@@ -191,6 +195,10 @@ docs/coding-agent-system-prompt/research-references.md
 docs/coding-agent-system-prompt/slice-1-arbitration-loop.md
 docs/coding-agent-system-prompt/slice-2-anti-agreement-self-critique.md
 docs/coding-agent-system-prompt/slice-3-context-position-middle-loss.md
+docs/coding-agent-system-prompt/final-findings-synthesis.md
+docs/coding-agent-system-prompt/candidate-structures.md
+docs/coding-agent-system-prompt/prompt-evaluation-checklist.md
+docs/coding-agent-system-prompt/final-opencode-findings-synthesis.md
 docs/coding-agent-system-prompt/workflow-patterns.md
 docs/hsm-master-report-2026-05-01.md
 docs/human-analogy-and-memory-research-seed-2026-05-02.md
