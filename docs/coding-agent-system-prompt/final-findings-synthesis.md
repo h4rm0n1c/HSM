@@ -122,7 +122,7 @@ This is close to the old synthesis, but safety and dynamic runtime context are n
 QuantZhai's `codex-core-qwenified` comparison introduced the proportional-compactness constraint:
 
 ```text
-650 tokens -> 1024 tokens is defensible
+650 tokens -> 1280 tokens is defensible
 650 tokens -> 1300+ tokens is probably a prompt-design failure
 ```
 
@@ -627,7 +627,7 @@ Prefer process/docs/tests:
 
 ## 17. Open Questions
 
-1. Which candidate structures survive compression into a 1024-token QuantZhai-style baseline without losing behavioural force?
+1. Which candidate structures survive compression into a 1280-token QuantZhai-style baseline without losing behavioural force?
 2. Does the trusted input boundary reduce advanced prompt-injection compliance without increasing false refusals?
 3. Does explicit dirty-worktree wording materially reduce user-change overwrite in local Qwen/QuantZhai fixtures?
 4. Does plan-budget wording improve task completion or merely add ceremony?

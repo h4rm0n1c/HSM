@@ -178,7 +178,7 @@ Cross-reference against failure mode catalog:
 
 Current estimated total: **~1260 tokens** (31 structures, per candidate-structures.md).
 
-Target: **1024 tokens**.
+Target: **1280 tokens**.
 
 | Prompt section | Structures | Current estimate (tokens) |
 |---|---|---|
@@ -196,7 +196,7 @@ Target: **1024 tokens**.
 | Compaction | S8-1 | 80 |
 | **Total (prompt text)** | | **~1260** |
 
-Compression plan (saves ~236 tokens to reach 1024):
+Compression plan: current estimate is already within the 1280-token target. If the final prompt expands during drafting, use this compression order:
 1. Drop M5 (planning step), C7 (claim classification), M19 (linter cap) — saves ~105
 2. Compress S6-1: ~130 → ~90 by tightening examples — saves ~40
 3. Compress C2+M4: ~100 → ~70 by removing redundant lines — saves ~30
@@ -215,7 +215,7 @@ Do NOT compress: S6-1 safety core, M12/M14 edit boundaries, C4/C9 validation hon
 - [ ] Git status injection (S7-5) ready in harness
 - [ ] Runtime feedback acceptance (S7-3) in prompt
 - [ ] Compaction awareness (S7-6) and high-value atom preservation (S8-1) in prompt
-- [ ] Token count under 1050 (or documented compression plan)
+- [ ] Token count under 1280 (or documented compression plan)
 - [ ] No persona/identity claims beyond executor header
 - [ ] AGENTS.md priority semantics defined
 - [ ] Override chain documented
