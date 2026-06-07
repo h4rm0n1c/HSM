@@ -30,6 +30,14 @@
 
 ---
 
+## HSM Local Additions
+
+This external-reference directory now includes a local `OpenCode/` source-capture folder for `anomalyco/opencode` prompt-surface material.
+
+The OpenCode folder is not yet analysed in the synthesis reports. It exists so later comparison work can inspect OpenCode provider prompts, agent prompts, command templates, and tool prompt text from one stable place.
+
+---
+
 ## Support the Project
 
 If you find this collection valuable and appreciate the effort involved in obtaining and sharing these insights, please consider supporting the project.
