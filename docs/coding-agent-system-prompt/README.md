@@ -33,6 +33,23 @@ user intent + repo state + tool contract + workflow scaffold
 
 This subproject captures the prompt structures, workflow scaffolds, and research material needed to build that coding-agent layer deliberately.
 
+## Current boundary
+
+Candidate prompt drafting is paused.
+
+Do not produce `candidate-system-prompt-v0.md` until the user explicitly resumes candidate prompt work.
+
+The current work is research-level resynthesis only:
+
+```text
+OpenCode source map
+  -> OpenCode runtime assembly comparison
+  -> OpenCode plan-mode comparison
+  -> OpenCode task/subagent/compaction comparison
+  -> OpenCode vs CLI-family synthesis
+  -> final-findings-synthesis.md update
+```
+
 ## Why this belongs here
 
 QuantZhai is the runtime and prior-art source for local coding-agent behaviour, prompt compression, state injection, and harness experiments.
@@ -113,25 +130,37 @@ prompt-evaluation-checklist.md
   Slice 10 eval framework: 14-section checklist covering all prompt layers, failure mode coverage matrix, token budget, and eval task ideas.
 
 final-findings-synthesis.md
-  Final consolidated synthesis: preserves the original Rule Zero and pattern vocabulary, then integrates all slices, failure modes, candidate structures, vendor comparisons, OpenCode audit findings, runtime/process boundaries, and next evaluation path.
+  Final consolidated synthesis. Next update target: absorb the repaired OpenCode resynthesis at research level only.
 
 RESEARCH_STATUS.md
-  One-page status matrix for all 10 research slices with artifact links, next actions, and risk register.
+  One-page status matrix, artifact list, next actions, and risk register.
 
 comparison-quantzhai-codex-core-qwenified.md
   Dedicated comparison: QuantZhai `codex-core-qwenified.md` against our 10-slice research findings.
-  Section-by-section analysis with validation, challenge, gap, and adoption priority.
 
 comparison-codex-cli-max.md
-  Dedicated comparison: OpenAI Codex CLI (Codex Max) system prompt against our 10-slice research
-  findings. 11-layer analysis with cross-cutting findings and structure adoption recommendations.
+  Dedicated comparison: OpenAI Codex CLI (Codex Max) system prompt against our 10-slice research findings.
 
 comparison-claude-code.md
   Dedicated comparison: Claude Code v2.1.143 system prompt against our 10-slice research findings.
-  11-layer analysis including memory system and sub-agent architecture evaluation.
 
 final-opencode-findings-synthesis.md
-  Consolidated OpenCode synthesis across base prompt variants from `anomalyco/opencode` `dev`, including adoption cluster, rejection list, and fixture-comparison recommendation.
+  Resynthesis boundary document for OpenCode. It marks the earlier OpenCode integration as too thin and blocks candidate prompt drafting until the OpenCode layer is repaired.
+
+research-opencode-source-map.md
+  Source map for OpenCode prompt/runtime surfaces: base prompts, runtime assembly, reminders, command/tool surfaces, task/subagent prompts, compaction, and user-observed TUI behaviours.
+
+comparison-opencode-runtime-assembly.md
+  OpenCode runtime assembly comparison: provider routing, environment injection, skills, reminders, task/subagent prompts, Explore, compaction, and CLI/TUI placement.
+
+comparison-opencode-plan-mode.md
+  OpenCode plan-mode comparison: read-only planning, plan-file exception, explore agents, build switch, question vs plan-exit boundary, and runtime placement.
+
+comparison-opencode-agent-task-compaction.md
+  OpenCode task/subagent/compaction comparison: when not to delegate, Explore role, main-agent accountability, and anchored compaction.
+
+research-opencode-vs-cli-family.md
+  Cross-family synthesis comparing OpenCode against QuantZhai, Codex CLI, Claude Code, Cursor/external matrix, and HSM slice findings.
 
 comparison-opencode-template.md
   Template used for OpenCode base-prompt comparison reports.
@@ -221,6 +250,8 @@ If a structure cannot be tested directly, it should at least produce observable 
 
 Build from evidence, not prompt-fashion.
 
-Use the QuantZhai packaged prompt as the current local baseline. Compare it later against Claude Code, Codex Max, ChatGPT prompt collections, Qwen-specific prompting notes, academic prompt/context-engineering papers, internal HSM/QuantZhai/NetTTS references, and observed local QuantZhai behaviour.
+Use the QuantZhai packaged prompt as the current local baseline. Compare it against Claude Code, Codex Max, ChatGPT prompt collections, Qwen-specific prompting notes, academic prompt/context-engineering papers, internal HSM/QuantZhai/NetTTS references, observed local QuantZhai behaviour, and now the repaired OpenCode prompt-system-family synthesis.
 
 Do not blindly merge all prompt sources. Extract useful structures, test them, and keep only what improves coding-agent behaviour on software-development tasks.
+
+Do not draft candidate prompt text until the user explicitly resumes that stage.
