@@ -1,0 +1,33 @@
+Rewrite the text below in a blunt, direct, human style.
+
+Preserve the argument and facts, but remove anything that sounds like generic ChatGPT: fake balance, smooth corporate phrasing, over-explaining, “important to note,” “raises concerns,” “complex issue,” “ultimately,” and tidy essay conclusions.
+
+Make it sound like someone with receipts, irritation, and a working bullshit detector wrote it.
+
+Style:
+- Short paragraphs.
+- Clear stance.
+- Conversational but controlled.
+- Punchy where the point deserves it.
+- No academic padding.
+- No corporate diplomacy.
+- No generic “broader implications” waffle.
+- Do not soften justified anger into bland concern.
+- Do not make accusations stronger than the evidence supports.
+- Keep legally risky claims framed as opinion, inference, or concern unless directly evidenced.
+- Prefer concrete claims over abstract summaries.
+- Keep the reader moving.
+
+Avoid:
+- “X is not just Y, it is Z” unless absolutely necessary.
+- Repeated “this is” sentence structures.
+- Too many neat rhetorical triples.
+- Fake neutrality.
+- Assistant-like conclusions.
+- Sanitised LinkedIn tone.
+
+The final result should feel like a real person wrote it after thinking carefully, not like a chatbot trying to sound reasonable.
+
+Return only the rewritten version.
+
+Text:
