@@ -58,6 +58,8 @@ Do not jump to `hsm-build-v1.md` until all integration slices below are complete
 
 ### Slice I0 — Integration protocol
 
+**Status**: done.
+
 **Goal**: Stop the process from becoming one giant rewrite.
 
 **Files**:
@@ -73,21 +75,24 @@ Do not jump to `hsm-build-v1.md` until all integration slices below are complete
 
 ### Slice I1 — Research-layer consolidation
 
+**Status**: done as I1A + I1B.
+
 **Goal**: Make the research layer internally coherent before touching canonical candidate structures.
 
 **Inputs**:
 
 - `slice-12-evidence-gated-action.md`
 - `project-smell-audit-2026-06-17.md`
+- `i1a-arxiv-backing-orientation-evidence-gating.md`
 - Slice 12 sidecars
 - relevant user/DeepSeek feedback already captured in Slice 12
 
-**Files to update**:
+**Files updated**:
 
-- `slice-12-evidence-gated-action.md`
+- `i1a-arxiv-backing-orientation-evidence-gating.md`
 - `research-failure-mode-catalog-slice-12-extension.md`
 - `prompt-evaluation-checklist-slice-12-extension.md`
-- `candidate-structures-slice-12-extension.md` only if needed
+- `candidate-structures-slice-12-extension.md`
 
 **Must preserve**:
 
@@ -108,6 +113,8 @@ examples are fixtures, not prompt wording
 
 ### Slice I2 — Candidate-structures canonical merge
 
+**Status**: next.
+
 **Goal**: Integrate Slice 12 and the smell-audit abstraction pass into `candidate-structures.md`.
 
 **Files to update**:
@@ -116,7 +123,7 @@ examples are fixtures, not prompt wording
 
 **Required changes**:
 
-- Status/source updated through Slice 12.
+- Status/source updated through Slice 12 and I1A.
 - Add C36-C42 using abstract wording.
 - Rewrite C28 orientation principle-first.
 - Rewrite C30 established-way discovery principle-first.
@@ -130,6 +137,8 @@ examples are fixtures, not prompt wording
 - C27-C42 form one coherent scaffold rather than Slice 11 plus appended Slice 12.
 
 ### Slice I3 — Failure-mode catalog canonical merge
+
+**Status**: pending.
 
 **Goal**: Integrate FM12 and update relationships between FM3, FM7, FM11, and FM12.
 
@@ -151,6 +160,8 @@ examples are fixtures, not prompt wording
 - The catalog distinguishes fake investigation, narrow investigation, assumption cascade, and action without evidence promotion.
 
 ### Slice I4 — Evaluation checklist canonical merge
+
+**Status**: pending.
 
 **Goal**: Add EF12 and prevent fixture-to-rule leakage.
 
@@ -174,6 +185,8 @@ examples are fixtures, not prompt wording
 
 ### Slice I5 — Final synthesis rewrite
 
+**Status**: pending.
+
 **Goal**: Rewrite `final-findings-synthesis.md` so the new foundation flows through the practical report.
 
 **Files to update**:
@@ -195,6 +208,8 @@ examples are fixtures, not prompt wording
 
 ### Slice I6 — Status and index update
 
+**Status**: pending.
+
 **Goal**: Make navigation reflect the new canonical state.
 
 **Files to update**:
@@ -215,6 +230,8 @@ examples are fixtures, not prompt wording
 
 ### Slice I7 — Evaluation preparation
 
+**Status**: pending.
+
 **Goal**: Prepare the behavioural A/B pass without drafting v1 yet.
 
 **Files to update**:
@@ -234,6 +251,8 @@ examples are fixtures, not prompt wording
 
 ### Slice I8 — Candidate prompt drafting
 
+**Status**: gated.
+
 **Goal**: Draft `hsm-build-v1.md` or equivalent.
 
 **Gate**: Only after I1-I7 are complete and the user explicitly resumes prompt drafting.
@@ -245,11 +264,12 @@ examples are fixtures, not prompt wording
 We are at:
 
 ```text
-I0 in progress
-I1 next
+I0 complete
+I1 complete
+I2 next
 ```
 
-Do not skip directly to I2-I8.
+Do not skip directly to I3-I8.
 
 ---
 
