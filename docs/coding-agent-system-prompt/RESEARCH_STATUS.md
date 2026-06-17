@@ -1,6 +1,6 @@
 # Research Status: Coding Agent System Prompt Subproject
 
-Summary: slices 0-10 are complete. Slice 11 has been added as a research correction after `hsm-build-v0.md` evaluation showed the worker prompt was over-weighted toward containment and under-weighted toward active investigation. Candidate prompt drafting remains paused until Slice 11 is included in any v1 build.
+Summary: slices 0-11 are now canonically integrated. Slice 11 was added after `hsm-build-v0.md` evaluation showed the worker prompt was over-weighted toward containment and under-weighted toward active investigation. Candidate prompt drafting remains paused until the user explicitly resumes it, but the research corpus now carries the safely-curious correction directly in the main synthesis, candidate-structure, failure-mode, and evaluation files.
 
 ---
 
@@ -18,8 +18,8 @@ Summary: slices 0-10 are complete. Slice 11 has been added as a research correct
 | 7 | Complete | `slice-7-tool-stream-state-feedback.md`, S7-1 through S7-6 | None |
 | 8 | Complete | `slice-8-compaction-preservation.md`, S8-1 through S8-3 | None |
 | 9 | Complete | `research-external-prompt-comparison.md` | None |
-| 10 | Complete / candidate paused | `candidate-structures.md`, `prompt-evaluation-checklist.md`, `final-findings-synthesis.md` | Use with Slice 11 extensions before v1 drafting |
-| 11 | Integrated extension / needs behavioural eval | `slice-11-investigation-imperative.md`, `candidate-structures-slice-11-extension.md`, `research-failure-mode-catalog-slice-11-extension.md`, `prompt-evaluation-checklist-slice-11-extension.md`, `final-findings-synthesis-amendment-2026-06-17.md` | Run EF11.1-EF11.6 A/B against v0/v1 |
+| 10 | Complete | `candidate-structures.md`, `prompt-evaluation-checklist.md`, `final-findings-synthesis.md` | Use canonical versions; no extension-only dependency |
+| 11 | Canonically integrated / needs behavioural eval | `slice-11-investigation-imperative.md`, updated `candidate-structures.md`, updated `research-failure-mode-catalog.md`, updated `prompt-evaluation-checklist.md`, updated `final-findings-synthesis.md` | Run EF11.1-EF11.6 A/B against v0/v1 |
 
 ---
 
@@ -29,18 +29,16 @@ Candidate prompt drafting is paused.
 
 Do not produce `candidate-system-prompt-v0.md`, `hsm-build-v1.md`, or any equivalent replacement prompt until the user explicitly resumes candidate prompt work.
 
-Any future prompt build must use the base research plus Slice 11 extensions:
+Any future prompt build must use the canonical Slice 11-integrated files:
 
 ```text
 candidate-structures.md
-  + candidate-structures-slice-11-extension.md
-  + research-failure-mode-catalog.md
-  + research-failure-mode-catalog-slice-11-extension.md
-  + prompt-evaluation-checklist.md
-  + prompt-evaluation-checklist-slice-11-extension.md
-  + final-findings-synthesis.md
-  + final-findings-synthesis-amendment-2026-06-17.md
+research-failure-mode-catalog.md
+prompt-evaluation-checklist.md
+final-findings-synthesis.md
 ```
+
+The Slice 11 extension docs remain useful as provenance, but they are no longer the only place C27-C35, FM11, or EF11 live.
 
 The OpenCode resynthesis sequence is complete at research level:
 
@@ -53,7 +51,7 @@ OpenCode source map                          DONE
   -> update final-findings-synthesis.md      DONE
 ```
 
-The Slice 11 correction sequence is complete at integration-extension level:
+The Slice 11 correction sequence is complete at canonical integration level:
 
 ```text
 hsm-build-v0.md evaluation                   DONE
@@ -61,8 +59,10 @@ hsm-build-v0.md evaluation                   DONE
   -> Fable5 distilled prompt comparison      DONE
   -> CL4R1T4S Fable prompt architecture pass DONE
   -> slice-11-investigation-imperative.md    DONE
-  -> final synthesis amendment               DONE
-  -> candidate/failure/eval extensions       DONE
+  -> final synthesis canonical update        DONE
+  -> candidate-structures canonical update   DONE
+  -> failure catalog canonical update        DONE
+  -> evaluation checklist canonical update   DONE
   -> A/B behavioural fixtures                PENDING
 ```
 
@@ -76,21 +76,23 @@ hsm-build-v0.md evaluation                   DONE
 | `slice-7-tool-stream-state-feedback.md` | Slice 7: parallel-call guidance, tool result persistence, runtime feedback acceptance, environment/git injection, compaction awareness |
 | `slice-8-compaction-preservation.md` | Slice 8: survival-weighted compaction (QuantZhai #8), high-value atom preservation (expanded C15), NetTTS prosody transfer, compaction acceptance criteria |
 | `slice-11-investigation-imperative.md` | Slice 11 correction: safely curious execution, orientation before narrowing, assumption ledger, surface-signal discipline, C27-C35, EF11 fixtures |
-| `candidate-structures-slice-11-extension.md` | Adds C27-C35 to the candidate prompt structure set without overwriting the Slice 10 consolidation |
-| `research-failure-mode-catalog-slice-11-extension.md` | Adds FM11: Premature Narrowing / Curiosity Collapse |
-| `prompt-evaluation-checklist-slice-11-extension.md` | Adds the Slice 11 checklist and EF11.1-EF11.6 A/B fixtures |
-| `comparison-quantzhai-codex-core-qwenified.md` | Dedicated comparison: QuantZhai codex-core-qwenified vs all 10 research slices. Section-by-section validation, challenge, and gap analysis. |
-| `comparison-codex-cli-max.md` | Dedicated comparison: OpenAI Codex CLI (Codex Max) vs all 10 research slices. 11-layer taxonomy analysis with adoption recommendations. |
-| `comparison-claude-code.md` | Dedicated comparison: Claude Code v2.1.143 vs all 10 research slices. Includes memory system and sub-agent architecture evaluation. |
-| `comparison-opencode-*.md` | Dedicated OpenCode comparisons for anthropic, beast, codex, default, gemini, gpt, kimi, and trinity base prompt variants. Useful base-prompt comparisons, now supplemented by deeper resynthesis docs. |
-| `research-opencode-source-map.md` | Source map for OpenCode prompt/runtime surfaces: base prompts, system runtime, reminders, task/subagent prompts, compaction, and user-observed TUI behaviours. |
-| `comparison-opencode-runtime-assembly.md` | Runtime assembly comparison: provider routing, environment injection, skills, reminders, task/subagent prompts, Explore, compaction, and CLI/TUI placement. |
-| `comparison-opencode-plan-mode.md` | Plan-mode comparison: read-only planning, plan-file exception, explore agents, build switch, question vs plan-exit boundary, and runtime placement. |
-| `comparison-opencode-agent-task-compaction.md` | Task/subagent/compaction comparison: when not to delegate, Explore role, main-agent accountability, and anchored compaction. |
-| `research-opencode-vs-cli-family.md` | Cross-family synthesis comparing OpenCode against QuantZhai, Codex CLI, Claude Code, Cursor/external matrix, and HSM slice findings. |
-| `final-opencode-findings-synthesis.md` | Resynthesis boundary document. It explicitly blocks candidate prompt drafting until OpenCode is compared with the older discipline. |
-| `final-findings-synthesis.md` | Final consolidated synthesis, updated with repaired OpenCode prompt-system-family findings. |
-| `final-findings-synthesis-amendment-2026-06-17.md` | Amendment after v0 evaluation: containment is not enough; the worker must be safely curious. |
+| `candidate-structures.md` | Canonical C1-C35 candidate structures, including Slice 11 |
+| `research-failure-mode-catalog.md` | Canonical FM1-FM11 failure-mode catalog |
+| `prompt-evaluation-checklist.md` | Canonical checklist and fixtures, including EF11.1-EF11.6 |
+| `final-findings-synthesis.md` | Canonical final synthesis through Slice 11 |
+| `candidate-structures-slice-11-extension.md` | Provenance extension used before canonical integration; retained for audit trail |
+| `research-failure-mode-catalog-slice-11-extension.md` | Provenance extension for FM11; retained for audit trail |
+| `prompt-evaluation-checklist-slice-11-extension.md` | Provenance extension for EF11 fixtures; retained for audit trail |
+| `comparison-quantzhai-codex-core-qwenified.md` | Dedicated comparison: QuantZhai codex-core-qwenified vs research slices |
+| `comparison-codex-cli-max.md` | Dedicated comparison: OpenAI Codex CLI (Codex Max) vs research slices |
+| `comparison-claude-code.md` | Dedicated comparison: Claude Code v2.1.143 vs research slices |
+| `comparison-opencode-*.md` | Dedicated OpenCode comparisons for anthropic, beast, codex, default, gemini, gpt, kimi, and trinity base prompt variants |
+| `research-opencode-source-map.md` | Source map for OpenCode prompt/runtime surfaces |
+| `comparison-opencode-runtime-assembly.md` | Runtime assembly comparison |
+| `comparison-opencode-plan-mode.md` | Plan-mode comparison |
+| `comparison-opencode-agent-task-compaction.md` | Task/subagent/compaction comparison |
+| `research-opencode-vs-cli-family.md` | Cross-family synthesis comparing OpenCode against QuantZhai, Codex CLI, Claude Code, Cursor/external matrix, and HSM findings |
+| `final-opencode-findings-synthesis.md` | Resynthesis boundary document |
 
 ---
 
@@ -98,14 +100,14 @@ hsm-build-v0.md evaluation                   DONE
 
 | Fixture | FM tested | Research gap addressed |
 |---------|-----------|----------------------|
-| `fake-investigation` | FM3 (Hallucinated Investigation) | Agent must read both files to find which has the bug |
-| `destructive-git` | FM9 (Destructive Action) | Agent must avoid git-reset/git-checkout, preserve dirty state |
-| `assumption-cascade` | FM7 (Assumption Cascade) | Agent must verify assumptions before editing confusing but correct code |
-| `premature-commitment` | FM5 (Premature Commitment) | Agent must trace the full call chain before committing to a fix |
-| `over-paraphrasing` | FM6 (Over-Paraphrasing) | Agent must preserve exact config path, not paraphrase it |
-| `context-overload` | FM8 (Context Overload) | Six modules, agent must find the one with the bug |
-| `task-abandonment` | FM10 (Task Abandonment) | Two bugs, agent must not give up after fixing the first |
-| `adversarial-prompt-injection` | FM4 (advanced) | Zero-width spaces, Unicode confusables, delayed invocation base64, HTML comment injection |
+| `fake-investigation` | FM3 | Agent must read both files to find which has the bug |
+| `destructive-git` | FM9 | Agent must avoid git-reset/git-checkout and preserve dirty state |
+| `assumption-cascade` | FM7 | Agent must verify assumptions before editing confusing but correct code |
+| `premature-commitment` | FM5 | Agent must trace the full call chain before committing to a fix |
+| `over-paraphrasing` | FM6 | Agent must preserve exact config path, not paraphrase it |
+| `context-overload` | FM8 | Agent must find the relevant module without drowning context |
+| `task-abandonment` | FM10 | Agent must not give up after a partial failure |
+| `adversarial-prompt-injection` | FM4 | Unicode/confusable/delayed-invocation injection cases |
 | `EF11.1-existing-helper-trap` | FM11 / FM1 | Agent must find established project way before creating a helper |
 | `EF11.2-wrong-path-trap` | FM11 / FM3 | Agent must verify real path before action |
 | `EF11.3-hidden-config-trap` | FM11 / FM7 | Agent must check configs/manifests before trusting obvious file |
@@ -115,7 +117,7 @@ hsm-build-v0.md evaluation                   DONE
 
 All 11 failure modes have fixture coverage at design level: FM1 through FM11.
 
-OpenCode-specific fixture extensions are proposed in `final-findings-synthesis.md` and `research-opencode-vs-cli-family.md`:
+OpenCode-specific fixture extensions remain proposed:
 
 ```text
 opencode-provider-route
@@ -132,10 +134,9 @@ opencode-compaction-atoms
 ## Remaining Work
 
 1. **A/B prompt evaluation** — Run EF11.1-EF11.6 against `hsm-build-v0.md` and the future revised prompt.
-2. **Main-file consolidation** — Optional: merge Slice 11 extension docs into the large consolidated files once stable. Extension docs are the current source of truth for Slice 11 integration.
-3. **Fixture extensions** — Add OpenCode-specific fixture ideas if behavioural comparison is needed.
+2. **Candidate prompt text** — Still paused. Draft only if the user explicitly resumes candidate prompt work.
+3. **OpenCode fixture extensions** — Add OpenCode-specific fixture ideas if behavioural comparison is needed.
 4. **TUI source audit** — Inspect plan-mode toggle, visible state, rollback, patch/diff rendering, todo UI, and permission common-node behaviour if QuantZhai CLI design work resumes.
-5. **Candidate prompt text** — Still paused. Do not draft a replacement prompt until the user explicitly resumes candidate prompt work.
 
 ---
 
@@ -150,7 +151,7 @@ opencode-compaction-atoms
 
 ## Risk Register
 
-- **Slice 11 not behaviourally measured yet**: C27-C35 and EF11.1-EF11.6 are integrated as research/eval structures but need A/B runs.
+- **Slice 11 not behaviourally measured yet**: C27-C35 and EF11.1-EF11.6 are now canonical but still need A/B runs.
 - **Curiosity can become research theatre**: Blast-radius scaling is mandatory. Low-blast tasks should not trigger broad exploration.
 - **Prompt bloat risk increased**: Slice 11 must be semantically merged and compressed into existing sections, not appended wholesale.
 - **Safety must not be weakened**: The correction is ordering and emphasis, not removal. Safety remains strict around mutation, privilege, git, and irreversible actions.
