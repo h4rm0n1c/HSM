@@ -43,7 +43,7 @@ This subproject captures the prompt structures, workflow scaffolds, and research
 
 Candidate prompt drafting is paused.
 
-Do not produce `candidate-system-prompt-v0.md` until the user explicitly resumes candidate prompt work.
+Do not produce `candidate-system-prompt-v0.md`, `hsm-build-v1.md`, or any replacement prompt until the user explicitly resumes candidate prompt work.
 
 The OpenCode resynthesis sequence is complete at research level:
 
@@ -65,9 +65,10 @@ hsm-build-v0.md
   -> CL4R1T4S Fable prompt architecture contrast
   -> slice-11-investigation-imperative.md
   -> final-findings-synthesis-amendment-2026-06-17.md
+  -> candidate/failure/eval extension docs
 ```
 
-Remaining work is candidate-structure, failure-mode, and evaluation-checklist integration before any new prompt draft.
+Remaining work is behavioural A/B evaluation before any new prompt draft.
 
 ## Why this belongs here
 
@@ -136,20 +137,29 @@ slice-8-compaction-preservation.md
 slice-11-investigation-imperative.md
   Slice 11 correction: safely curious coding agents, territory mapping before narrowing, surface-signal discipline, assumption ledger, and C27-C35 candidate structures.
 
+candidate-structures-slice-11-extension.md
+  Integration extension adding C27-C35 to the candidate structure set without rewriting the Slice 10 consolidation.
+
+research-failure-mode-catalog-slice-11-extension.md
+  Integration extension adding FM11: Premature Narrowing / Curiosity Collapse.
+
+prompt-evaluation-checklist-slice-11-extension.md
+  Integration extension adding Slice 11 checklist items and EF11.1-EF11.6 fixtures.
+
 research-external-prompt-comparison.md
   Slice 9 output: 10-layer comparison of Claude Code, Codex CLI, and Cursor prompts with cross-cutting findings and adoption recommendations.
 
 research-failure-mode-catalog.md
-  Research output: 10 coding-agent failure modes mapped to missing prompt structures, with severity ratings and mitigation strategies per mode (FM1-FM10). Slice 11 adds FM11 pending integration.
+  Research output: 10 coding-agent failure modes mapped to missing prompt structures, with severity ratings and mitigation strategies per mode (FM1-FM10). Use with Slice 11 failure-mode extension for FM11.
 
 research-missing-structures.md
   Research output: cross-reference of 27 vendor prompt structures (M1-M27) against our C1-C26 candidate set, with gap analysis and adoption recommendations by prompt layer.
 
 candidate-structures.md
-  Slice 10 consolidation: all C1-C26 and M1-M27 merged, deduplicated, classified (adopt/test/defer/reject), with token cost estimates, test plans, and interaction conflict warnings. Slice 11 adds C27-C35 pending integration.
+  Slice 10 consolidation: all C1-C26 and M1-M27 merged, deduplicated, classified (adopt/test/defer/reject), with token cost estimates, test plans, and interaction conflict warnings. Use with Slice 11 candidate extension for C27-C35.
 
 prompt-evaluation-checklist.md
-  Slice 10 eval framework: 14-section checklist covering all prompt layers, failure mode coverage matrix, token budget, and eval task ideas. Slice 11 adds EF11.1-EF11.6 pending integration.
+  Slice 10 eval framework: 14-section checklist covering all prompt layers, failure-mode matrix, token budget, and eval task ideas. Use with Slice 11 checklist extension for EF11 fixtures.
 
 final-findings-synthesis.md
   Final consolidated synthesis, now updated with the repaired OpenCode prompt-system-family findings.
