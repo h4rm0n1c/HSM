@@ -3,7 +3,7 @@
 Status: canonical consolidated research output through Slice 12 / I5 final synthesis rewrite  
 Date: 2026-06-17  
 Scope: slices 0-12, failure-mode catalog through FM12, evaluation checklist through EF12, QuantZhai/Codex CLI/Claude Code comparisons, external CLI-family comparison, repaired OpenCode prompt-system-family resynthesis, Fable5 distilled operating-instruction comparison, CL4R1T4S Fable prompt architecture contrast, project smell audit, and I1A arXiv backing for orientation/evidence-gating structures  
-Candidate prompt drafting: explicitly out of scope until resumed by direct user instruction  
+Candidate prompt drafting: explicitly gated until resumed by direct user instruction  
 Backup of previous synthesis: `final-findings-synthesis.md.pre-20260607-resynthesis.bak`
 
 ---
@@ -471,20 +471,33 @@ For non-trivial, uncertain, or unfamiliar work, orient before narrowing. Before 
 
 That one compact rule should be merged across operating stance, investigation, validation, and runtime feedback. It should not become a separate Slice 12 block.
 
-Do not draft v1 until I1-I7 are complete and the user explicitly resumes prompt drafting.
+I1-I7 are complete. Candidate prompt drafting remains gated until the user explicitly resumes prompt drafting.
 
 ---
 
-## 17. Current Next Step
+## 17. Current Boundary
 
-I5 is complete when this file is merged.
+The non-drafting integration pass is complete through I7.
 
-The next canonical integration slice is I6:
+Current position:
 
 ```text
-RESEARCH_STATUS.md
-docs/coding-agent-system-prompt/README.md
-docs/README.md
+I0 integration protocol             DONE
+I1A arXiv backing slice             DONE
+I1B research sidecar consolidation  DONE
+I2 candidate-structures merge       DONE
+I3 failure-mode catalog merge       DONE
+I4 evaluation checklist merge       DONE
+I5 final synthesis rewrite          DONE
+I6 status / index update            DONE
+I7 evaluation preparation           DONE
+I8 candidate prompt drafting        GATED
 ```
 
-I6 should update navigation and remove stale `through Slice 11` entry points. It should not draft a prompt.
+The next useful choices are:
+
+1. Run v0 evaluation using `evaluation-plan-ef11-ef12.md`.
+2. Explicitly resume candidate prompt drafting and create a future `hsm-build-v1.md`.
+3. Prepare automated fixture files/scripts before running evaluation.
+
+Do not draft v1 unless the user explicitly resumes candidate prompt work.
