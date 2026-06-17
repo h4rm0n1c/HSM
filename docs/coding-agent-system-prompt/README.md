@@ -19,6 +19,7 @@ The goal is to provide external structure that helps a coding agent reason bette
 - better source inspection
 - better handoff from suspicion to evidence
 - safely curious orientation before premature narrowing
+- evidence promotion before action
 - safer edit boundaries
 - better validation choices
 - cleaner final reporting
@@ -30,6 +31,7 @@ It is separate from the main HSM subject-state work, but related. HSM is interes
 user intent + repo state + tool contract + workflow scaffold
   -> orientation / territory mapping
   -> bounded investigation
+  -> evidence-promotion gate
   -> implementation slice
   -> validation
   -> concise report
@@ -44,7 +46,7 @@ Candidate prompt drafting is paused.
 
 Do not produce `candidate-system-prompt-v0.md`, `hsm-build-v1.md`, or any replacement prompt until the user explicitly resumes candidate prompt work.
 
-The research corpus is now canonically integrated through Slice 11:
+The research corpus is canonically integrated through Slice 11, with Slice 12 now added as an active correction:
 
 ```text
 slices 0-10
@@ -55,9 +57,15 @@ slices 0-10
   -> CL4R1T4S Fable prompt architecture contrast
   -> Slice 11 investigation imperative
   -> canonical updates to final synthesis, candidate structures, failure catalog, eval checklist, and status
+  -> Slice 12 evidence-gated action correction
 ```
 
-Remaining work is behavioural A/B evaluation before any measured claim about a new prompt draft.
+Remaining work is now two-stage:
+
+```text
+canonically merge Slice 12 into the large consolidated files
+  -> run behavioural A/B evaluation before any measured claim about a new prompt draft
+```
 
 ## Why this belongs here
 
@@ -68,6 +76,7 @@ HSM is the better home for the broader methodology work because this prompt rese
 - task scaffolding for software-development reasoning
 - role and authority boundaries
 - evidence-first task structure
+- evidence-promotion before action
 - prompt compilation
 - instruction layering
 - durable memory discipline
@@ -127,17 +136,20 @@ slice-8-compaction-preservation.md
 slice-11-investigation-imperative.md
   Slice 11 research correction: safely curious coding agents, territory mapping before narrowing, surface-signal discipline, assumption ledger, and C27-C35 candidate structures.
 
+slice-12-evidence-gated-action.md
+  Slice 12 research correction: evidence promotion before action, source-code-is-not-runtime rule, cheap preflight checks, FM12, C36-C42, and EF12 fixtures.
+
 candidate-structures.md
-  Canonical candidate structures C1-C35, including Slice 11 C27-C35.
+  Canonical candidate structures C1-C35, including Slice 11 C27-C35. Must be merged with Slice 12 before any serious v1 prompt draft.
 
 research-failure-mode-catalog.md
-  Canonical failure-mode catalog FM1-FM11, including FM11 Premature Narrowing / Curiosity Collapse.
+  Canonical failure-mode catalog FM1-FM11, including FM11 Premature Narrowing / Curiosity Collapse. Must be merged with FM12 before any serious v1 prompt draft.
 
 prompt-evaluation-checklist.md
-  Canonical evaluation checklist, including EF11.1-EF11.6.
+  Canonical evaluation checklist, including EF11.1-EF11.6. Must be merged with EF12 before any serious v1 prompt draft.
 
 final-findings-synthesis.md
-  Canonical final synthesis through Slice 11.
+  Canonical final synthesis through Slice 11. Must be amended with Slice 12 before any serious v1 prompt draft.
 
 RESEARCH_STATUS.md
   One-page status matrix, artifact list, fixture coverage, next actions, and risk register.
@@ -145,7 +157,7 @@ RESEARCH_STATUS.md
 candidate-structures-slice-11-extension.md
 research-failure-mode-catalog-slice-11-extension.md
 prompt-evaluation-checklist-slice-11-extension.md
-  Provenance sidecars from the integration pass. These are retained for audit trail, but the canonical material is now in the main files above.
+  Provenance sidecars from the Slice 11 integration pass. These are retained for audit trail, but the canonical Slice 11 material is now in the main files above.
 
 final-findings-synthesis-amendment-2026-06-17.md
   Provenance amendment used before the final synthesis was canonically updated.
@@ -201,6 +213,7 @@ executor identity
   -> task-framing scaffold
   -> orientation / territory-mapping scaffold
   -> investigation scaffold
+  -> evidence-promotion scaffold
   -> edit-boundary scaffold
   -> validation scaffold
   -> safety/risk handling
@@ -223,6 +236,7 @@ If a structure cannot be tested directly, it should at least produce observable 
 - more reliable territory mapping before narrowing
 - fewer wrong-path edits
 - better surfacing of relevant adjacent signal
+- fewer guessed API endpoints, model IDs, config paths, and hardware assumptions
 
 ## Immediate working rule
 
