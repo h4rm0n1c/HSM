@@ -30,6 +30,8 @@ Use it to find the current architecture notes, runtime/state design, source boun
 | Harness lessons | [Active state harness lessons](active-state-harness-lessons-2026-05-02.md) | Lessons from hosted AI runtime state injection and what HSM should make explicit, inspectable, and update-gated. |
 | Research seed | [Human analogy and memory research seed](human-analogy-and-memory-research-seed-2026-05-02.md) | Seed notes for human-human state maintenance, trust, memory, exhaustion, hyperfocus, and social integrity. |
 | Coding-agent prompt development | [Coding agent system prompt subproject](coding-agent-system-prompt/README.md) | Separate workspace for building a coding-agent system prompt from QuantZhai prior art, workflow observations, and external prompt references. |
+| Coding-agent prompt development | [Investigation imperative](coding-agent-system-prompt/slice-11-investigation-imperative.md) | Slice 11 correction: safely curious coding agents, orientation before narrowing, surface-signal discipline, and C27-C35 candidate structures. |
+| Coding-agent prompt development | [Final synthesis amendment](coding-agent-system-prompt/final-findings-synthesis-amendment-2026-06-17.md) | Final synthesis amendment after `hsm-build-v0.md` evaluation: containment is not enough; the worker must be safely curious. |
 
 ## Task-oriented entry points
 
@@ -89,7 +91,9 @@ Read:
 - [Arbitration loop analysis](coding-agent-system-prompt/slice-1-arbitration-loop.md) — Slice 1 output, external prompt comparison, candidate structures
 - [Anti-agreement and self-critique](coding-agent-system-prompt/slice-2-anti-agreement-self-critique.md) — Slice 2 output, minimum viable adversarial check, candidate structures C6-C11
 - [Context position and middle-detail loss](coding-agent-system-prompt/slice-3-context-position-middle-loss.md) — Slice 3 output, Lost in the Middle analysis, position-aware ordering, candidate structures C12-C16
+- [Investigation imperative](coding-agent-system-prompt/slice-11-investigation-imperative.md) — Slice 11 correction, active investigator stance, territory mapping, surface-signal discipline, C27-C35, and EF11 fixtures
 - [Final coding-agent prompt synthesis](coding-agent-system-prompt/final-findings-synthesis.md) — consolidated synthesis across all slices, candidate structures, failure modes, vendor comparisons, OpenCode audit, and runtime/process boundaries
+- [Final synthesis amendment](coding-agent-system-prompt/final-findings-synthesis-amendment-2026-06-17.md) — correction after `hsm-build-v0.md`: safely curious execution and prompt architecture reordering
 - [Candidate prompt structures](coding-agent-system-prompt/candidate-structures.md) — merged structure set with adoption/test/defer/reject status and token-cost implications
 - [Prompt evaluation checklist](coding-agent-system-prompt/prompt-evaluation-checklist.md) — evaluation framework, failure-mode matrix, token budget, and fixture ideas
 - [QuantZhai research comparison](coding-agent-system-prompt/comparison-quantzhai-codex-core-qwenified.md) — QuantZhai `codex-core-qwenified` section-by-section evaluated against all research findings
@@ -105,6 +109,7 @@ Focus on:
 - treating external prompt dumps as research inputs, not authority
 - slicing research into research, verification, adversarial review, correction, and conclusion phases
 - producing candidate prompt structures that can be tested locally
+- preserving active investigation without letting it become broad unsafe autonomy
 
 ### I want to work on quiescent/anchor/trigger state
 
@@ -195,7 +200,9 @@ docs/coding-agent-system-prompt/research-references.md
 docs/coding-agent-system-prompt/slice-1-arbitration-loop.md
 docs/coding-agent-system-prompt/slice-2-anti-agreement-self-critique.md
 docs/coding-agent-system-prompt/slice-3-context-position-middle-loss.md
+docs/coding-agent-system-prompt/slice-11-investigation-imperative.md
 docs/coding-agent-system-prompt/final-findings-synthesis.md
+docs/coding-agent-system-prompt/final-findings-synthesis-amendment-2026-06-17.md
 docs/coding-agent-system-prompt/candidate-structures.md
 docs/coding-agent-system-prompt/prompt-evaluation-checklist.md
 docs/coding-agent-system-prompt/final-opencode-findings-synthesis.md
