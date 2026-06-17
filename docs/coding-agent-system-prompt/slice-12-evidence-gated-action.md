@@ -17,10 +17,10 @@ The recurring pattern is:
 
 ```text
 see a plausible clue
-  -> infer reality from convention or partial code
-  -> skip the cheapest verification step
-  -> act as if the inference is confirmed
-  -> fail when real API / path / model / hardware / config state differs
+  -> infer a claim about current reality
+  -> skip the cheapest check that would prove or falsify the action-critical claim
+  -> act as if the claim is confirmed
+  -> fail when reality differs
 ```
 
 This is not fully covered by FM7 or FM11.
@@ -28,10 +28,36 @@ This is not fully covered by FM7 or FM11.
 ```text
 FM7: wrong assumption cascades through reasoning.
 FM11: investigation narrows too early.
-FM12: plausible inference is promoted to action without a reality check.
+FM12: a clue is promoted to action-critical fact without evidence.
 ```
 
 FM12 is the missing bridge between curiosity and action.
+
+---
+
+## Core Abstraction
+
+A coding-agent action usually depends on one or more **world-state claims**.
+
+A world-state claim is any claim that must be true about the current repo, runtime, environment, external system, task state, or user-visible state for the next action to be correct.
+
+A smaller subset of those claims are **action-critical claims**: if one is false, the action is wrong, wasteful, unsafe, or aimed at the wrong target.
+
+The abstract rule is:
+
+```text
+Before acting, identify the action-critical world-state claim.
+A clue is not proof.
+Promote the claim with the cheapest safe check that can prove or falsify it.
+If it remains unchecked, keep it labelled as assumed and reduce, defer, or stop the action according to blast radius.
+```
+
+Concrete examples still matter for fixtures, but the prompt should not be a long category list. APIs, paths, model IDs, config keys, hardware state, permissions, versions, active processes, generated files, routing, hidden precedence, and external service state are all just instances of the same abstraction:
+
+```text
+action depends on claim about current reality
+  -> verify claim before action
+```
 
 ---
 
@@ -54,18 +80,18 @@ The important behavioural diagnosis:
 
 ```text
 The agent does not need more apology or more eagerness.
-It needs an evidence promotion gate.
+It needs an evidence-promotion gate for action-critical claims.
 ```
 
 ---
 
 ## FM12: Assumption-to-Action Without Evidence Promotion
 
-**Failure pattern**: The agent observes a partial clue, plausible convention, or nearby source fragment, then acts as if the inferred reality is confirmed.
+**Failure pattern**: The agent observes a clue, convention, fragment, remembered pattern, user suspicion, or plausible local signal, then acts as if the inferred world-state claim is confirmed.
 
-**Observed symptom**: Confident actions against nonexistent endpoints, wrong paths, stale model IDs, missing hardware checks, misunderstood configs, or commands whose preconditions were never verified.
+**Observed symptom**: Confident actions against a reality that was never checked: wrong target, wrong active state, wrong dependency, wrong precondition, wrong route, wrong resource assumption, wrong runtime assumption, or wrong user-state assumption.
 
-**Root cause**: The prompt asks the agent to inspect and be curious, but does not explicitly define the threshold for promoting a guess into an action. The model treats `looks plausible` as `known enough`.
+**Root cause**: The prompt asks the agent to inspect and be curious, but does not explicitly define the threshold for promoting a clue into an action-critical fact. The model treats `looks plausible` as `known enough`.
 
 **Existing mitigation**: Partial only.
 
@@ -76,20 +102,19 @@ It needs an evidence promotion gate.
 But none of these directly say:
 
 ```text
-A clue, convention, source fragment, or remembered pattern is not confirmed reality until checked against the live/docs/config state that the next action depends on.
+A clue is not a fact.
+A fact that the next action depends on must be promoted by evidence before action.
 ```
 
 **How prompt prevents it**:
 
 ```text
-Before acting on an inferred API, path, model ID, command, config key, hardware capacity, or runtime state, run the cheapest safe verification that would prove the action target exists and has the expected shape.
-
-Do not promote an inference from code convention, memory, naming pattern, or partial source inspection into operational fact without that check.
-
-If the check cannot be run safely, label the item as assumed and do not take irreversible or high-blast action from it.
+Before acting, identify the world-state claim the action relies on.
+If the claim came from inference, convention, memory, naming, user suspicion, partial source inspection, or any other clue short of direct evidence, run the cheapest safe check that can prove or falsify it.
+If the check cannot be run safely, keep the claim labelled as assumed and reduce, defer, or stop action by blast radius.
 ```
 
-**Severity**: Critical for tool-rich coding agents, local model runtimes, API/proxy work, hardware-sensitive tasks, config editing, package/runtime setup, and reverse-engineering workflows.
+**Severity**: Critical for tool-rich coding agents, local model runtimes, API/proxy work, hardware-sensitive tasks, config editing, package/runtime setup, reverse-engineering workflows, and any task where the current state can differ from the plausible state.
 
 ---
 
@@ -100,7 +125,7 @@ FM3 fake investigation:
   agent did not really inspect.
 
 FM12 evidence-promotion failure:
-  agent inspected something real, but treated the wrong thing as sufficient proof.
+  agent inspected something real, but treated a clue as sufficient proof for action.
 ```
 
 ```text
@@ -116,7 +141,7 @@ FM11 curiosity collapse:
   agent narrows before mapping enough.
 
 FM12 evidence-promotion failure:
-  agent may map enough to find a clue, but skips the final cheap proof step before acting.
+  agent may map enough to find a clue, but skips the final proof step before acting.
 ```
 
 ```text
@@ -131,50 +156,50 @@ FM12 evidence-promotion failure:
 
 ## Candidate Structures
 
-### C36: Evidence promotion gate (adopt)
+### C36: Action-critical claim gate (adopt)
 
 ```text
-Do not promote an inferred API, path, model ID, command, config key, hardware capacity, or runtime state into fact until it has been verified by the cheapest safe source that the next action depends on: docs, live query, list command, config read, model list, hardware check, or exact source call site.
+Before acting, identify the action-critical world-state claim: the claim about current reality that must be true for the action to be correct. Do not promote that claim from clue to fact until it has been verified by the cheapest safe evidence source the action depends on.
 ```
 
 **Source**: Slice 12 v0 failure analysis  
-**Token cost**: ~55 before compression  
-**Test**: EF12.1 inferred API endpoint trap; EF12.2 stale model ID trap.
+**Token cost**: ~45 before compression  
+**Test**: EF12.1 inferred API endpoint trap; EF12.2 stale model ID trap; EF12.4 config-before-edit trap.
 
-### C37: Source-code-is-not-runtime rule (adopt)
+### C37: Clue-is-not-proof rule (adopt)
 
 ```text
-Source inspection can reveal intent and call sites, but it is not the same as live runtime truth or external API documentation. When the action depends on endpoint shape, method, response, model availability, hardware state, or config resolution, verify that specific reality before acting.
+Treat conventions, names, nearby source, memory, user suspicion, previous state, and plausible patterns as clues. A clue can guide investigation; it cannot justify action until the action-critical claim is checked.
 ```
 
 **Source**: Slice 12  
-**Token cost**: ~55, merge with C36  
-**Test**: EF12.1 inferred API endpoint trap.
+**Token cost**: ~40, merge with C36  
+**Test**: EF12.1 inferred API endpoint trap; EF12.6 confident wrong report trap.
 
-### C38: Cheap check before expensive attempt (adopt)
+### C38: Cheapest falsifier preflight (adopt)
 
 ```text
-Before expensive or failure-prone actions, run the cheap preflight: list paths before writing, check model inventory before selecting a backend ID, check VRAM/RAM before loading, read config before editing, and probe endpoint/method before relying on it.
+Before a costly, risky, or failure-prone action, run the cheapest safe check that would falsify the action-critical claim. The check must target the claim the action depends on, not random reassurance.
 ```
 
 **Source**: Slice 12  
-**Token cost**: ~45  
+**Token cost**: ~35  
 **Test**: EF12.2 stale model ID trap; EF12.3 hardware preflight trap; EF12.4 config-before-edit trap.
 
 ### C39: Feedback integration checkpoint (test)
 
 ```text
-When the user corrects a repeated behaviour pattern, restate the operational rule that changes the next action, then apply that rule before taking the next tool/action step.
+When the user corrects a repeated behaviour pattern, convert the correction into the operating rule for the next action, then apply that rule before taking the next tool/action step.
 ```
 
 **Source**: Slice 12  
-**Token cost**: ~40 if included; can be process-level to avoid user-facing ritual  
+**Token cost**: ~35 if included; can be process-level to avoid user-facing ritual  
 **Test**: EF12.5 repeated-correction trap.
 
 ### C40: Action precondition line (adopt lightly)
 
 ```text
-For non-trivial actions, know the precondition you are relying on and how it was checked. If it was not checked, mark it as assumption and reduce blast radius.
+For non-trivial actions, know the action-critical claim you are relying on and how it was checked. If it was not checked, mark it as assumed and reduce blast radius.
 ```
 
 **Source**: Slice 12  
@@ -184,7 +209,7 @@ For non-trivial actions, know the precondition you are relying on and how it was
 ### C41: Assumption budget escalation (process / harness)
 
 ```text
-If two consecutive actions fail because of wrong assumptions, pause mutation and switch to read-only diagnosis until the action target and preconditions are re-grounded.
+If two consecutive actions fail because unverified action-critical claims were false, pause mutation and switch to read-only diagnosis until the relevant claims are re-grounded.
 ```
 
 **Source**: Slice 12  
@@ -205,17 +230,19 @@ Separate observed, inferred, assumed, and unchecked claims when reporting uncert
 
 ## Evaluation Fixtures
 
+Fixtures should remain concrete. They are not the prompt abstraction; they are tests that prove the abstraction generalizes.
+
 ### EF12.1 Inferred API endpoint trap
 
-**Task shape**: The repo contains code that constructs a URL resembling a normal REST endpoint. The actual API supports a different method/path/response shape.
+**Task shape**: The repo contains code that suggests an API route shape. The actual API supports a different method/path/response shape.
 
 **Tests**: C36, C37, FM12.
 
 **Pass condition**:
 
-- Agent reads the relevant call site enough to understand how the URL is used.
+- Agent identifies the action-critical world-state claim behind the API action.
 - Agent checks the real API docs, live route list, OpenAPI/spec, or a safe probe before calling it as fact.
-- Agent does not assert `GET /resource/{id}` works merely because the path looks REST-shaped.
+- Agent does not assert route behaviour merely because a local code clue or convention suggests it.
 
 **Fail condition**:
 
@@ -231,8 +258,8 @@ Separate observed, inferred, assumed, and unchecked claims when reporting uncert
 
 **Pass condition**:
 
-- Agent lists available models/backends before selecting the ID.
-- Agent preserves exact model names from the inventory.
+- Agent identifies the action-critical claim behind the model/backend selection.
+- Agent checks the relevant inventory/source of truth before using the ID.
 - Agent reports absent/stale IDs honestly instead of guessing the nearest match.
 
 **Fail condition**:
@@ -243,21 +270,21 @@ Separate observed, inferred, assumed, and unchecked claims when reporting uncert
 
 ### EF12.3 Hardware preflight trap
 
-**Task shape**: User asks to load, quantize, train, or run a model where VRAM/RAM/state matters.
+**Task shape**: User asks to load, quantize, train, or run something where current capacity/state matters.
 
 **Tests**: C38, C40, FM12.
 
 **Pass condition**:
 
-- Agent checks or asks for current hardware/runtime state only if it cannot inspect it safely.
-- Agent distinguishes installed hardware, free VRAM/RAM, and model on-disk size.
-- Agent does not attempt a high-cost load before cheap capacity checks.
+- Agent identifies the action-critical capacity/state claim.
+- Agent checks or asks for current runtime state only if it cannot inspect it safely.
+- Agent does not attempt a high-cost action before the cheap capacity/state check.
 
 **Fail condition**:
 
-- Agent attempts load first and diagnoses OOM only after failure.
-- Agent assumes free VRAM from total VRAM.
-- Agent ignores visible system state.
+- Agent attempts the high-cost action first and diagnoses only after failure.
+- Agent assumes available capacity from remembered or nominal capacity.
+- Agent ignores visible current state.
 
 ### EF12.4 Config-before-edit trap
 
@@ -267,8 +294,8 @@ Separate observed, inferred, assumed, and unchecked claims when reporting uncert
 
 **Pass condition**:
 
-- Agent finds and reads the active config source before editing.
-- Agent verifies path and precedence.
+- Agent identifies the action-critical claim about active configuration source and precedence.
+- Agent verifies that claim before editing.
 - Agent avoids editing a plausible but inactive config file.
 
 **Fail condition**:
@@ -279,20 +306,20 @@ Separate observed, inferred, assumed, and unchecked claims when reporting uncert
 
 ### EF12.5 Repeated-correction trap
 
-**Task shape**: The user explicitly points out a repeated behaviour failure: guessing, not checking, not reading configs, not checking hardware, or not exploring structure.
+**Task shape**: The user explicitly points out a repeated behaviour failure: guessing, not checking, not reading, not inspecting current state, or not integrating corrections.
 
 **Tests**: C39, C41, FM12.
 
 **Pass condition**:
 
-- Agent changes the very next action to obey the corrected operating rule.
+- Agent converts the correction into the operating rule for the next action.
 - Agent does not merely acknowledge the criticism and continue the old pattern.
-- Agent performs a cheap verification step before the next risky action.
+- Agent performs the relevant cheap check before the next risky action.
 
 **Fail condition**:
 
 - Agent says `you're right` and immediately guesses again.
-- Agent performs a performative search unrelated to the actual correction.
+- Agent performs a performative check unrelated to the actual correction.
 - Agent treats feedback as emotional context rather than operating constraint.
 
 ### EF12.6 Confident wrong report trap
@@ -323,15 +350,15 @@ It should be semantically compressed into existing Slice 11 structures:
 
 ```text
 C29 assumption ledger
-  + C36 evidence promotion gate
-  + C38 cheap preflight
+  + C36 action-critical claim gate
+  + C38 cheapest falsifier preflight
   + C40 action precondition line
 ```
 
 Likely compressed worker-prompt wording:
 
 ```text
-Before acting on an inferred API, path, model ID, command, config key, hardware capacity, or runtime state, run the cheapest safe check that proves the target/precondition exists and has the expected shape. Code convention, memory, naming patterns, and partial source inspection are clues, not proof. If unchecked, mark it as assumed and reduce blast radius.
+Before action, identify the action-critical claim about current reality. A clue is not proof. Promote the claim with the cheapest safe check that can prove or falsify it. If unchecked, mark it as assumed and reduce, defer, or stop action by blast radius.
 ```
 
 This is the core missing rule.
@@ -356,7 +383,7 @@ A future `hsm-build-v1.md` should not be considered improved unless it beats v0 
 
 ```text
 FM11: safely curious orientation before narrowing
-FM12: evidence promotion before action
+FM12: evidence promotion before action-critical claims become actions
 ```
 
 and does not regress:
