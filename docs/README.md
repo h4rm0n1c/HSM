@@ -35,6 +35,7 @@ Use it to find the current architecture notes, runtime/state design, source boun
 | Coding-agent prompt development | [Candidate prompt structures](coding-agent-system-prompt/candidate-structures.md) | Canonical C1-C42 candidate structure set, including Slice 11 C27-C35 and Slice 12 C36-C42. |
 | Coding-agent prompt development | [Failure-mode catalog](coding-agent-system-prompt/research-failure-mode-catalog.md) | Canonical FM1-FM12 failure-mode catalog, including FM11 Premature Narrowing and FM12 Assumption-to-Action Without Evidence Promotion. |
 | Coding-agent prompt development | [Prompt evaluation checklist](coding-agent-system-prompt/prompt-evaluation-checklist.md) | Canonical evaluation checklist and fixtures through EF12, including EF11.1-EF11.6 and EF12.1-EF12.6. |
+| Coding-agent prompt development | [EF11 / EF12 evaluation plan](coding-agent-system-prompt/evaluation-plan-ef11-ef12.md) | I7 behavioural A/B preparation: how to test v0 and future v1 against EF11, EF12, and critical non-regression fixtures. |
 | Coding-agent prompt development | [Research status](coding-agent-system-prompt/RESEARCH_STATUS.md) | Current status matrix, fixture coverage, remaining work, and risk register. |
 | Coding-agent prompt development | [Investigation imperative](coding-agent-system-prompt/slice-11-investigation-imperative.md) | Slice 11 source research: safely curious coding agents, orientation before narrowing, surface-signal discipline, and C27-C35 derivation. |
 | Coding-agent prompt development | [Evidence-gated action](coding-agent-system-prompt/slice-12-evidence-gated-action.md) | Slice 12 source research: action-critical claims, clue-is-not-proof, evidence promotion before action, C36-C42, and EF12 fixtures. |
@@ -97,6 +98,7 @@ Read:
 - [Candidate prompt structures](coding-agent-system-prompt/candidate-structures.md)
 - [Failure-mode catalog](coding-agent-system-prompt/research-failure-mode-catalog.md)
 - [Prompt evaluation checklist](coding-agent-system-prompt/prompt-evaluation-checklist.md)
+- [EF11 / EF12 evaluation plan](coding-agent-system-prompt/evaluation-plan-ef11-ef12.md)
 - [Research status](coding-agent-system-prompt/RESEARCH_STATUS.md)
 - [Investigation imperative](coding-agent-system-prompt/slice-11-investigation-imperative.md)
 - [Evidence-gated action](coding-agent-system-prompt/slice-12-evidence-gated-action.md)
