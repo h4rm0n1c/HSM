@@ -1,6 +1,6 @@
 # Coding Agent System Prompt Subproject
 
-Status: seed workspace  
+Status: active research workspace  
 Parent project: Human State Machine  
 Related source project: `h4rm0n1c/quantzhai`
 
@@ -45,7 +45,7 @@ Candidate prompt drafting is paused.
 
 Do not produce `candidate-system-prompt-v0.md` until the user explicitly resumes candidate prompt work.
 
-The current OpenCode resynthesis sequence is complete at research level:
+The OpenCode resynthesis sequence is complete at research level:
 
 ```text
 OpenCode source map
@@ -56,7 +56,18 @@ OpenCode source map
   -> final-findings-synthesis.md update
 ```
 
-Remaining work is fixture/TUI/runtime verification, not candidate prompt drafting.
+A later live prompt evaluation reopened the research with Slice 11:
+
+```text
+hsm-build-v0.md
+  -> DeepSeek V4 Flash feedback
+  -> Fable5 distilled prompt comparison
+  -> CL4R1T4S Fable prompt architecture contrast
+  -> slice-11-investigation-imperative.md
+  -> final-findings-synthesis-amendment-2026-06-17.md
+```
+
+Remaining work is candidate-structure, failure-mode, and evaluation-checklist integration before any new prompt draft.
 
 ## Why this belongs here
 
@@ -122,23 +133,29 @@ slice-7-tool-stream-state-feedback.md
 slice-8-compaction-preservation.md
   Slice 8 output: survival-weighted compaction (QuantZhai issue #8 RFC), high-value atom preservation rule, NetTTS prosody weighting transfer. Compaction safety acceptance criteria.
 
+slice-11-investigation-imperative.md
+  Slice 11 correction: safely curious coding agents, territory mapping before narrowing, surface-signal discipline, assumption ledger, and C27-C35 candidate structures.
+
 research-external-prompt-comparison.md
   Slice 9 output: 10-layer comparison of Claude Code, Codex CLI, and Cursor prompts with cross-cutting findings and adoption recommendations.
 
 research-failure-mode-catalog.md
-  Research output: 10 coding-agent failure modes mapped to missing prompt structures, with severity ratings and mitigation strategies per mode (FM1-FM10).
+  Research output: 10 coding-agent failure modes mapped to missing prompt structures, with severity ratings and mitigation strategies per mode (FM1-FM10). Slice 11 adds FM11 pending integration.
 
 research-missing-structures.md
   Research output: cross-reference of 27 vendor prompt structures (M1-M27) against our C1-C26 candidate set, with gap analysis and adoption recommendations by prompt layer.
 
 candidate-structures.md
-  Slice 10 consolidation: all C1-C26 and M1-M27 merged, deduplicated, classified (adopt/test/defer/reject), with token cost estimates, test plans, and interaction conflict warnings.
+  Slice 10 consolidation: all C1-C26 and M1-M27 merged, deduplicated, classified (adopt/test/defer/reject), with token cost estimates, test plans, and interaction conflict warnings. Slice 11 adds C27-C35 pending integration.
 
 prompt-evaluation-checklist.md
-  Slice 10 eval framework: 14-section checklist covering all prompt layers, failure mode coverage matrix, token budget, and eval task ideas.
+  Slice 10 eval framework: 14-section checklist covering all prompt layers, failure mode coverage matrix, token budget, and eval task ideas. Slice 11 adds EF11.1-EF11.6 pending integration.
 
 final-findings-synthesis.md
   Final consolidated synthesis, now updated with the repaired OpenCode prompt-system-family findings.
+
+final-findings-synthesis-amendment-2026-06-17.md
+  Amendment to final synthesis: investigation imperative, safely curious execution, and prompt architecture correction after `hsm-build-v0.md` evaluation.
 
 RESEARCH_STATUS.md
   One-page status matrix, artifact list, next actions, and risk register.
@@ -230,9 +247,11 @@ It should offer useful task structures:
 
 ```text
 executor identity
+  -> active investigator stance
   -> tool contract
   -> repo authority rules
   -> task-framing scaffold
+  -> orientation / territory-mapping scaffold
   -> investigation scaffold
   -> edit-boundary scaffold
   -> validation scaffold
@@ -253,12 +272,15 @@ If a structure cannot be tested directly, it should at least produce observable 
 - better escalation behaviour
 - better preservation of user changes
 - more useful final summaries
+- more reliable territory mapping before narrowing
+- fewer wrong-path edits
+- better surfacing of relevant adjacent signal
 
 ## Immediate working rule
 
 Build from evidence, not prompt-fashion.
 
-Use the QuantZhai packaged prompt as the current local baseline. Compare it against Claude Code, Codex Max, ChatGPT prompt collections, Qwen-specific prompting notes, academic prompt/context-engineering papers, internal HSM/QuantZhai/NetTTS references, observed local QuantZhai behaviour, and now the repaired OpenCode prompt-system-family synthesis.
+Use the QuantZhai packaged prompt as the current local baseline. Compare it against Claude Code, Codex Max, ChatGPT prompt collections, Qwen-specific prompting notes, academic prompt/context-engineering papers, internal HSM/QuantZhai/NetTTS references, observed local QuantZhai behaviour, the repaired OpenCode prompt-system-family synthesis, the Fable5 distilled operating instructions, and the CL4R1T4S Fable prompt dump as an unverified architecture contrast.
 
 Do not blindly merge all prompt sources. Extract useful structures, test them, and keep only what improves coding-agent behaviour on software-development tasks.
 
