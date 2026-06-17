@@ -113,23 +113,23 @@ examples are fixtures, not prompt wording
 
 ### Slice I2 — Candidate-structures canonical merge
 
-**Status**: next.
+**Status**: done.
 
 **Goal**: Integrate Slice 12 and the smell-audit abstraction pass into `candidate-structures.md`.
 
-**Files to update**:
+**Files updated**:
 
 - `candidate-structures.md`
 
-**Required changes**:
+**Required changes completed**:
 
 - Status/source updated through Slice 12 and I1A.
-- Add C36-C42 using abstract wording.
-- Rewrite C28 orientation principle-first.
-- Rewrite C30 established-way discovery principle-first.
-- Rewrite atom-preservation wording principle-first.
-- Keep examples as non-exhaustive anchors.
-- Do not draft `hsm-build-v1.md`.
+- Added C36-C42 using abstract wording.
+- Rewrote C28 orientation principle-first.
+- Rewrote C30 established-way discovery principle-first.
+- Rewrote atom-preservation wording principle-first.
+- Kept examples as non-exhaustive anchors.
+- Did not draft `hsm-build-v1.md`.
 
 **Done when**:
 
@@ -138,7 +138,7 @@ examples are fixtures, not prompt wording
 
 ### Slice I3 — Failure-mode catalog canonical merge
 
-**Status**: pending.
+**Status**: next.
 
 **Goal**: Integrate FM12 and update relationships between FM3, FM7, FM11, and FM12.
 
@@ -266,10 +266,11 @@ We are at:
 ```text
 I0 complete
 I1 complete
-I2 next
+I2 complete
+I3 next
 ```
 
-Do not skip directly to I3-I8.
+Do not skip directly to I4-I8.
 
 ---
 
