@@ -16,59 +16,66 @@ Slice 12 adds the missing final gate:
 ```text
 curiosity produces clues
 clues are not facts
-facts require the cheapest safe proof the next action depends on
+facts require evidence before action
 ```
 
-The worker must not convert plausible code shape, REST convention, remembered path, model filename, config-looking file, or partial source inspection into operational truth without an evidence-promotion step.
+The abstraction is not `API/path/model/config/hardware/etc.`. Those are examples. The abstraction is:
+
+```text
+action depends on a claim about current reality
+  -> identify that claim
+  -> prove or falsify it with the cheapest safe check
+  -> only then act at full blast radius
+```
 
 ---
 
 ## New Candidate Structures
 
-### C36: Evidence promotion gate (adopt)
+### C36: Action-critical claim gate (adopt)
 
 ```text
-Do not promote an inferred API, path, model ID, command, config key, hardware capacity, or runtime state into fact until it has been verified by the cheapest safe source that the next action depends on: docs, live query, list command, config read, model list, hardware check, or exact source call site.
+Before acting, identify the action-critical world-state claim: the claim about current reality that must be true for the action to be correct. Do not promote that claim from clue to fact until it has been verified by the cheapest safe evidence source the action depends on.
 ```
 
 **Source**: Slice 12 v0 failure analysis  
-**Token cost**: ~55 before compression  
-**Test**: EF12.1 inferred API endpoint trap; EF12.2 stale model ID trap.
+**Token cost**: ~45 before compression  
+**Test**: EF12 fixtures.
 
-### C37: Source-code-is-not-runtime rule (adopt)
+### C37: Clue-is-not-proof rule (adopt)
 
 ```text
-Source inspection can reveal intent and call sites, but it is not the same as live runtime truth or external API documentation. When the action depends on endpoint shape, method, response, model availability, hardware state, or config resolution, verify that specific reality before acting.
+Treat conventions, names, nearby source, memory, user suspicion, previous state, and plausible patterns as clues. A clue can guide investigation; it cannot justify action until the action-critical claim is checked.
 ```
 
 **Source**: Slice 12  
-**Token cost**: ~55, merge with C36  
-**Test**: EF12.1 inferred API endpoint trap.
+**Token cost**: ~40, merge with C36  
+**Test**: EF12.1 inferred API endpoint trap; EF12.6 confident wrong report trap.
 
-### C38: Cheap check before expensive attempt (adopt)
+### C38: Cheapest falsifier preflight (adopt)
 
 ```text
-Before expensive or failure-prone actions, run the cheap preflight: list paths before writing, check model inventory before selecting a backend ID, check VRAM/RAM before loading, read config before editing, and probe endpoint/method before relying on it.
+Before a costly, risky, or failure-prone action, run the cheapest safe check that would falsify the action-critical claim. The check must target the claim the action depends on, not random reassurance.
 ```
 
 **Source**: Slice 12  
-**Token cost**: ~45  
+**Token cost**: ~35  
 **Test**: EF12.2 stale model ID trap; EF12.3 hardware preflight trap; EF12.4 config-before-edit trap.
 
 ### C39: Feedback integration checkpoint (test)
 
 ```text
-When the user corrects a repeated behaviour pattern, restate the operational rule that changes the next action, then apply that rule before taking the next tool/action step.
+When the user corrects a repeated behaviour pattern, convert the correction into the operating rule for the next action, then apply that rule before taking the next tool/action step.
 ```
 
 **Source**: Slice 12  
-**Token cost**: ~40 if included; can be process-level to avoid user-facing ritual  
+**Token cost**: ~35 if included; can be process-level to avoid user-facing ritual  
 **Test**: EF12.5 repeated-correction trap.
 
 ### C40: Action precondition line (adopt lightly)
 
 ```text
-For non-trivial actions, know the precondition you are relying on and how it was checked. If it was not checked, mark it as assumption and reduce blast radius.
+For non-trivial actions, know the action-critical claim you are relying on and how it was checked. If it was not checked, mark it as assumed and reduce blast radius.
 ```
 
 **Source**: Slice 12  
@@ -78,7 +85,7 @@ For non-trivial actions, know the precondition you are relying on and how it was
 ### C41: Assumption budget escalation (process / harness)
 
 ```text
-If two consecutive actions fail because of wrong assumptions, pause mutation and switch to read-only diagnosis until the action target and preconditions are re-grounded.
+If two consecutive actions fail because unverified action-critical claims were false, pause mutation and switch to read-only diagnosis until the relevant claims are re-grounded.
 ```
 
 **Source**: Slice 12  
@@ -105,9 +112,9 @@ Merge them into existing structures:
 
 | Existing structure | Slice 12 merge |
 |---|---|
-| C29 assumption ledger | C36 evidence promotion gate + C40 action precondition line |
-| C3/C8 evidence-before-edit | C37 source-code-is-not-runtime distinction |
-| C28 orientation pass | C38 cheap preflight checks |
+| C29 assumption ledger | C36 action-critical claim gate + C40 action precondition line |
+| C3/C8 evidence-before-edit | C37 clue-is-not-proof distinction |
+| C28 orientation pass | C38 cheapest falsifier preflight |
 | C6 adversarial check | C40 checked preconditions |
 | C11 final report | C42 observed/inferred/assumed/unchecked labelling |
 | runtime/process rules | C41 repeated wrong-assumption pause |
@@ -115,7 +122,7 @@ Merge them into existing structures:
 Likely compressed prompt wording:
 
 ```text
-Before acting on an inferred API, path, model ID, command, config key, hardware capacity, or runtime state, run the cheapest safe check that proves the target/precondition exists and has the expected shape. Code convention, memory, naming patterns, and partial source inspection are clues, not proof. If unchecked, mark it as assumed and reduce blast radius.
+Before action, identify the action-critical claim about current reality. A clue is not proof. Promote the claim with the cheapest safe check that can prove or falsify it. If unchecked, mark it as assumed and reduce, defer, or stop action by blast radius.
 ```
 
 ---
@@ -124,10 +131,10 @@ Before acting on an inferred API, path, model ID, command, config key, hardware 
 
 | # | Rule | Cost | Priority |
 |---|---|---:|---|
-| C36 | Evidence promotion gate | ~55, compress with C29 | critical |
-| C37 | Source-code-is-not-runtime | ~55, compress with C36/C3 | high |
-| C38 | Cheap preflight before expensive action | ~45 | critical for model/API/config work |
-| C39 | Feedback integration checkpoint | ~40 or process | test |
+| C36 | Action-critical claim gate | ~45, compress with C29 | critical |
+| C37 | Clue-is-not-proof | ~40, compress with C36/C3 | high |
+| C38 | Cheapest falsifier preflight | ~35 | critical |
+| C39 | Feedback integration checkpoint | ~35 or process | test |
 | C40 | Action precondition line | ~30, merge with C6 | high |
 | C41 | Wrong-assumption pause | process/runtime | medium |
 | C42 | Confidence source labelling | ~35, merge with C11 | high |
@@ -142,8 +149,9 @@ Do not compress away:
 
 ```text
 orientation before narrowing
+action-critical claim gate
+clue-is-not-proof rule
 assumption check
-evidence promotion before action
 trusted-input boundary
 existing-change preservation
 git/destructive-action safety
