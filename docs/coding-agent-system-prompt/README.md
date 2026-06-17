@@ -59,14 +59,20 @@ slices 0-10
   -> canonical updates to final synthesis, candidate structures, failure catalog, eval checklist, and status
   -> Slice 12 evidence-gated action correction
   -> project smell audit / abstraction pass requirement
+  -> canonical integration pass plan
 ```
 
-Remaining work is now three-stage:
+Remaining work is now explicitly slice-by-slice:
 
 ```text
-canonical abstraction pass over list-shaped rules
-  -> canonically merge Slice 12 into the large consolidated files
-  -> run behavioural A/B evaluation before any measured claim about a new prompt draft
+I1 research-layer consolidation
+  -> I2 candidate-structures canonical merge
+  -> I3 failure-mode catalog canonical merge
+  -> I4 evaluation checklist canonical merge
+  -> I5 final synthesis rewrite
+  -> I6 status / index update
+  -> I7 evaluation preparation
+  -> I8 candidate prompt drafting only if explicitly resumed
 ```
 
 ## Why this belongs here
@@ -98,6 +104,9 @@ AGENTS.md
 
 research-plan.md
   Research protocol: sliced research tasks with verification, correction, and adversarial review gates.
+
+canonical-integration-pass-2026-06-17.md
+  Current slice-by-slice integration plan. Start here before merging Slice 12 or smell-audit findings into canonical files.
 
 workflow-patterns.md
   Captured working structures from successful QuantZhai and coding-agent development loops.
