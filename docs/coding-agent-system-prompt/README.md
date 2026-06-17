@@ -58,12 +58,14 @@ slices 0-10
   -> Slice 11 investigation imperative
   -> canonical updates to final synthesis, candidate structures, failure catalog, eval checklist, and status
   -> Slice 12 evidence-gated action correction
+  -> project smell audit / abstraction pass requirement
 ```
 
-Remaining work is now two-stage:
+Remaining work is now three-stage:
 
 ```text
-canonically merge Slice 12 into the large consolidated files
+canonical abstraction pass over list-shaped rules
+  -> canonically merge Slice 12 into the large consolidated files
   -> run behavioural A/B evaluation before any measured claim about a new prompt draft
 ```
 
@@ -137,7 +139,10 @@ slice-11-investigation-imperative.md
   Slice 11 research correction: safely curious coding agents, territory mapping before narrowing, surface-signal discipline, assumption ledger, and C27-C35 candidate structures.
 
 slice-12-evidence-gated-action.md
-  Slice 12 research correction: evidence promotion before action, source-code-is-not-runtime rule, cheap preflight checks, FM12, C36-C42, and EF12 fixtures.
+  Slice 12 research correction: evidence promotion before action, action-critical world-state claims, clue-is-not-proof rule, FM12, C36-C42, and EF12 fixtures.
+
+project-smell-audit-2026-06-17.md
+  Audit of prompt-research bad smells discovered from v0 output/testing: category-list-as-rule, example leakage, fixture leakage, sidecar drift, prompt/runtime boundary blur, and required abstraction pass before v1.
 
 candidate-structures.md
   Canonical candidate structures C1-C35, including Slice 11 C27-C35. Must be merged with Slice 12 before any serious v1 prompt draft.
