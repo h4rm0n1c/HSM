@@ -30,12 +30,14 @@ Use it to find the current architecture notes, runtime/state design, source boun
 | Harness lessons | [Active state harness lessons](active-state-harness-lessons-2026-05-02.md) | Lessons from hosted AI runtime state injection and what HSM should make explicit, inspectable, and update-gated. |
 | Research seed | [Human analogy and memory research seed](human-analogy-and-memory-research-seed-2026-05-02.md) | Seed notes for human-human state maintenance, trust, memory, exhaustion, hyperfocus, and social integrity. |
 | Coding-agent prompt development | [Coding agent system prompt subproject](coding-agent-system-prompt/README.md) | Separate workspace for building a coding-agent system prompt from QuantZhai prior art, workflow observations, and external prompt references. |
-| Coding-agent prompt development | [Final coding-agent prompt synthesis](coding-agent-system-prompt/final-findings-synthesis.md) | Canonical synthesis through Slice 11: compact worker inside larger system; safely curious execution; OpenCode/Fable integrations. |
-| Coding-agent prompt development | [Candidate prompt structures](coding-agent-system-prompt/candidate-structures.md) | Canonical C1-C35 candidate structure set, including Slice 11 C27-C35. |
-| Coding-agent prompt development | [Failure-mode catalog](coding-agent-system-prompt/research-failure-mode-catalog.md) | Canonical FM1-FM11 failure-mode catalog, including FM11 Premature Narrowing / Curiosity Collapse. |
-| Coding-agent prompt development | [Prompt evaluation checklist](coding-agent-system-prompt/prompt-evaluation-checklist.md) | Canonical evaluation checklist and fixtures, including EF11.1-EF11.6. |
-| Coding-agent prompt development | [Research status](coding-agent-system-prompt/RESEARCH_STATUS.md) | Current status matrix, fixture coverage, remaining work, and risk register through Slice 11. |
+| Coding-agent prompt development | [Canonical integration pass](coding-agent-system-prompt/canonical-integration-pass-2026-06-17.md) | Slice-by-slice controller for integrating Slice 12 and smell-audit findings without giant rewrites. |
+| Coding-agent prompt development | [Final coding-agent prompt synthesis](coding-agent-system-prompt/final-findings-synthesis.md) | Canonical synthesis through Slice 12: compact worker inside larger system; safely curious orientation plus evidence-gated action. |
+| Coding-agent prompt development | [Candidate prompt structures](coding-agent-system-prompt/candidate-structures.md) | Canonical C1-C42 candidate structure set, including Slice 11 C27-C35 and Slice 12 C36-C42. |
+| Coding-agent prompt development | [Failure-mode catalog](coding-agent-system-prompt/research-failure-mode-catalog.md) | Canonical FM1-FM12 failure-mode catalog, including FM11 Premature Narrowing and FM12 Assumption-to-Action Without Evidence Promotion. |
+| Coding-agent prompt development | [Prompt evaluation checklist](coding-agent-system-prompt/prompt-evaluation-checklist.md) | Canonical evaluation checklist and fixtures through EF12, including EF11.1-EF11.6 and EF12.1-EF12.6. |
+| Coding-agent prompt development | [Research status](coding-agent-system-prompt/RESEARCH_STATUS.md) | Current status matrix, fixture coverage, remaining work, and risk register. |
 | Coding-agent prompt development | [Investigation imperative](coding-agent-system-prompt/slice-11-investigation-imperative.md) | Slice 11 source research: safely curious coding agents, orientation before narrowing, surface-signal discipline, and C27-C35 derivation. |
+| Coding-agent prompt development | [Evidence-gated action](coding-agent-system-prompt/slice-12-evidence-gated-action.md) | Slice 12 source research: action-critical claims, clue-is-not-proof, evidence promotion before action, C36-C42, and EF12 fixtures. |
 
 ## Task-oriented entry points
 
@@ -90,12 +92,14 @@ Read:
 - [Research plan](coding-agent-system-prompt/research-plan.md)
 - [Workflow patterns](coding-agent-system-prompt/workflow-patterns.md)
 - [QuantZhai prompt reference snapshot](coding-agent-system-prompt/reference-quantzhai-codex-core-qwenified.md)
+- [Canonical integration pass](coding-agent-system-prompt/canonical-integration-pass-2026-06-17.md)
 - [Final coding-agent prompt synthesis](coding-agent-system-prompt/final-findings-synthesis.md)
 - [Candidate prompt structures](coding-agent-system-prompt/candidate-structures.md)
 - [Failure-mode catalog](coding-agent-system-prompt/research-failure-mode-catalog.md)
 - [Prompt evaluation checklist](coding-agent-system-prompt/prompt-evaluation-checklist.md)
 - [Research status](coding-agent-system-prompt/RESEARCH_STATUS.md)
 - [Investigation imperative](coding-agent-system-prompt/slice-11-investigation-imperative.md)
+- [Evidence-gated action](coding-agent-system-prompt/slice-12-evidence-gated-action.md)
 - [OpenCode prompt synthesis](coding-agent-system-prompt/final-opencode-findings-synthesis.md)
 
 Focus on:
@@ -107,6 +111,8 @@ Focus on:
 - slicing research into research, verification, adversarial review, correction, and conclusion phases
 - producing candidate prompt structures that can be tested locally
 - preserving active investigation without letting it become broad unsafe autonomy
+- treating clues as leads, not proof, before action
+- turning repeated user/runtime correction into changed next-action behaviour
 
 ### I want to work on quiescent/anchor/trigger state
 
@@ -188,33 +194,10 @@ AGENTS.md
 docs/README.md
 docs/active-state-harness-lessons-2026-05-02.md
 docs/anti-agreement-harness.md
-docs/coding-agent-system-prompt/README.md
-docs/coding-agent-system-prompt/AGENTS.md
-docs/coding-agent-system-prompt/reference-quantzhai-codex-core-qwenified.md
-docs/coding-agent-system-prompt/research-plan.md
-docs/coding-agent-system-prompt/internal-project-references.md
-docs/coding-agent-system-prompt/research-references.md
-docs/coding-agent-system-prompt/slice-1-arbitration-loop.md
-docs/coding-agent-system-prompt/slice-2-anti-agreement-self-critique.md
-docs/coding-agent-system-prompt/slice-3-context-position-middle-loss.md
-docs/coding-agent-system-prompt/slice-11-investigation-imperative.md
-docs/coding-agent-system-prompt/candidate-structures.md
-docs/coding-agent-system-prompt/research-failure-mode-catalog.md
-docs/coding-agent-system-prompt/prompt-evaluation-checklist.md
-docs/coding-agent-system-prompt/final-findings-synthesis.md
-docs/coding-agent-system-prompt/RESEARCH_STATUS.md
-docs/coding-agent-system-prompt/final-opencode-findings-synthesis.md
-docs/coding-agent-system-prompt/workflow-patterns.md
+docs/coding-agent-system-prompt/**
 docs/hsm-master-report-2026-05-01.md
-docs/human-analogy-and-memory-research-seed-2026-05-02.md
 docs/identity-as-data-contract.md
 docs/quiescent-anchor-and-affective-cycle.md
 docs/runtime-and-integrity.md
 docs/source-map-and-roadmap.md
 ```
-
-## Maintenance rule
-
-When adding a Markdown document, add it to this index in the same change.
-
-A document without an index link is not documentation. It is archaeology.
