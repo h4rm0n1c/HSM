@@ -1,12 +1,12 @@
 # Research Status: Coding Agent System Prompt Subproject
 
-Summary: slices 0-11 are canonically integrated. Slice 12 has now been added as a new correction after further `hsm-build-v0.md` behavioural evidence showed a distinct failure: the worker promotes plausible inferences into action without a cheap reality check. Candidate prompt drafting remains paused until the user explicitly resumes it, but the research corpus now has the missing evidence-promotion rule and EF12 fixture suite captured.
+Summary: slices 0-11 are canonically integrated. Slice 12 has been added as a correction after `hsm-build-v0.md` behavioural evidence showed a distinct failure: the worker promotes plausible inferences into action without checking the action-critical world-state claim. A project smell audit now records the broader lesson: list-shaped rules and examples-too-close-to-prompt-text must be abstracted before `hsm-build-v1.md`. Candidate prompt drafting remains paused until the user explicitly resumes it.
 
 ---
 
 ## Status Matrix
 
-| Slice | Status | Key Artifacts | Next Action |
+| Slice / Pass | Status | Key Artifacts | Next Action |
 |---|---|---|---|
 | 0 | Complete | `internal-project-references.md`, `research-references.md` | None |
 | 1 | Complete | `slice-1-arbitration-loop.md`, C1-C5 | None |
@@ -20,7 +20,8 @@ Summary: slices 0-11 are canonically integrated. Slice 12 has now been added as 
 | 9 | Complete | `research-external-prompt-comparison.md` | None |
 | 10 | Complete | `candidate-structures.md`, `prompt-evaluation-checklist.md`, `final-findings-synthesis.md` | Use canonical versions; no extension-only dependency |
 | 11 | Canonically integrated / needs behavioural eval | `slice-11-investigation-imperative.md`, updated `candidate-structures.md`, updated `research-failure-mode-catalog.md`, updated `prompt-evaluation-checklist.md`, updated `final-findings-synthesis.md` | Run EF11.1-EF11.6 A/B against v0/v1 |
-| 12 | Added as correction / needs canonical merge + behavioural eval | `slice-12-evidence-gated-action.md` | Merge C36-C42/FM12/EF12 into canonical files before drafting v1; run EF12.1-EF12.6 A/B |
+| 12 | Added as correction / needs canonical merge + behavioural eval | `slice-12-evidence-gated-action.md` | Merge C36-C42/FM12/EF12 into canonical files using abstract action-critical-claim wording; run EF12.1-EF12.6 A/B |
+| smell audit | Added / needs cleanup pass | `project-smell-audit-2026-06-17.md` | Run abstraction pass over candidate structures, final synthesis, eval checklist, and stale sidecars before v1 |
 
 ---
 
@@ -30,7 +31,7 @@ Candidate prompt drafting is paused.
 
 Do not produce `candidate-system-prompt-v0.md`, `hsm-build-v1.md`, or any equivalent replacement prompt until the user explicitly resumes candidate prompt work.
 
-Any future prompt build must use the canonical Slice 11-integrated files **plus** the Slice 12 correction:
+Any future prompt build must use the canonical Slice 11-integrated files, the Slice 12 correction, and the project smell audit:
 
 ```text
 candidate-structures.md
@@ -38,9 +39,10 @@ research-failure-mode-catalog.md
 prompt-evaluation-checklist.md
 final-findings-synthesis.md
 slice-12-evidence-gated-action.md
+project-smell-audit-2026-06-17.md
 ```
 
-Slice 12 is not yet fully canonically merged into the large consolidated files. It is an active correction document that must be merged before a serious `hsm-build-v1.md` draft.
+Slice 12 is not yet fully canonically merged into the large consolidated files. The abstraction pass is also not complete. Both must happen before a serious `hsm-build-v1.md` draft.
 
 The OpenCode resynthesis sequence is complete at research level:
 
@@ -68,12 +70,15 @@ hsm-build-v0.md evaluation                   DONE
   -> A/B behavioural fixtures                PENDING
 ```
 
-The Slice 12 correction sequence is active:
+The Slice 12 / smell-audit sequence is active:
 
 ```text
 additional v0 failure evidence               DONE
   -> assumption-to-action diagnosis           DONE
   -> slice-12-evidence-gated-action.md        DONE
+  -> abstract wording repair                  DONE
+  -> project-smell-audit-2026-06-17.md        DONE
+  -> canonical abstraction pass               PENDING
   -> canonical candidate/failure/eval merge   PENDING
   -> EF12 behavioural fixtures                PENDING
   -> v0/v1 A/B with EF11 + EF12               PENDING
@@ -89,11 +94,12 @@ additional v0 failure evidence               DONE
 | `slice-7-tool-stream-state-feedback.md` | Slice 7: parallel-call guidance, tool result persistence, runtime feedback acceptance, environment context injection, git state injection |
 | `slice-8-compaction-preservation.md` | Slice 8: survival-weighted compaction (QuantZhai #8), high-value atom preservation rule, NetTTS prosody weighting transfer, compaction safety acceptance criteria |
 | `slice-11-investigation-imperative.md` | Slice 11 correction: safely curious execution, orientation before narrowing, assumption ledger, surface-signal discipline, C27-C35, EF11 fixtures |
-| `slice-12-evidence-gated-action.md` | Slice 12 correction: evidence-promotion gate before action, source-code-is-not-runtime rule, cheap preflight checks, FM12, C36-C42, EF12 fixtures |
-| `candidate-structures.md` | Canonical C1-C35 candidate structures, including Slice 11; must be updated with Slice 12 before v1 drafting |
+| `slice-12-evidence-gated-action.md` | Slice 12 correction: action-critical world-state claims, clue-is-not-proof rule, evidence-promotion gate before action, FM12, C36-C42, EF12 fixtures |
+| `project-smell-audit-2026-06-17.md` | Project-level smell audit: category-list-as-rule, example leakage, fixture leakage, sidecar drift, prompt/runtime boundary blur, required abstraction pass |
+| `candidate-structures.md` | Canonical C1-C35 candidate structures, including Slice 11; must be updated with Slice 12 and abstraction-pass corrections before v1 drafting |
 | `research-failure-mode-catalog.md` | Canonical FM1-FM11 failure-mode catalog; must be updated with FM12 before v1 drafting |
-| `prompt-evaluation-checklist.md` | Canonical checklist and fixtures, including EF11.1-EF11.6; must be updated with EF12 before v1 drafting |
-| `final-findings-synthesis.md` | Canonical final synthesis through Slice 11; must be amended with Slice 12 before v1 drafting |
+| `prompt-evaluation-checklist.md` | Canonical checklist and fixtures, including EF11.1-EF11.6; must be updated with EF12 and fixture-vs-rule warning before v1 drafting |
+| `final-findings-synthesis.md` | Canonical final synthesis through Slice 11; must be amended with Slice 12 and abstraction-pass notes before v1 drafting |
 | `candidate-structures-slice-11-extension.md` | Provenance extension used before canonical integration; retained for audit trail |
 | `research-failure-mode-catalog-slice-11-extension.md` | Provenance extension for FM11; retained for audit trail |
 | `prompt-evaluation-checklist-slice-11-extension.md` | Provenance extension for EF11 fixtures; retained for audit trail |
@@ -153,19 +159,22 @@ opencode-compaction-atoms
 
 ## Remaining Work
 
-1. **Canonical Slice 12 merge** — Merge FM12, C36-C42, and EF12.1-EF12.6 into the consolidated candidate structures, failure catalog, evaluation checklist, and final synthesis.
-2. **A/B prompt evaluation** — Run EF11.1-EF11.6 and EF12.1-EF12.6 against `hsm-build-v0.md` and the future revised prompt.
-3. **Candidate prompt text** — Still paused. Draft only if the user explicitly resumes candidate prompt work.
-4. **OpenCode fixture extensions** — Add OpenCode-specific fixture ideas if behavioural comparison is needed.
-5. **TUI source audit** — Inspect plan-mode toggle, visible state, rollback, patch/diff rendering, todo UI, and permission common-node behaviour if QuantZhai CLI design work resumes.
+1. **Canonical abstraction pass** — Apply `project-smell-audit-2026-06-17.md`: rewrite list-shaped rules principle-first and keep examples fixture-only/non-exhaustive.
+2. **Canonical Slice 12 merge** — Merge FM12, C36-C42, and EF12.1-EF12.6 into the consolidated candidate structures, failure catalog, evaluation checklist, and final synthesis using abstract wording.
+3. **A/B prompt evaluation** — Run EF11.1-EF11.6 and EF12.1-EF12.6 against `hsm-build-v0.md` and the future revised prompt.
+4. **Candidate prompt text** — Still paused. Draft only if the user explicitly resumes candidate prompt work.
+5. **OpenCode fixture extensions** — Add OpenCode-specific fixture ideas if behavioural comparison is needed.
+6. **TUI source audit** — Inspect plan-mode toggle, visible state, rollback, patch/diff rendering, todo UI, and permission common-node behaviour if QuantZhai CLI design work resumes.
 
 ---
 
 ## Quick Wins
 
+- Update stale Slice 12 sidecars so old list-shaped wording cannot be copied back.
+- Rewrite C28 orientation, C30 established-way discovery, and compaction atom preservation as principle-first before v1.
+- Add a fixture/checklist warning: examples and fixture nouns are not baseline prompt wording.
 - Canonically merge Slice 12 before drafting any v1 prompt.
-- Run EF12.1 and EF12.5 manually against `hsm-build-v0.md`; these directly target the new observed DeepSeek failures.
-- Add one compact evidence-promotion sentence to any future v1 draft rather than a long Slice 12 block.
+- Run EF12.1 and EF12.5 manually against `hsm-build-v0.md`; these directly target the observed DeepSeek failures.
 - Keep EF11 and EF12 separate in evaluation: curiosity/orientation and evidence-promotion are different failure classes.
 
 ---
@@ -174,8 +183,10 @@ opencode-compaction-atoms
 
 - **Slice 11 not behaviourally measured yet**: C27-C35 and EF11.1-EF11.6 are canonical but still need A/B runs.
 - **Slice 12 not canonically merged yet**: C36-C42/FM12/EF12 currently live in `slice-12-evidence-gated-action.md`; consolidated files still need update.
+- **Bad-smell abstraction pass not complete**: list-shaped rules can still leak into v1 if copied from candidate structures, final synthesis, or old sidecars.
+- **Examples can become rules**: fixtures and explanatory examples must stay non-exhaustive and must not be pasted into compact prompt wording.
 - **Curiosity can become research theatre**: Blast-radius scaling is mandatory. Low-blast tasks should not trigger broad exploration.
-- **Verification can become performative**: Slice 12 requires the cheapest check that proves the next action's precondition, not random busywork.
+- **Verification can become performative**: Slice 12 requires the cheapest check that proves/falsifies the action-critical claim, not random busywork.
 - **Prompt bloat risk increased**: Slice 11 and Slice 12 must be semantically merged into existing sections, not appended wholesale.
 - **Safety must not be weakened**: The correction is ordering, evidence, and action gating, not removal. Safety remains strict around mutation, privilege, git, and irreversible actions.
 - **Runtime boundary still partially unaudited**: plugin, permission, command, and TUI implementation details remain open if precise OpenCode behaviour is required.
