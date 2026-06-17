@@ -1,6 +1,6 @@
 # Coding Agent System Prompt Subproject
 
-Status: active research workspace; canonical files merged through Slice 12, with evaluation preparation still pending  
+Status: active research workspace; canonical files merged through Slice 12 and evaluation preparation complete  
 Parent project: Human State Machine  
 Related source project: `h4rm0n1c/quantzhai`
 
@@ -44,7 +44,7 @@ Candidate prompt drafting is paused.
 
 Do not produce `candidate-system-prompt-v0.md`, `hsm-build-v1.md`, or any replacement prompt until the user explicitly resumes candidate prompt work.
 
-The research corpus is now canonically merged through Slice 12 in the main files:
+The research corpus is now canonically merged through Slice 12 in the main files, and I7 evaluation preparation exists:
 
 ```text
 slices 0-10
@@ -61,14 +61,14 @@ slices 0-10
   -> I3 failure catalog merge
   -> I4 evaluation checklist merge
   -> I5 final synthesis rewrite
+  -> I6 status / index update
+  -> I7 evaluation preparation
 ```
 
-Remaining work is slice-by-slice:
+Remaining gated work:
 
 ```text
-I6 status / index update              IN PROGRESS / THIS README
-  -> I7 evaluation preparation         NEXT
-  -> I8 candidate prompt drafting      GATED: only if explicitly resumed
+I8 candidate prompt drafting only if explicitly resumed
 ```
 
 ## Why this belongs here
@@ -102,7 +102,7 @@ research-plan.md
   Research protocol: sliced research tasks with verification, correction, and adversarial review gates.
 
 canonical-integration-pass-2026-06-17.md
-  Slice-by-slice integration plan. Current canonical merge position is I6 status/index update, then I7 evaluation preparation.
+  Slice-by-slice integration plan. Current canonical merge position is I7 complete; I8 candidate drafting remains gated.
 
 workflow-patterns.md
   Captured working structures from successful QuantZhai and coding-agent development loops.
@@ -146,6 +146,9 @@ research-failure-mode-catalog.md
 
 prompt-evaluation-checklist.md
   Canonical evaluation checklist through EF12, including EF11.1-EF11.6, EF12.1-EF12.6, critical non-regression checks, and v0/v1 pass criteria.
+
+evaluation-plan-ef11-ef12.md
+  I7 evaluation preparation plan: how to run v0/v1 A/B against EF11, EF12, and critical non-regression fixtures. No prompt draft.
 
 final-findings-synthesis.md
   Canonical final synthesis through Slice 12: compact worker inside larger system; safely curious orientation plus evidence-gated action; practical implications for future v1 drafting.
