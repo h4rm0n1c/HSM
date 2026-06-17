@@ -1,6 +1,6 @@
 # Research Status: Coding Agent System Prompt Subproject
 
-Summary: slices 0-11 are canonically integrated. Slice 12 and the project smell audit are being integrated one layer at a time. I4 is now complete: `prompt-evaluation-checklist.md` is canonical through EF12, with C36-C42 checks, FM12 coverage, invariant-testing warnings, EF12.1-EF12.6 fixtures, and updated v0/v1 A/B criteria. Candidate prompt drafting remains paused until the user explicitly resumes it.
+Summary: slices 0-12 are canonically integrated across candidate structures, failure modes, evaluation checklist, and final synthesis. I6 is now complete: `RESEARCH_STATUS.md`, `docs/coding-agent-system-prompt/README.md`, and `docs/README.md` point to the Slice 12 state and remove stale `through Slice 11` entry points. Candidate prompt drafting remains paused until the user explicitly resumes it.
 
 ---
 
@@ -17,9 +17,9 @@ I1B research sidecar consolidation  DONE
 I2 candidate-structures merge       DONE
 I3 failure-mode catalog merge       DONE
 I4 evaluation checklist merge       DONE
-I5 final synthesis rewrite          NEXT
-I6 status / index update            PENDING
-I7 evaluation preparation           PENDING
+I5 final synthesis rewrite          DONE
+I6 status / index update            DONE
+I7 evaluation preparation           NEXT
 I8 candidate prompt drafting        GATED: only if explicitly resumed
 ```
 
@@ -39,12 +39,12 @@ one slice
 
 | Slice / Pass | Status | Key Artifacts | Next Action |
 |---|---|---|---|
-| 0-10 | Complete | earlier slice files, `final-findings-synthesis.md` | None |
-| 11 | Canonically integrated / needs behavioural eval | `slice-11-investigation-imperative.md`, canonical C27-C35/FM11/EF11 material | Run EF11 A/B after integration pass |
-| 12 | Candidate structures, failure catalog, and evaluation checklist merged / final synthesis pending | `slice-12-evidence-gated-action.md`, updated `candidate-structures.md`, updated `research-failure-mode-catalog.md`, updated `prompt-evaluation-checklist.md` | I5 final synthesis rewrite |
-| smell audit | Applied through evaluation checklist / synthesis + index pending | `project-smell-audit-2026-06-17.md` | I5 abstraction cleanup |
-| arXiv backing | I1A complete | `i1a-arxiv-backing-orientation-evidence-gating.md` | Use as evidence input for I5 |
-| integration pass | I4 complete | `canonical-integration-pass-2026-06-17.md`, updated checklist | Continue to I5 only |
+| 0-10 | Complete | earlier slice files | None |
+| 11 | Canonically integrated / needs behavioural eval | `slice-11-investigation-imperative.md`, canonical C27-C35/FM11/EF11 material | Run EF11 A/B during I7 |
+| 12 | Canonically integrated / needs behavioural eval | `slice-12-evidence-gated-action.md`, canonical C36-C42/FM12/EF12 material | Run EF12 A/B during I7 |
+| smell audit | Applied through canonical files and indexes | `project-smell-audit-2026-06-17.md` | Use as guard against example leakage during future drafting |
+| arXiv backing | I1A complete | `i1a-arxiv-backing-orientation-evidence-gating.md` | Use as evidence boundary; do not overclaim exact wording |
+| integration pass | I6 complete | `canonical-integration-pass-2026-06-17.md`, updated indexes | Continue to I7 only |
 
 ---
 
@@ -52,17 +52,19 @@ one slice
 
 | File | Role |
 |---|---|
-| `canonical-integration-pass-2026-06-17.md` | Current slice-by-slice integration controller. Read before touching canonical files. |
-| `i1a-arxiv-backing-orientation-evidence-gating.md` | Full-paper arXiv backing for Slice 11/12 foundations: ReAct, CoVe, Self-RAG, Reflexion, STORM, SWE-agent, CheckList. |
-| `slice-12-evidence-gated-action.md` | Research-layer source for action-critical world-state claim gate, clue-is-not-proof rule, FM12, C36-C42, EF12. |
-| `project-smell-audit-2026-06-17.md` | Project-level audit of category-list-as-rule, example leakage, fixture leakage, sidecar drift, and prompt/runtime boundary blur. |
-| `candidate-structures.md` | Canonical through Slice 12. Use as I5 source, but do not draft v1 yet. |
-| `research-failure-mode-catalog.md` | Canonical through FM12. Use as I5 source. |
-| `prompt-evaluation-checklist.md` | Canonical through EF12. Use as I5 source. |
-| `candidate-structures-slice-12-extension.md` | Provenance sidecar for Slice 12 candidate structures; canonical material is now merged into `candidate-structures.md`. |
-| `research-failure-mode-catalog-slice-12-extension.md` | Provenance sidecar for FM12; canonical material is now merged into `research-failure-mode-catalog.md`. |
-| `prompt-evaluation-checklist-slice-12-extension.md` | Provenance sidecar for EF12; canonical material is now merged into `prompt-evaluation-checklist.md`. |
-| `final-findings-synthesis.md` | Canonical through Slice 11 only. Must be rewritten next. |
+| `canonical-integration-pass-2026-06-17.md` | Slice-by-slice integration controller. Current position: I7 evaluation preparation next. |
+| `candidate-structures.md` | Canonical C1-C42 candidate structures. Use for future prompt drafting, but do not draft v1 yet. |
+| `research-failure-mode-catalog.md` | Canonical FM1-FM12 failure catalog. |
+| `prompt-evaluation-checklist.md` | Canonical checklist through EF12, including v0/v1 pass criteria. |
+| `final-findings-synthesis.md` | Canonical synthesis through Slice 12: safely curious orientation plus evidence-gated action. |
+| `slice-11-investigation-imperative.md` | Slice 11 research source/provenance. |
+| `slice-12-evidence-gated-action.md` | Slice 12 research source/provenance. |
+| `project-smell-audit-2026-06-17.md` | Bad-smell audit: noun-list-as-rule, example leakage, fixture leakage, sidecar drift, prompt/runtime boundary blur. |
+| `i1a-arxiv-backing-orientation-evidence-gating.md` | Full-paper backing for Slice 11/12 structures and evaluation strategy. |
+| `docs/coding-agent-system-prompt/README.md` | Subproject entry point, updated through Slice 12. |
+| `docs/README.md` | Repo documentation front door, updated through Slice 12. |
+
+Provenance sidecars remain for audit trail, but canonical material is in the main files above.
 
 ---
 
@@ -87,7 +89,7 @@ hsm-build-v0.md evaluation                   DONE
 
 ## Slice 12 / Smell-Audit State
 
-Slice 12 / smell-audit integration is active but must remain layered:
+Slice 12 / smell-audit integration is complete at canonical document level:
 
 ```text
 additional v0 failure evidence               DONE
@@ -101,9 +103,9 @@ additional v0 failure evidence               DONE
   -> I2 candidate-structures merge            DONE
   -> I3 failure-mode catalog merge            DONE
   -> I4 evaluation checklist merge            DONE
-  -> I5 final synthesis rewrite               NEXT
-  -> I6 status / index update                 PENDING
-  -> EF12 behavioural fixtures                DESIGN-LEVEL READY
+  -> I5 final synthesis rewrite               DONE
+  -> I6 status / index update                 DONE
+  -> I7 evaluation preparation                NEXT
   -> v0/v1 A/B with EF11 + EF12               PENDING
 ```
 
@@ -124,33 +126,33 @@ additional v0 failure evidence               DONE
 | `EF11.1-EF11.6` | FM11 | Safely curious orientation before narrowing |
 | `EF12.1-EF12.6` | FM12 | Evidence promotion before action-critical claims become action |
 
-EF12 fixtures are now canonical in the checklist but still behavioural-design level until actually run.
+EF11/EF12 fixtures are canonical in the checklist but still behavioural-design level until actually run.
 
 ---
 
-## Immediate Next Slice: I5
+## Immediate Next Slice: I7
 
-I5 must update only the canonical final synthesis:
+I7 must prepare evaluation without drafting a prompt:
 
 ```text
-final-findings-synthesis.md
+hsm-build-v0.md
+  vs
+future hsm-build-v1.md or equivalent revised prompt
 ```
 
-I5 is done only when:
+I7 is done only when:
 
-- status/source are updated through Slice 12;
-- core thesis becomes `safely curious + evidence-gated action`;
-- FM12 and C36-C42 are integrated into the architecture, not appended;
-- list-shaped example wording is repaired where it would leak into prompt text;
-- final synthesis no longer says the next step is only EF11 or only Slice 11 work;
+- EF11.1-EF11.6 and EF12.1-EF12.6 are ready to run as an A/B suite;
+- critical non-regression fixtures are listed;
+- v0 failure expectations are separated from v1 pass criteria;
+- any future v1 success claim has a concrete pass threshold;
 - no prompt draft is produced.
 
 ---
 
 ## Risk Register
 
-- **Giant rewrite relapse**: trying to rewrite synthesis, status, indexes, and prompt in one pass will recreate the failure mode at project scale.
-- **Sidecar drift**: stale extension docs can reintroduce old noun-list wording.
+- **Evaluation theatre**: do not claim v1 improvement until EF11/EF12 and non-regression fixtures are actually run.
 - **Example leakage**: fixture nouns must not become baseline prompt wording.
 - **Paper overclaim**: arXiv evidence supports structures and evaluation strategy, not exact v1 wording or guaranteed DeepSeek behaviour.
 - **Prompt bloat**: Slice 11 and Slice 12 must be semantically merged, not appended wholesale.
