@@ -1,6 +1,6 @@
 # Research Status: Coding Agent System Prompt Subproject
 
-Summary: slices 0-11 are canonically integrated. Slice 12 and the project smell audit are being integrated one layer at a time. I3 is now complete: `research-failure-mode-catalog.md` is canonical through FM12, with action-critical claim / clue-is-not-proof / evidence-promotion wording merged as a first-class failure mode. Candidate prompt drafting remains paused until the user explicitly resumes it.
+Summary: slices 0-11 are canonically integrated. Slice 12 and the project smell audit are being integrated one layer at a time. I4 is now complete: `prompt-evaluation-checklist.md` is canonical through EF12, with C36-C42 checks, FM12 coverage, invariant-testing warnings, EF12.1-EF12.6 fixtures, and updated v0/v1 A/B criteria. Candidate prompt drafting remains paused until the user explicitly resumes it.
 
 ---
 
@@ -16,8 +16,8 @@ I1A arXiv backing slice             DONE
 I1B research sidecar consolidation  DONE
 I2 candidate-structures merge       DONE
 I3 failure-mode catalog merge       DONE
-I4 evaluation checklist merge       NEXT
-I5 final synthesis rewrite          PENDING
+I4 evaluation checklist merge       DONE
+I5 final synthesis rewrite          NEXT
 I6 status / index update            PENDING
 I7 evaluation preparation           PENDING
 I8 candidate prompt drafting        GATED: only if explicitly resumed
@@ -41,10 +41,10 @@ one slice
 |---|---|---|---|
 | 0-10 | Complete | earlier slice files, `final-findings-synthesis.md` | None |
 | 11 | Canonically integrated / needs behavioural eval | `slice-11-investigation-imperative.md`, canonical C27-C35/FM11/EF11 material | Run EF11 A/B after integration pass |
-| 12 | Candidate structures and failure catalog merged / downstream evaluation + synthesis pending | `slice-12-evidence-gated-action.md`, Slice 12 sidecars, updated `candidate-structures.md`, updated `research-failure-mode-catalog.md` | I4 evaluation checklist merge |
-| smell audit | Applied to candidate structures and failure catalog / downstream files pending | `project-smell-audit-2026-06-17.md` | I4-I5 abstraction cleanup |
-| arXiv backing | I1A complete | `i1a-arxiv-backing-orientation-evidence-gating.md` | Use as evidence input for I4-I5 |
-| integration pass | I3 complete | `canonical-integration-pass-2026-06-17.md`, updated failure catalog | Continue to I4 only |
+| 12 | Candidate structures, failure catalog, and evaluation checklist merged / final synthesis pending | `slice-12-evidence-gated-action.md`, updated `candidate-structures.md`, updated `research-failure-mode-catalog.md`, updated `prompt-evaluation-checklist.md` | I5 final synthesis rewrite |
+| smell audit | Applied through evaluation checklist / synthesis + index pending | `project-smell-audit-2026-06-17.md` | I5 abstraction cleanup |
+| arXiv backing | I1A complete | `i1a-arxiv-backing-orientation-evidence-gating.md` | Use as evidence input for I5 |
+| integration pass | I4 complete | `canonical-integration-pass-2026-06-17.md`, updated checklist | Continue to I5 only |
 
 ---
 
@@ -56,13 +56,13 @@ one slice
 | `i1a-arxiv-backing-orientation-evidence-gating.md` | Full-paper arXiv backing for Slice 11/12 foundations: ReAct, CoVe, Self-RAG, Reflexion, STORM, SWE-agent, CheckList. |
 | `slice-12-evidence-gated-action.md` | Research-layer source for action-critical world-state claim gate, clue-is-not-proof rule, FM12, C36-C42, EF12. |
 | `project-smell-audit-2026-06-17.md` | Project-level audit of category-list-as-rule, example leakage, fixture leakage, sidecar drift, and prompt/runtime boundary blur. |
-| `candidate-structures.md` | Canonical through Slice 12. Use as I4/I5 source, but do not draft v1 yet. |
-| `research-failure-mode-catalog.md` | Canonical through FM12. Use as I4/I5 source. |
+| `candidate-structures.md` | Canonical through Slice 12. Use as I5 source, but do not draft v1 yet. |
+| `research-failure-mode-catalog.md` | Canonical through FM12. Use as I5 source. |
+| `prompt-evaluation-checklist.md` | Canonical through EF12. Use as I5 source. |
 | `candidate-structures-slice-12-extension.md` | Provenance sidecar for Slice 12 candidate structures; canonical material is now merged into `candidate-structures.md`. |
 | `research-failure-mode-catalog-slice-12-extension.md` | Provenance sidecar for FM12; canonical material is now merged into `research-failure-mode-catalog.md`. |
-| `prompt-evaluation-checklist-slice-12-extension.md` | Consolidated EF12 sidecar; use as I4 source. |
-| `prompt-evaluation-checklist.md` | Canonical through EF11 only. Must not be treated as EF12-complete yet. |
-| `final-findings-synthesis.md` | Canonical through Slice 11 only. Must be rewritten after I4, not before. |
+| `prompt-evaluation-checklist-slice-12-extension.md` | Provenance sidecar for EF12; canonical material is now merged into `prompt-evaluation-checklist.md`. |
+| `final-findings-synthesis.md` | Canonical through Slice 11 only. Must be rewritten next. |
 
 ---
 
@@ -100,9 +100,10 @@ additional v0 failure evidence               DONE
   -> I1B research sidecar consolidation       DONE
   -> I2 candidate-structures merge            DONE
   -> I3 failure-mode catalog merge            DONE
-  -> I4 evaluation checklist merge            NEXT
-  -> I5 final synthesis rewrite               PENDING
-  -> EF12 behavioural fixtures                PENDING
+  -> I4 evaluation checklist merge            DONE
+  -> I5 final synthesis rewrite               NEXT
+  -> I6 status / index update                 PENDING
+  -> EF12 behavioural fixtures                DESIGN-LEVEL READY
   -> v0/v1 A/B with EF11 + EF12               PENDING
 ```
 
@@ -123,33 +124,32 @@ additional v0 failure evidence               DONE
 | `EF11.1-EF11.6` | FM11 | Safely curious orientation before narrowing |
 | `EF12.1-EF12.6` | FM12 | Evidence promotion before action-critical claims become action |
 
-EF12 fixtures are design-level until I4 canonical evaluation merge.
+EF12 fixtures are now canonical in the checklist but still behavioural-design level until actually run.
 
 ---
 
-## Immediate Next Slice: I4
+## Immediate Next Slice: I5
 
-I4 must update only the canonical evaluation checklist:
+I5 must update only the canonical final synthesis:
 
 ```text
-prompt-evaluation-checklist.md
+final-findings-synthesis.md
 ```
 
-I4 is done only when:
+I5 is done only when:
 
 - status/source are updated through Slice 12;
-- evaluation preface says examples are probes, not prompt wording;
-- C36-C42 checks are present;
-- FM12 is added to coverage;
-- EF12.1-EF12.6 are added;
-- quick check and token-budget sections reflect evidence-gated action;
-- no final synthesis or prompt draft is changed.
+- core thesis becomes `safely curious + evidence-gated action`;
+- FM12 and C36-C42 are integrated into the architecture, not appended;
+- list-shaped example wording is repaired where it would leak into prompt text;
+- final synthesis no longer says the next step is only EF11 or only Slice 11 work;
+- no prompt draft is produced.
 
 ---
 
 ## Risk Register
 
-- **Giant rewrite relapse**: trying to rewrite checklist, synthesis, status, and prompt in one pass will recreate the failure mode at project scale.
+- **Giant rewrite relapse**: trying to rewrite synthesis, status, indexes, and prompt in one pass will recreate the failure mode at project scale.
 - **Sidecar drift**: stale extension docs can reintroduce old noun-list wording.
 - **Example leakage**: fixture nouns must not become baseline prompt wording.
 - **Paper overclaim**: arXiv evidence supports structures and evaluation strategy, not exact v1 wording or guaranteed DeepSeek behaviour.
