@@ -1,6 +1,6 @@
 # Canonical Integration Pass: Slice-by-Slice Plan
 
-Status: active integration plan; current position I5 next  
+Status: active integration plan; current position I7 next  
 Date: 2026-06-17  
 Scope: integrating Slice 12 and the project smell audit into the coding-agent prompt research corpus without tacking notes onto the end or rewriting every layer at once
 
@@ -62,30 +62,11 @@ Do not jump to `hsm-build-v1.md` until all integration slices below are complete
 
 **Goal**: Stop the process from becoming one giant rewrite.
 
-**Files**:
-
-- `canonical-integration-pass-2026-06-17.md`
-- `README.md` / `RESEARCH_STATUS.md` only if needed to point future agents here
-
-**Done when**:
-
-- The integration order is explicit.
-- Candidate prompt drafting remains paused.
-- The next slice is clearly named.
-
 ### Slice I1 — Research-layer consolidation
 
 **Status**: done as I1A + I1B.
 
 **Goal**: Make the research layer internally coherent before touching canonical candidate structures.
-
-**Inputs**:
-
-- `slice-12-evidence-gated-action.md`
-- `project-smell-audit-2026-06-17.md`
-- `i1a-arxiv-backing-orientation-evidence-gating.md`
-- Slice 12 sidecars
-- relevant user/DeepSeek feedback already captured in Slice 12
 
 **Files updated**:
 
@@ -105,17 +86,9 @@ blast-radius-scaled action
 examples are fixtures, not prompt wording
 ```
 
-**Done when**:
-
-- No Slice 12 research-sidecar file still presents a noun-list as the core rule.
-- Concrete examples are explicitly framed as non-exhaustive fixtures.
-- The next layer can cite the research layer without ambiguity.
-
 ### Slice I2 — Candidate-structures canonical merge
 
 **Status**: done.
-
-**Goal**: Integrate Slice 12 and the smell-audit abstraction pass into `candidate-structures.md`.
 
 **Files updated**:
 
@@ -131,16 +104,9 @@ examples are fixtures, not prompt wording
 - Kept examples as non-exhaustive anchors.
 - Did not draft `hsm-build-v1.md`.
 
-**Done when**:
-
-- Candidate structures no longer depend on list-shaped rules.
-- C27-C42 form one coherent scaffold rather than Slice 11 plus appended Slice 12.
-
 ### Slice I3 — Failure-mode catalog canonical merge
 
 **Status**: done.
-
-**Goal**: Integrate FM12 and update relationships between FM3, FM7, FM11, and FM12.
 
 **Files updated**:
 
@@ -154,16 +120,9 @@ examples are fixtures, not prompt wording
 - Updated FM11 wording so orientation and evidence-promotion are distinct.
 - Updated summary table to FM1-FM12.
 
-**Done when**:
-
-- FM12 is a first-class failure mode, not a side note.
-- The catalog distinguishes fake investigation, narrow investigation, assumption cascade, and action without evidence promotion.
-
 ### Slice I4 — Evaluation checklist canonical merge
 
 **Status**: done.
-
-**Goal**: Add EF12 and prevent fixture-to-rule leakage.
 
 **Files updated**:
 
@@ -178,73 +137,57 @@ examples are fixtures, not prompt wording
 - Added EF12.1-EF12.6.
 - Updated quick check, token-budget sections, and v0/v1 A/B criteria.
 
-**Done when**:
-
-- Eval fixtures test invariants, not exact prompt nouns.
-- v0/v1 comparison can measure EF11 and EF12 separately.
-
 ### Slice I5 — Final synthesis rewrite
 
-**Status**: next.
+**Status**: done.
 
-**Goal**: Rewrite `final-findings-synthesis.md` so the new foundation flows through the practical report.
-
-**Files to update**:
+**Files updated**:
 
 - `final-findings-synthesis.md`
 
-**Required changes**:
+**Required changes completed**:
 
 - Status/source updated through Slice 12 and smell audit.
 - Core thesis updated from `safely curious` alone to `safely curious + evidence-gated action`.
-- Replace list-first orientation/compaction/project-surface sections with principle-first wording.
-- Integrate FM12 and C36-C42 into architecture, not as an appendix.
-- Preserve practical report usefulness for future prompt drafting.
-
-**Done when**:
-
-- The synthesis can be read alongside the directory as the concentrated practical report.
-- It no longer says the next step is only EF11 or only Slice 11 work.
-- It does not draft `hsm-build-v1.md`.
+- Replaced list-first sections with principle-first wording where it affects prompt drafting.
+- Integrated FM12 and C36-C42 into architecture, not as an appendix.
+- Preserved practical report usefulness for future prompt drafting.
+- Did not draft `hsm-build-v1.md`.
 
 ### Slice I6 — Status and index update
 
-**Status**: pending.
+**Status**: done.
 
-**Goal**: Make navigation reflect the new canonical state.
-
-**Files to update**:
+**Files updated**:
 
 - `RESEARCH_STATUS.md`
 - `docs/coding-agent-system-prompt/README.md`
 - `docs/README.md`
 
-**Required changes**:
+**Required changes completed**:
 
-- Remove stale `through Slice 11` statements where no longer true.
-- Point readers to the integration pass and updated synthesis.
-- Keep candidate prompt drafting paused unless explicitly resumed.
-
-**Done when**:
-
-- Future agents can enter from either README and get the right current layer order.
+- Removed stale `through Slice 11` entry points where no longer true.
+- Pointed readers to the integration pass and updated synthesis.
+- Kept candidate prompt drafting paused unless explicitly resumed.
 
 ### Slice I7 — Evaluation preparation
 
-**Status**: pending.
+**Status**: next.
 
 **Goal**: Prepare the behavioural A/B pass without drafting v1 yet.
 
 **Files to update**:
 
-- possibly `prompt-evaluation-checklist.md`
-- possibly fixture docs / issue tracker
+- likely `prompt-evaluation-checklist.md`
+- possibly a dedicated evaluation-plan or fixture-prep document if the checklist would become too large
 
 **Required changes**:
 
 - Define how to test `hsm-build-v0.md` against EF11 and EF12.
 - Define what a future v1 must beat.
 - Preserve critical non-regression fixtures.
+- Separate v0 failure expectations from future v1 pass criteria.
+- Do not draft a prompt.
 
 **Done when**:
 
@@ -270,10 +213,12 @@ I1 complete
 I2 complete
 I3 complete
 I4 complete
-I5 next
+I5 complete
+I6 complete
+I7 next
 ```
 
-Do not skip directly to I6-I8.
+Do not skip directly to I8.
 
 ---
 
