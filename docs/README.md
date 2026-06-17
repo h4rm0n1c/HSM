@@ -30,11 +30,12 @@ Use it to find the current architecture notes, runtime/state design, source boun
 | Harness lessons | [Active state harness lessons](active-state-harness-lessons-2026-05-02.md) | Lessons from hosted AI runtime state injection and what HSM should make explicit, inspectable, and update-gated. |
 | Research seed | [Human analogy and memory research seed](human-analogy-and-memory-research-seed-2026-05-02.md) | Seed notes for human-human state maintenance, trust, memory, exhaustion, hyperfocus, and social integrity. |
 | Coding-agent prompt development | [Coding agent system prompt subproject](coding-agent-system-prompt/README.md) | Separate workspace for building a coding-agent system prompt from QuantZhai prior art, workflow observations, and external prompt references. |
-| Coding-agent prompt development | [Investigation imperative](coding-agent-system-prompt/slice-11-investigation-imperative.md) | Slice 11 correction: safely curious coding agents, orientation before narrowing, surface-signal discipline, and C27-C35 candidate structures. |
-| Coding-agent prompt development | [Candidate structures Slice 11 extension](coding-agent-system-prompt/candidate-structures-slice-11-extension.md) | Adds C27-C35 to the candidate-structure set without rewriting the Slice 10 consolidation. |
-| Coding-agent prompt development | [Failure-mode Slice 11 extension](coding-agent-system-prompt/research-failure-mode-catalog-slice-11-extension.md) | Adds FM11: Premature Narrowing / Curiosity Collapse. |
-| Coding-agent prompt development | [Evaluation checklist Slice 11 extension](coding-agent-system-prompt/prompt-evaluation-checklist-slice-11-extension.md) | Adds Slice 11 checklist items and EF11.1-EF11.6 fixtures. |
-| Coding-agent prompt development | [Final synthesis amendment](coding-agent-system-prompt/final-findings-synthesis-amendment-2026-06-17.md) | Final synthesis amendment after `hsm-build-v0.md` evaluation: containment is not enough; the worker must be safely curious. |
+| Coding-agent prompt development | [Final coding-agent prompt synthesis](coding-agent-system-prompt/final-findings-synthesis.md) | Canonical synthesis through Slice 11: compact worker inside larger system; safely curious execution; OpenCode/Fable integrations. |
+| Coding-agent prompt development | [Candidate prompt structures](coding-agent-system-prompt/candidate-structures.md) | Canonical C1-C35 candidate structure set, including Slice 11 C27-C35. |
+| Coding-agent prompt development | [Failure-mode catalog](coding-agent-system-prompt/research-failure-mode-catalog.md) | Canonical FM1-FM11 failure-mode catalog, including FM11 Premature Narrowing / Curiosity Collapse. |
+| Coding-agent prompt development | [Prompt evaluation checklist](coding-agent-system-prompt/prompt-evaluation-checklist.md) | Canonical evaluation checklist and fixtures, including EF11.1-EF11.6. |
+| Coding-agent prompt development | [Research status](coding-agent-system-prompt/RESEARCH_STATUS.md) | Current status matrix, fixture coverage, remaining work, and risk register through Slice 11. |
+| Coding-agent prompt development | [Investigation imperative](coding-agent-system-prompt/slice-11-investigation-imperative.md) | Slice 11 source research: safely curious coding agents, orientation before narrowing, surface-signal discipline, and C27-C35 derivation. |
 
 ## Task-oriented entry points
 
@@ -89,23 +90,13 @@ Read:
 - [Research plan](coding-agent-system-prompt/research-plan.md)
 - [Workflow patterns](coding-agent-system-prompt/workflow-patterns.md)
 - [QuantZhai prompt reference snapshot](coding-agent-system-prompt/reference-quantzhai-codex-core-qwenified.md)
-- [Research references](coding-agent-system-prompt/research-references.md)
-- [Internal source matrix](coding-agent-system-prompt/internal-project-references.md) — Slice 0 output, authority classifications, verification findings
-- [Arbitration loop analysis](coding-agent-system-prompt/slice-1-arbitration-loop.md) — Slice 1 output, external prompt comparison, candidate structures
-- [Anti-agreement and self-critique](coding-agent-system-prompt/slice-2-anti-agreement-self-critique.md) — Slice 2 output, minimum viable adversarial check, candidate structures C6-C11
-- [Context position and middle-detail loss](coding-agent-system-prompt/slice-3-context-position-middle-loss.md) — Slice 3 output, Lost in the Middle analysis, position-aware ordering, candidate structures C12-C16
-- [Investigation imperative](coding-agent-system-prompt/slice-11-investigation-imperative.md) — Slice 11 correction, active investigator stance, territory mapping, surface-signal discipline, C27-C35, and EF11 fixtures
-- [Candidate structures Slice 11 extension](coding-agent-system-prompt/candidate-structures-slice-11-extension.md) — C27-C35 integration extension
-- [Failure-mode Slice 11 extension](coding-agent-system-prompt/research-failure-mode-catalog-slice-11-extension.md) — FM11 integration extension
-- [Evaluation checklist Slice 11 extension](coding-agent-system-prompt/prompt-evaluation-checklist-slice-11-extension.md) — EF11.1-EF11.6 integration extension
-- [Final coding-agent prompt synthesis](coding-agent-system-prompt/final-findings-synthesis.md) — consolidated synthesis across all slices, candidate structures, failure modes, vendor comparisons, OpenCode audit, and runtime/process boundaries
-- [Final synthesis amendment](coding-agent-system-prompt/final-findings-synthesis-amendment-2026-06-17.md) — correction after `hsm-build-v0.md`: safely curious execution and prompt architecture reordering
-- [Candidate prompt structures](coding-agent-system-prompt/candidate-structures.md) — merged structure set with adoption/test/defer/reject status and token-cost implications
-- [Prompt evaluation checklist](coding-agent-system-prompt/prompt-evaluation-checklist.md) — evaluation framework, failure-mode matrix, token budget, and fixture ideas
-- [QuantZhai research comparison](coding-agent-system-prompt/comparison-quantzhai-codex-core-qwenified.md) — QuantZhai `codex-core-qwenified` section-by-section evaluated against all research findings
-- [Codex CLI research comparison](coding-agent-system-prompt/comparison-codex-cli-max.md) — OpenAI Codex CLI system prompt evaluated against all research findings
-- [Claude Code research comparison](coding-agent-system-prompt/comparison-claude-code.md) — Claude Code v2.1.143 system prompt evaluated against all research findings
-- [OpenCode prompt synthesis](coding-agent-system-prompt/final-opencode-findings-synthesis.md) — consolidated OpenCode base-prompt findings and adoption cluster
+- [Final coding-agent prompt synthesis](coding-agent-system-prompt/final-findings-synthesis.md)
+- [Candidate prompt structures](coding-agent-system-prompt/candidate-structures.md)
+- [Failure-mode catalog](coding-agent-system-prompt/research-failure-mode-catalog.md)
+- [Prompt evaluation checklist](coding-agent-system-prompt/prompt-evaluation-checklist.md)
+- [Research status](coding-agent-system-prompt/RESEARCH_STATUS.md)
+- [Investigation imperative](coding-agent-system-prompt/slice-11-investigation-imperative.md)
+- [OpenCode prompt synthesis](coding-agent-system-prompt/final-opencode-findings-synthesis.md)
 
 Focus on:
 
@@ -207,13 +198,11 @@ docs/coding-agent-system-prompt/slice-1-arbitration-loop.md
 docs/coding-agent-system-prompt/slice-2-anti-agreement-self-critique.md
 docs/coding-agent-system-prompt/slice-3-context-position-middle-loss.md
 docs/coding-agent-system-prompt/slice-11-investigation-imperative.md
-docs/coding-agent-system-prompt/candidate-structures-slice-11-extension.md
-docs/coding-agent-system-prompt/research-failure-mode-catalog-slice-11-extension.md
-docs/coding-agent-system-prompt/prompt-evaluation-checklist-slice-11-extension.md
-docs/coding-agent-system-prompt/final-findings-synthesis.md
-docs/coding-agent-system-prompt/final-findings-synthesis-amendment-2026-06-17.md
 docs/coding-agent-system-prompt/candidate-structures.md
+docs/coding-agent-system-prompt/research-failure-mode-catalog.md
 docs/coding-agent-system-prompt/prompt-evaluation-checklist.md
+docs/coding-agent-system-prompt/final-findings-synthesis.md
+docs/coding-agent-system-prompt/RESEARCH_STATUS.md
 docs/coding-agent-system-prompt/final-opencode-findings-synthesis.md
 docs/coding-agent-system-prompt/workflow-patterns.md
 docs/hsm-master-report-2026-05-01.md
