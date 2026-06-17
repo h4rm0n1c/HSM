@@ -1,6 +1,6 @@
 # Canonical Integration Pass: Slice-by-Slice Plan
 
-Status: active integration plan; current position I7 next  
+Status: integration complete through I7; I8 gated  
 Date: 2026-06-17  
 Scope: integrating Slice 12 and the project smell audit into the coding-agent prompt research corpus without tacking notes onto the end or rewriting every layer at once
 
@@ -94,16 +94,6 @@ examples are fixtures, not prompt wording
 
 - `candidate-structures.md`
 
-**Required changes completed**:
-
-- Status/source updated through Slice 12 and I1A.
-- Added C36-C42 using abstract wording.
-- Rewrote C28 orientation principle-first.
-- Rewrote C30 established-way discovery principle-first.
-- Rewrote atom-preservation wording principle-first.
-- Kept examples as non-exhaustive anchors.
-- Did not draft `hsm-build-v1.md`.
-
 ### Slice I3 — Failure-mode catalog canonical merge
 
 **Status**: done.
@@ -111,14 +101,6 @@ examples are fixtures, not prompt wording
 **Files updated**:
 
 - `research-failure-mode-catalog.md`
-
-**Required changes completed**:
-
-- Status/source updated through Slice 12.
-- Added FM12 as first-class.
-- Updated FM6 atom preservation abstraction.
-- Updated FM11 wording so orientation and evidence-promotion are distinct.
-- Updated summary table to FM1-FM12.
 
 ### Slice I4 — Evaluation checklist canonical merge
 
@@ -128,15 +110,6 @@ examples are fixtures, not prompt wording
 
 - `prompt-evaluation-checklist.md`
 
-**Required changes completed**:
-
-- Status/source updated through Slice 12.
-- Added evaluation preface: examples are probes, not prompt wording.
-- Added C36-C42 checks.
-- Added FM12 to coverage table.
-- Added EF12.1-EF12.6.
-- Updated quick check, token-budget sections, and v0/v1 A/B criteria.
-
 ### Slice I5 — Final synthesis rewrite
 
 **Status**: done.
@@ -144,15 +117,6 @@ examples are fixtures, not prompt wording
 **Files updated**:
 
 - `final-findings-synthesis.md`
-
-**Required changes completed**:
-
-- Status/source updated through Slice 12 and smell audit.
-- Core thesis updated from `safely curious` alone to `safely curious + evidence-gated action`.
-- Replaced list-first sections with principle-first wording where it affects prompt drafting.
-- Integrated FM12 and C36-C42 into architecture, not as an appendix.
-- Preserved practical report usefulness for future prompt drafting.
-- Did not draft `hsm-build-v1.md`.
 
 ### Slice I6 — Status and index update
 
@@ -164,34 +128,25 @@ examples are fixtures, not prompt wording
 - `docs/coding-agent-system-prompt/README.md`
 - `docs/README.md`
 
-**Required changes completed**:
-
-- Removed stale `through Slice 11` entry points where no longer true.
-- Pointed readers to the integration pass and updated synthesis.
-- Kept candidate prompt drafting paused unless explicitly resumed.
-
 ### Slice I7 — Evaluation preparation
 
-**Status**: next.
+**Status**: done.
 
-**Goal**: Prepare the behavioural A/B pass without drafting v1 yet.
+**Files updated**:
 
-**Files to update**:
+- `evaluation-plan-ef11-ef12.md`
+- `RESEARCH_STATUS.md`
+- `docs/coding-agent-system-prompt/README.md`
+- `docs/README.md`
 
-- likely `prompt-evaluation-checklist.md`
-- possibly a dedicated evaluation-plan or fixture-prep document if the checklist would become too large
-
-**Required changes**:
-
-- Define how to test `hsm-build-v0.md` against EF11 and EF12.
-- Define what a future v1 must beat.
-- Preserve critical non-regression fixtures.
-- Separate v0 failure expectations from future v1 pass criteria.
-- Do not draft a prompt.
+**Goal completed**: Prepare behavioural A/B evaluation without drafting v1.
 
 **Done when**:
 
-- We know exactly what v1 must prove before claiming improvement.
+- We know how to test `hsm-build-v0.md` against EF11 and EF12.
+- We know what a future v1 must beat.
+- Critical non-regression fixtures are preserved.
+- Candidate prompt drafting remains gated.
 
 ### Slice I8 — Candidate prompt drafting
 
@@ -215,10 +170,11 @@ I3 complete
 I4 complete
 I5 complete
 I6 complete
-I7 next
+I7 complete
+I8 gated
 ```
 
-Do not skip directly to I8.
+Do not draft a candidate prompt unless the user explicitly resumes that stage.
 
 ---
 
@@ -246,3 +202,5 @@ one layer
   -> record next layer
   -> stop or receive explicit continuation
 ```
+
+The integration pass has now completed the non-drafting layers. The next move is either evaluation execution or explicit candidate prompt drafting.
