@@ -7,12 +7,9 @@ Related source project: `h4rm0n1c/quantzhai`
 Note that should be taken very seriously by humans and agents:
 system prompt awakening and improvement research, you tell an agent to read all of this, get up to speed, take some effort to do it, and only respond briefly when it's done learning what we're doing and how we want to do it. then you feed it a system prompt and ask it to analyse based on the findings of the research, strengths, weaknesses, areas for improvement. it will crunch for a while and come up with a plan, then ask for a draft of a replacement that accounts for what we found. the results will be a notable improvement, discuss semantic compression as well if you need to adjust length, making a fat prototype/draft of 12k to 15k bytes is not a disaster, it's an opportunity for semantic compression revisions of that version and this should be considered.
 
-
 ## Purpose
 
 This directory is a dedicated HSM-side workspace for developing coding-agent system prompt structures.
-
-
 
 The goal is not to force a single model-internal reasoning style.
 
@@ -21,6 +18,7 @@ The goal is to provide external structure that helps a coding agent reason bette
 - clearer task framing
 - better source inspection
 - better handoff from suspicion to evidence
+- safely curious orientation before premature narrowing
 - safer edit boundaries
 - better validation choices
 - cleaner final reporting
@@ -30,6 +28,7 @@ It is separate from the main HSM subject-state work, but related. HSM is interes
 
 ```text
 user intent + repo state + tool contract + workflow scaffold
+  -> orientation / territory mapping
   -> bounded investigation
   -> implementation slice
   -> validation
@@ -45,30 +44,20 @@ Candidate prompt drafting is paused.
 
 Do not produce `candidate-system-prompt-v0.md`, `hsm-build-v1.md`, or any replacement prompt until the user explicitly resumes candidate prompt work.
 
-The OpenCode resynthesis sequence is complete at research level:
+The research corpus is now canonically integrated through Slice 11:
 
 ```text
-OpenCode source map
-  -> OpenCode runtime assembly comparison
-  -> OpenCode plan-mode comparison
-  -> OpenCode task/subagent/compaction comparison
-  -> OpenCode vs CLI-family synthesis
-  -> final-findings-synthesis.md update
-```
-
-A later live prompt evaluation reopened the research with Slice 11:
-
-```text
-hsm-build-v0.md
+slices 0-10
+  -> OpenCode resynthesis
+  -> hsm-build-v0.md evaluation
   -> DeepSeek V4 Flash feedback
   -> Fable5 distilled prompt comparison
   -> CL4R1T4S Fable prompt architecture contrast
-  -> slice-11-investigation-imperative.md
-  -> final-findings-synthesis-amendment-2026-06-17.md
-  -> candidate/failure/eval extension docs
+  -> Slice 11 investigation imperative
+  -> canonical updates to final synthesis, candidate structures, failure catalog, eval checklist, and status
 ```
 
-Remaining work is behavioural A/B evaluation before any new prompt draft.
+Remaining work is behavioural A/B evaluation before any measured claim about a new prompt draft.
 
 ## Why this belongs here
 
@@ -83,6 +72,7 @@ HSM is the better home for the broader methodology work because this prompt rese
 - instruction layering
 - durable memory discipline
 - human/assistant/coding-agent arbitration
+- safely curious execution without broad unsafe autonomy
 
 QuantZhai should stay focused on running the thing. This directory exists to design the structures that make the thing work better.
 
@@ -135,94 +125,42 @@ slice-8-compaction-preservation.md
   Slice 8 output: survival-weighted compaction (QuantZhai issue #8 RFC), high-value atom preservation rule, NetTTS prosody weighting transfer. Compaction safety acceptance criteria.
 
 slice-11-investigation-imperative.md
-  Slice 11 correction: safely curious coding agents, territory mapping before narrowing, surface-signal discipline, assumption ledger, and C27-C35 candidate structures.
-
-candidate-structures-slice-11-extension.md
-  Integration extension adding C27-C35 to the candidate structure set without rewriting the Slice 10 consolidation.
-
-research-failure-mode-catalog-slice-11-extension.md
-  Integration extension adding FM11: Premature Narrowing / Curiosity Collapse.
-
-prompt-evaluation-checklist-slice-11-extension.md
-  Integration extension adding Slice 11 checklist items and EF11.1-EF11.6 fixtures.
-
-research-external-prompt-comparison.md
-  Slice 9 output: 10-layer comparison of Claude Code, Codex CLI, and Cursor prompts with cross-cutting findings and adoption recommendations.
-
-research-failure-mode-catalog.md
-  Research output: 10 coding-agent failure modes mapped to missing prompt structures, with severity ratings and mitigation strategies per mode (FM1-FM10). Use with Slice 11 failure-mode extension for FM11.
-
-research-missing-structures.md
-  Research output: cross-reference of 27 vendor prompt structures (M1-M27) against our C1-C26 candidate set, with gap analysis and adoption recommendations by prompt layer.
+  Slice 11 research correction: safely curious coding agents, territory mapping before narrowing, surface-signal discipline, assumption ledger, and C27-C35 candidate structures.
 
 candidate-structures.md
-  Slice 10 consolidation: all C1-C26 and M1-M27 merged, deduplicated, classified (adopt/test/defer/reject), with token cost estimates, test plans, and interaction conflict warnings. Use with Slice 11 candidate extension for C27-C35.
+  Canonical candidate structures C1-C35, including Slice 11 C27-C35.
+
+research-failure-mode-catalog.md
+  Canonical failure-mode catalog FM1-FM11, including FM11 Premature Narrowing / Curiosity Collapse.
 
 prompt-evaluation-checklist.md
-  Slice 10 eval framework: 14-section checklist covering all prompt layers, failure-mode matrix, token budget, and eval task ideas. Use with Slice 11 checklist extension for EF11 fixtures.
+  Canonical evaluation checklist, including EF11.1-EF11.6.
 
 final-findings-synthesis.md
-  Final consolidated synthesis, now updated with the repaired OpenCode prompt-system-family findings.
-
-final-findings-synthesis-amendment-2026-06-17.md
-  Amendment to final synthesis: investigation imperative, safely curious execution, and prompt architecture correction after `hsm-build-v0.md` evaluation.
+  Canonical final synthesis through Slice 11.
 
 RESEARCH_STATUS.md
-  One-page status matrix, artifact list, next actions, and risk register.
+  One-page status matrix, artifact list, fixture coverage, next actions, and risk register.
+
+candidate-structures-slice-11-extension.md
+research-failure-mode-catalog-slice-11-extension.md
+prompt-evaluation-checklist-slice-11-extension.md
+  Provenance sidecars from the integration pass. These are retained for audit trail, but the canonical material is now in the main files above.
+
+final-findings-synthesis-amendment-2026-06-17.md
+  Provenance amendment used before the final synthesis was canonically updated.
 
 comparison-quantzhai-codex-core-qwenified.md
-  Dedicated comparison: QuantZhai `codex-core-qwenified.md` against our 10-slice research findings.
-
 comparison-codex-cli-max.md
-  Dedicated comparison: OpenAI Codex CLI (Codex Max) system prompt against our 10-slice research findings.
-
 comparison-claude-code.md
-  Dedicated comparison: Claude Code v2.1.143 system prompt against our 10-slice research findings.
-
-final-opencode-findings-synthesis.md
-  Resynthesis boundary document for OpenCode. It marks the earlier OpenCode integration as too thin and blocks candidate prompt drafting until the OpenCode layer is repaired.
-
+comparison-opencode-*.md
 research-opencode-source-map.md
-  Source map for OpenCode prompt/runtime surfaces: base prompts, runtime assembly, reminders, command/tool surfaces, task/subagent prompts, compaction, and user-observed TUI behaviours.
-
 comparison-opencode-runtime-assembly.md
-  OpenCode runtime assembly comparison: provider routing, environment injection, skills, reminders, task/subagent prompts, Explore, compaction, and CLI/TUI placement.
-
 comparison-opencode-plan-mode.md
-  OpenCode plan-mode comparison: read-only planning, plan-file exception, explore agents, build switch, question vs plan-exit boundary, and runtime placement.
-
 comparison-opencode-agent-task-compaction.md
-  OpenCode task/subagent/compaction comparison: when not to delegate, Explore role, main-agent accountability, and anchored compaction.
-
 research-opencode-vs-cli-family.md
-  Cross-family synthesis comparing OpenCode against QuantZhai, Codex CLI, Claude Code, Cursor/external matrix, and HSM slice findings.
-
-comparison-opencode-template.md
-  Template used for OpenCode base-prompt comparison reports.
-
-comparison-opencode-gpt.md
-  OpenCode `gpt.txt` comparison against the research findings. Shared-workspace executor, small correct change, edit-boundary, and concise CLI-output analysis.
-
-comparison-opencode-codex.md
-  OpenCode `codex.txt` comparison against the research findings. Professional objectivity, tool discipline, edit-boundary, and anti-agreement relevance.
-
-comparison-opencode-trinity.md
-  OpenCode `trinity.txt` comparison against the research findings. Compact all-around prompt, repo authority, validation, and AGENTS.md awareness.
-
-comparison-opencode-gemini.md
-  OpenCode `gemini.txt` comparison against the research findings. Local convention, library/style, verification, and repo-context discipline.
-
-comparison-opencode-default.md
-  OpenCode `default.txt` comparison against the research findings. Concise baseline with missing repo/edit-boundary structures.
-
-comparison-opencode-kimi.md
-  OpenCode `kimi.txt` comparison against the research findings. Compact task framing and validation with edit-boundary gaps.
-
-comparison-opencode-anthropic.md
-  OpenCode `anthropic.txt` comparison against the research findings. High-persistence wording treated as bounded adoption source, not baseline model.
-
-comparison-opencode-beast.md
-  OpenCode `beast.txt` comparison against the research findings. Stress-prompt analysis; useful for persistence risks and rejection decisions.
+final-opencode-findings-synthesis.md
+  Comparison and OpenCode resynthesis documents.
 ```
 
 ## Research protocol
