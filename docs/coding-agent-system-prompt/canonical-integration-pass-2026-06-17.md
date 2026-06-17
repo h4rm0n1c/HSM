@@ -1,6 +1,6 @@
 # Canonical Integration Pass: Slice-by-Slice Plan
 
-Status: active integration plan  
+Status: active integration plan; current position I5 next  
 Date: 2026-06-17  
 Scope: integrating Slice 12 and the project smell audit into the coding-agent prompt research corpus without tacking notes onto the end or rewriting every layer at once
 
@@ -8,7 +8,7 @@ Scope: integrating Slice 12 and the project smell audit into the coding-agent pr
 
 ## Why This Exists
 
-The previous work discovered a foundational correction:
+The foundational correction is:
 
 ```text
 action depends on a claim about current reality
@@ -138,21 +138,21 @@ examples are fixtures, not prompt wording
 
 ### Slice I3 — Failure-mode catalog canonical merge
 
-**Status**: next.
+**Status**: done.
 
 **Goal**: Integrate FM12 and update relationships between FM3, FM7, FM11, and FM12.
 
-**Files to update**:
+**Files updated**:
 
 - `research-failure-mode-catalog.md`
 
-**Required changes**:
+**Required changes completed**:
 
 - Status/source updated through Slice 12.
-- Add FM12.
-- Update FM6 atom preservation abstraction if needed.
-- Update FM11 wording so orientation and evidence-promotion are distinct.
-- Update summary table to FM1-FM12.
+- Added FM12 as first-class.
+- Updated FM6 atom preservation abstraction.
+- Updated FM11 wording so orientation and evidence-promotion are distinct.
+- Updated summary table to FM1-FM12.
 
 **Done when**:
 
@@ -161,22 +161,22 @@ examples are fixtures, not prompt wording
 
 ### Slice I4 — Evaluation checklist canonical merge
 
-**Status**: pending.
+**Status**: done.
 
 **Goal**: Add EF12 and prevent fixture-to-rule leakage.
 
-**Files to update**:
+**Files updated**:
 
 - `prompt-evaluation-checklist.md`
 
-**Required changes**:
+**Required changes completed**:
 
 - Status/source updated through Slice 12.
-- Add evaluation preface: examples are probes, not prompt wording.
-- Add C36-C42 checks.
-- Add FM12 to coverage table.
-- Add EF12.1-EF12.6.
-- Update quick check and token-budget sections.
+- Added evaluation preface: examples are probes, not prompt wording.
+- Added C36-C42 checks.
+- Added FM12 to coverage table.
+- Added EF12.1-EF12.6.
+- Updated quick check, token-budget sections, and v0/v1 A/B criteria.
 
 **Done when**:
 
@@ -185,7 +185,7 @@ examples are fixtures, not prompt wording
 
 ### Slice I5 — Final synthesis rewrite
 
-**Status**: pending.
+**Status**: next.
 
 **Goal**: Rewrite `final-findings-synthesis.md` so the new foundation flows through the practical report.
 
@@ -205,6 +205,7 @@ examples are fixtures, not prompt wording
 
 - The synthesis can be read alongside the directory as the concentrated practical report.
 - It no longer says the next step is only EF11 or only Slice 11 work.
+- It does not draft `hsm-build-v1.md`.
 
 ### Slice I6 — Status and index update
 
@@ -267,10 +268,12 @@ We are at:
 I0 complete
 I1 complete
 I2 complete
-I3 next
+I3 complete
+I4 complete
+I5 next
 ```
 
-Do not skip directly to I4-I8.
+Do not skip directly to I6-I8.
 
 ---
 
@@ -296,5 +299,5 @@ one layer
   -> fully absorb correction
   -> verify no local contradiction
   -> record next layer
-  -> stop or ask for next slice
+  -> stop or receive explicit continuation
 ```
