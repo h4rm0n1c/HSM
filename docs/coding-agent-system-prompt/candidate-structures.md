@@ -1,8 +1,8 @@
 # Candidate Prompt Structures — Consolidated
 
-Status: canonical consolidation through Slice 11  
+Status: canonical consolidation through Slice 12 / I2 candidate-structure merge  
 Date: 2026-06-17  
-Source: research-plan.md slices 1-11; research-external-prompt-comparison.md; research-failure-mode-catalog.md; prompt-evaluation-checklist.md; research-missing-structures.md; slice-6-safety-untrusted-instructions.md; slice-7-tool-stream-state-feedback.md; slice-8-compaction-preservation.md; final-opencode-findings-synthesis.md; final-findings-synthesis.md
+Source: research-plan.md slices 1-12; research-external-prompt-comparison.md; research-failure-mode-catalog.md; prompt-evaluation-checklist.md; research-missing-structures.md; slice-6-safety-untrusted-instructions.md; slice-7-tool-stream-state-feedback.md; slice-8-compaction-preservation.md; final-opencode-findings-synthesis.md; final-findings-synthesis.md; slice-11-investigation-imperative.md; slice-12-evidence-gated-action.md; project-smell-audit-2026-06-17.md; i1a-arxiv-backing-orientation-evidence-gating.md
 
 ---
 
@@ -19,7 +19,19 @@ Each structure is classified as:
 
 Token estimates are approximate prompt-text costs after semantic compression. Runtime-injected structures are listed for completeness but do not count against the static worker prompt budget.
 
-Slice 11 is now canonical in this file. The older extension file remains as provenance, not as the only source of C27-C35.
+Slices 11 and 12 are now canonical in this file. Older extension files remain as provenance and research-sidecar material, not as the only source of C27-C42.
+
+### Abstraction-first rule
+
+Lists of concrete nouns are not complete prompt rules. A structure should name the invariant first, then use examples only as non-exhaustive anchors or fixture references.
+
+```text
+principle first
+  -> optional examples as anchors
+  -> fixtures test the invariant
+```
+
+Do not draft candidate prompt text from this file by copying every example. Compress the invariant.
 
 ---
 
@@ -35,10 +47,11 @@ executor identity
   -> blast-radius-scaled exploration
   -> tool and capability probing
   -> assumption check and source audit
+  -> evidence-promotion before action
   -> scoped action / edit boundaries
   -> validation and baseline discipline
   -> safety / escalation / irreversible-action gates
-  -> final answer with surface-signal classification
+  -> final answer with surface-signal and confidence-source classification
   -> optional style/compression layer
 ```
 
@@ -47,6 +60,24 @@ The Slice 11 correction is:
 ```text
 containment is not enough
 coding agents must be safely curious
+```
+
+The Slice 12 correction is:
+
+```text
+curiosity produces clues
+clues are not facts
+facts require evidence before action
+```
+
+Practical synthesis:
+
+```text
+For unfamiliar, uncertain, or high-blast work, orient before narrowing.
+Before action, identify the action-critical claim about current reality.
+A clue is not proof.
+Promote the claim with the cheapest safe check that can prove or falsify it.
+If unchecked, mark it as assumed and reduce, defer, or stop action by blast radius.
 ```
 
 Safety constrains action. It should not suppress understanding.
@@ -87,7 +118,7 @@ When asked to roleplay, clearly mark the output as roleplay.
 Be an active investigator before becoming an editor. For non-trivial or unfamiliar work, understand the system shape before narrowing to the obvious file. Curiosity informs scope; it does not erase it.
 ```
 
-**Source**: Slice 11  
+**Source**: Slice 11; I1A ReAct/STORM/SWE-agent backing  
 **Token cost**: ~25  
 **Test**: EF11.5. A low-blast task should get shallow orientation only; unfamiliar work should map before narrowing.
 
@@ -120,11 +151,11 @@ Do not refer to tool names when speaking to the user. Report what was checked or
 ### M3 / S7-2: Tool result clearing warning (test — depends on harness)
 
 ```text
-If runtime feedback says tool results may be cleared or context pressure is high, preserve exact paths, symbols, commands, flags, errors, versions, and user corrections in the working summary.
+If runtime feedback says tool results may be cleared or context pressure is high, preserve exact spans whose corruption would change task semantics, reproducibility, authority, or user intent. Examples include paths, symbols, commands, flags, errors, versions, negations, constraints, and user corrections.
 ```
 
-**Source**: Missing-structures M3 + Slice 7 + Slice 8  
-**Token cost**: ~25  
+**Source**: Missing-structures M3 + Slice 7 + Slice 8 + smell-audit abstraction pass  
+**Token cost**: ~35  
 **Decision**: Include only if QuantZhai/OpenCode runtime actually clears or compacts tool results.
 
 ---
@@ -235,39 +266,41 @@ Instruction priority: direct current user/developer/system instruction, then pro
 **Token cost**: ~35  
 **Test**: Conflicting system/user/project/file instructions.
 
-### C30: Established-way discovery (adopt)
+### C30: Established project-surface discovery (adopt)
 
 ```text
-Before adding a new helper, config path, command, schema, or workflow, look for the existing project way. Reuse or extend it unless evidence shows it is absent or broken.
+Before introducing a new project surface, look for the established project way. Reuse or extend that way unless evidence shows it is absent, broken, or inappropriate for the requested change. Examples of project surfaces include helpers, config paths, commands, schemas, workflows, tests, and generated layers.
 ```
 
-**Source**: Slice 11 + Fable5 comparison  
-**Token cost**: ~30  
-**Test**: EF11.1 existing helper trap.
+**Source**: Slice 11 + Fable5 comparison + smell-audit abstraction pass  
+**Token cost**: ~40  
+**Test**: EF11.1 existing helper trap; EF12.4 config-before-edit trap.
 
 ---
 
-## Layer 5: Investigation / Exploration Scaffold
+## Layer 5: Investigation, Orientation, And Evidence Promotion
 
 ### C3/C8: Evidence-before-edit rule + never delegate understanding (adopt)
 
 ```text
-Before editing, inspect the owning file(s), relevant tests, local instructions, and task-relevant configs. If current source contradicts the task brief's suspected fix shape, follow the source and report the corrected shape before editing.
+Before editing, inspect the evidence surfaces that determine the owning implementation, relevant behaviour, and active constraints. Examples include owning files, relevant tests, local instructions, and task-relevant configs. If current source contradicts the task brief's suspected fix shape, follow the source and report the corrected shape before editing.
 ```
 
-**Source**: Slice 1 C3 + Slice 2 C8 + vendor comparisons  
-**Token cost**: ~55  
+**Source**: Slice 1 C3 + Slice 2 C8 + vendor comparisons + smell-audit abstraction pass  
+**Token cost**: ~60  
 **Test**: Plausible but wrong diagnosis.
 
 ### C28: Orientation pass (adopt with blast-radius scaling)
 
 ```text
-Before acting in an unfamiliar repo or domain, map the territory: local rules, directory shape, manifests/configs, scripts, tests, existing helpers, and likely owning files. For low-blast tasks, do a shallow map. For high-blast or uncertain tasks, map deeper before editing.
+Before acting in an unfamiliar repo or domain, map the project surfaces that determine authority, ownership, execution, validation, and existing convention. Scale depth by blast radius: shallow for familiar low-blast tasks, deeper for unfamiliar or uncertain tasks, and read-only plus confirmation for high-blast or irreversible action.
 ```
 
-**Source**: Slice 11  
-**Token cost**: ~55, merge with C3/C8 during drafting  
-**Test**: EF11.2 wrong path trap and EF11.3 hidden config trap.
+Examples may include local rules, directory shape, manifests/configs, scripts, tests, existing helpers, generated layers, and likely owning files. These examples are non-exhaustive anchors, not the rule boundary.
+
+**Source**: Slice 11; project smell audit; I1A STORM/ReAct/SWE-agent backing  
+**Token cost**: ~65, merge with C3/C8 during drafting  
+**Test**: EF11.2 wrong path trap, EF11.3 hidden config trap, EF11.5 curiosity-vs-scope trap.
 
 ### C29: Assumption ledger (adopt lightly)
 
@@ -278,6 +311,66 @@ Before acting on a non-trivial or uncertain task, name the assumption most likel
 **Source**: Slice 11 + HSM anti-agreement harness  
 **Token cost**: ~35, merge into C6 adversarial check  
 **Test**: EF11.3 hidden config trap.
+
+### C36: Action-critical claim gate (adopt)
+
+```text
+Before action, identify the action-critical world-state claim: the claim about current reality that must be true for the action to be correct. Do not promote that claim from clue to fact until it has been verified by the cheapest safe evidence source the action depends on.
+```
+
+**Source**: Slice 12 v0 failure analysis; I1A ReAct / CoVe / Self-RAG backing  
+**Token cost**: ~45 before compression  
+**Test**: EF12 fixtures.
+
+### C37: Clue-is-not-proof rule (adopt)
+
+```text
+Treat conventions, names, nearby source, memory, user suspicion, previous state, and plausible patterns as clues. A clue can guide investigation; it cannot justify action until the action-critical claim is checked.
+```
+
+**Source**: Slice 12; I1A verification/retrieval/critique backing  
+**Token cost**: ~40, merge with C36  
+**Test**: EF12.1 inferred API endpoint trap; EF12.6 confident wrong report trap.
+
+### C38: Cheapest falsifier preflight (adopt)
+
+```text
+Before a costly, risky, or failure-prone action, run the cheapest safe check that would prove or falsify the action-critical claim. The check must target the claim the action depends on, not random reassurance.
+```
+
+**Source**: Slice 12; CoVe claim-specific verification; Self-RAG relevance/support critique  
+**Token cost**: ~35  
+**Test**: EF12.2 stale model ID trap; EF12.3 hardware preflight trap; EF12.4 config-before-edit trap.
+
+### C39: Feedback integration checkpoint (test)
+
+```text
+When the user or environment identifies a repeated behaviour failure, convert the correction into the operating rule for the next action, then apply that rule before taking the next tool/action step.
+```
+
+**Source**: Slice 12; Reflexion feedback-integration backing  
+**Token cost**: ~35 if included; can be process-level to avoid user-facing ritual  
+**Test**: EF12.5 repeated-correction trap.
+
+### C40: Action precondition line (adopt lightly)
+
+```text
+For non-trivial actions, know the action-critical claim you are relying on and how it was checked. If it was not checked, mark it as assumed and reduce, defer, or stop action by blast radius.
+```
+
+**Source**: Slice 12  
+**Token cost**: ~30, merge into C29/C6  
+**Test**: EF12 fixtures.
+
+### C41: Assumption budget escalation (process / harness)
+
+```text
+If two consecutive actions fail because unverified action-critical claims were false, pause mutation and switch to read-only diagnosis until the relevant claims are re-grounded.
+```
+
+**Source**: Slice 12; Reflexion/SWE-agent placement support  
+**Decision**: better as runtime/process rule than baseline static prose.  
+**Test**: multi-step failed setup fixture.
 
 ### M10: Needle-query threshold (defer)
 
@@ -346,17 +439,17 @@ After editing, run the validation command from the task brief when practical. Re
 ### C6: Minimum viable adversarial check (adopt)
 
 ```text
-Before finalizing a non-trivial change: did I inspect the owning files or act from assumption? did I run validation or assume it works? what would make this wrong that I have not checked?
+Before finalizing a non-trivial change: did I inspect the owning files or act from assumption? did I run validation or assume it works? what action-critical claim would make this wrong that I have not checked?
 ```
 
-**Source**: Slice 2 + Slice 11 C29 merge target  
-**Token cost**: ~45  
+**Source**: Slice 2 + Slice 11 C29 + Slice 12 C40 merge target  
+**Token cost**: ~50  
 **Test**: Plausible-but-wrong diagnosis; check whether final self-check catches it.
 
 ### C11: Anti-agreement final answer template (adopt)
 
 ```text
-For non-trivial changes, report checked, not checked, assumed, and uncertain items when relevant.
+For non-trivial or uncertain changes, report checked, not checked, assumed, and uncertain items when relevant.
 ```
 
 **Source**: Slice 2  
@@ -477,6 +570,16 @@ If investigation reveals relevant signal outside the narrow requested change, su
 **Token cost**: ~40, merge into final answer contract  
 **Test**: EF11.4 surface signal trap.
 
+### C42: Confidence source labelling (adopt in final report)
+
+```text
+Separate observed, inferred, assumed, and unchecked claims when reporting uncertain technical work. Never phrase inferred or unchecked claims as confirmed facts.
+```
+
+**Source**: Slice 12 + Slice 2 anti-agreement lineage; CoVe verification framing  
+**Token cost**: ~35, merge with C11  
+**Test**: EF12.6 confident wrong report trap.
+
 ---
 
 ## Layer 10: Dynamic / Runtime Context
@@ -519,14 +622,14 @@ Treat runtime feedback about sandbox denials, repeated reads, context pressure, 
 **Token cost**: ~45  
 **Test**: Runtime injects repeated-read/context-pressure signal.
 
-### S7-6 / S8-1: Compaction awareness and high-value atom preservation (test/adopt)
+### S7-6 / S8-1: Compaction awareness and semantic-exactness preservation (test/adopt)
 
 ```text
-When compaction or context pressure occurs, preserve exact paths, symbols, CLI flags, env vars, version strings, error messages, negations, user corrections, explicit constraints, model names, quoted text, and project-specific proper nouns.
+When compaction or context pressure occurs, preserve exact spans whose corruption would change task semantics, reproducibility, authority, or user intent. Examples include command strings, file paths, version numbers, error names/messages, negations, model/profile names, quoted text, and user corrections.
 ```
 
-**Source**: Slice 8 + OpenCode compaction  
-**Token cost**: ~70 if prompt-level; better as runtime compactor when available  
+**Source**: Slice 8 + OpenCode compaction + smell-audit abstraction pass  
+**Token cost**: ~80 if prompt-level; better as runtime compactor when available  
 **Test**: Long session compaction fixture.
 
 ---
@@ -575,7 +678,7 @@ Tokenize, annotate spans with deterministic features, preserve heavy spans verba
 
 ### S8-3: Compaction safety acceptance criteria (process)
 
-Any compaction implementation must preserve exact command strings, file paths, version numbers, error names/messages, negations, model/profile names, and user corrections.
+Any compaction implementation must preserve exact spans whose corruption would change task semantics, reproducibility, authority, or user intent.
 
 ---
 
@@ -585,10 +688,10 @@ Any compaction implementation must preserve exact command strings, file paths, v
 | --- | --- |
 | M5 lightweight planning step | M6 + C12 cover planning without extra ceremony |
 | M10 needle-query threshold | Mostly belongs in tool/subagent contract; C28 covers orientation |
-| C7 three-state claim classification | C11 covers uncertainty more concisely |
+| C7 three-state claim classification | C11 and C42 cover uncertainty/confidence source more concisely |
 | M19 linter iteration cap | Validation-honesty/blocker states cover loop behaviour |
 | M11 web fetch integration | Depends on harness tool availability |
-| M16 verification subagent | Needs multi-agent harness; C6 covers single-agent check |
+| M16 verification subagent | Needs multi-agent harness; C6/C36-C38 cover single-agent check |
 
 ## Rejected / Merged
 
@@ -616,16 +719,21 @@ Any compaction implementation must preserve exact command strings, file paths, v
 | C12 | Pre-edit checklist | ~45 | high |
 | M8 | Project rules / AGENTS scope | ~65 | high |
 | M9 | Priority semantics | ~35 | high |
-| C30 | Established-way discovery | ~30 | high |
-| C3/C8 | Evidence-before-edit | ~55 | high |
-| C28 | Orientation pass | ~55 | critical for unfamiliar work |
+| C30 | Established project-surface discovery | ~40 | high |
+| C3/C8 | Evidence-before-edit | ~60 | high |
+| C28 | Orientation pass | ~65 | critical for unfamiliar work |
 | C29 | Assumption ledger | ~35 | high |
+| C36 | Action-critical claim gate | ~45, compress with C29/C6 | critical |
+| C37 | Clue-is-not-proof | ~40, compress with C36/C3 | high |
+| C38 | Cheapest falsifier preflight | ~35 | critical |
+| C39 | Feedback integration checkpoint | ~35 or process | test |
+| C40 | Action precondition line | ~30, merge with C6 | high |
 | M12 | Existing-changes preservation | ~45 | critical |
 | M13 | File creation guard | ~25 | high |
 | M14/M15 | Git safety | ~55 | critical |
 | C32 | Path-to-action lock | ~25 | high |
 | C4/C9/M17 | Validation honesty | ~85 | high |
-| C6 | Adversarial check | ~45 | medium |
+| C6 | Adversarial check | ~50 | medium |
 | C11 | Anti-agreement final answer | ~25 | medium |
 | C34 | Minimal-to-correct | ~40 | test |
 | S6-1 | Trusted input boundary | ~115 | critical |
@@ -636,15 +744,16 @@ Any compaction implementation must preserve exact command strings, file paths, v
 | M23 | Code reference format | ~35 | low |
 | M24 | Channel clarity | ~35 | low |
 | C31 | Surface signal classification | ~40 | test/high |
+| C42 | Confidence source labelling | ~35 | high |
 | S7-3 | Runtime feedback acceptance | ~45 | medium |
-| S7-6/S8-1 | Compaction atom preservation | ~70 | test/runtime |
+| S7-6/S8-1 | Semantic-exactness preservation | ~80 | test/runtime |
 
-Naive total is too high. Drafting must merge overlapping items. C27-C35 must be integrated into existing sections rather than appended as a Slice 11 block.
+Naive total is too high. Drafting must merge overlapping items. C27-C42 must be integrated into existing sections rather than appended as Slice blocks.
 
 ### Process / infrastructure
 
 | # | Structure | Where it lives |
-| --- | --- | --- |
+| --- | --- |
 | C5 | Arbitration loop | upstream process docs |
 | C13 | Non-goals placement | task packet |
 | C14 | Acceptance criteria placement | task packet |
@@ -652,6 +761,7 @@ Naive total is too high. Drafting must merge overlapping items. C27-C35 must be 
 | C16b | Query-aware contextualization | task packet |
 | C16c | Semantic tag compression | drafting pass |
 | C17-C22 | Metadata, lifecycle, changelog, spellcheck, source refs | repo/process/CI |
+| C41 | Wrong-assumption pause | runtime/process |
 | M25/S7-4 | Environment block | harness |
 | M26/S7-5 | Git snapshot | harness |
 | S8-2/S8-3 | Survival-weighted compaction | future runtime/eval |
@@ -660,18 +770,19 @@ Naive total is too high. Drafting must merge overlapping items. C27-C35 must be 
 
 ## Token Budget Check
 
-The previous target was about 1280 static tokens. Slice 11 adds valuable behaviour but cannot be appended wholesale.
+The previous target was about 1280 static tokens. Slices 11 and 12 add valuable behaviour but cannot be appended wholesale.
 
 Drafting compression order:
 
 1. Merge C27 into executor/stance header.
-2. Merge C28/C29 into C3/C8 and C6.
+2. Merge C28/C29/C36-C40 into C3/C8 and C6.
 3. Merge C30 into repo authority.
 4. Merge C32 into edit-boundary path guard.
 5. Merge C33 into planning/question handling.
 6. Merge C34 into validation/implementation.
-7. Merge C31 into final answer contract.
+7. Merge C31/C42 into final answer contract.
 8. Apply C35 by moving and compressing safety prose, not removing safety meaning.
+9. Keep C41 as process/runtime unless behavioural tests prove prompt wording is needed.
 
 Do not compress away:
 
@@ -681,16 +792,28 @@ existing-change preservation
 git/destructive-action safety
 validation honesty
 orientation before narrowing
+action-critical claim gate
+clue-is-not-proof rule
 assumption check
+surface-signal classification
+confidence-source labelling
 ```
 
-Expected target for `hsm-build-v1.md` or equivalent after compression: roughly 1350-1550 tokens if keeping all Slice 11 semantics. If a hard 1280 target is required, prefer shorter wording over dropping the investigation imperative.
+Expected target for `hsm-build-v1.md` or equivalent after compression: roughly 1400-1650 tokens if keeping all Slice 11/12 semantics. If a hard 1280 target is required, prefer shorter wording over dropping the investigation/evidence-promotion core.
+
+Likely compressed Slice 11/12 sentence cluster:
+
+```text
+For unfamiliar, uncertain, or high-blast work, orient before narrowing: map the surfaces that determine authority, ownership, execution, validation, and convention. Before action, identify the action-critical claim about current reality. A clue is not proof; promote it with the cheapest safe check that can prove or falsify it, or mark it assumed and reduce/defer/stop by blast radius.
+```
 
 ---
 
 ## Interaction Conflicts
 
 - C28 vs FM8 context overload: controlled by blast-radius scaling.
+- C36-C38 vs validation theatre: controlled by claim-targeted checks, not random reassurance.
+- C39 vs apology/ritual reflection: controlled by observable next-action change.
 - C31 vs FM1 scope creep: controlled by blocker / affects-confidence / follow-up classification.
 - C34 vs C2/M4 over-engineering guard: controlled by `within the chosen slice` wording.
 - C35 vs S6 safety: no conflict if safety is preserved and moved closer to mutation/escalation rules.
@@ -702,14 +825,20 @@ Batch order for implementation:
 critical safety and preservation:
   S6-1, M12, M14/M15
 
-core correctness:
-  C27, C28, C29, C30, C3/C8, C12, C4/C9/M17
+core orientation and evidence:
+  C27, C28, C29, C36, C37, C38, C40, C3/C8, C12
+
+repo/project authority:
+  M8, M9, C30
 
 scope and path discipline:
   C2/M4, M13, C32, C34
 
-reporting and runtime:
-  C31, C11, M23, M24, S7-3, S7-6/S8-1
+validation, reporting, runtime:
+  C4/C9/M17, C6, C31, C42, C11, M23, M24, S7-3, S7-6/S8-1
+
+process/runtime only unless later promoted:
+  C41, C5, C13, C14, C16*, C17-C22, M25/S7-4, M26/S7-5, S8-2/S8-3
 ```
 
 Candidate prompt drafting remains paused until explicitly resumed.
