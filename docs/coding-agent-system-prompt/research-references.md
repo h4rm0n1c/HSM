@@ -1,322 +1,364 @@
 # Coding Agent Prompt Research References
 
-Status: pending research queue  
-Purpose: point this subproject at external prompt sources, Qwen-specific prompting notes, academic papers, and model flaw observations without copying large external corpora into HSM.
+Status: canonical source registry through Slice 13  
+Date: 2026-06-24  
+Purpose: track internal authority, external prompt systems, academic research, model-specific observations, and inspected Slice 13 sources without vendoring large external corpora into HSM
 
-## Research rule
+## Research Rule
 
-Do not vendor these sources into this repo.
+Do not treat external prompt dumps, vendor systems, papers, blog posts, Reddit posts, or benchmark claims as authority.
 
-For each source, later research should extract:
+For each source record:
 
 ```text
 Source:
+Source type:
+Inspection status:
 What it is:
-Prompt layer(s) observed:
-Useful shape:
+Layer(s) observed:
+Useful structure:
 Risk / uncertainty:
-Candidate HSM/QuantZhai rule:
-How to test locally:
+What it does not prove:
+Candidate HSM/QuantZhai implication:
+How to inspect or test locally:
 ```
 
-Treat prompt leaks, curated collections, Reddit posts, blog posts, and papers as research inputs, not authority.
+Source types:
 
-## General flaw observations to research and compensate for
+```text
+authority
+primary repository/runtime evidence
+prior art
+external comparison
+academic evidence
+anecdote
+speculative input
+```
 
-These are practical model/task failure shapes that prompt structures should account for.
+---
 
-### Middle detail loss
+## Inspected Slice 13 Sources
 
-Observation:
+### ToolGate: Contract-Grounded and Verified Tool Execution for LLMs
 
-Long prompts, long files, and long conversations can cause important middle-context details to lose influence.
+- URL: https://arxiv.org/abs/2601.04688
+- Type: academic/runtime architecture
+- Status: inspected for Slice 13
+- Supports: separate precondition and postcondition gates over explicit trusted state; tool output should not automatically update trusted world state.
+- Does not prove: that compact static prompt prose can reproduce formal symbolic contracts or runtime guarantees.
+- HSM implication: adopt the precondition/action/postcondition/trusted-state abstraction; place formal enforcement in runtime where possible.
 
-Research links:
+### ToolSandbox: A Stateful, Conversational, Interactive Evaluation Benchmark for LLM Tool Use Capabilities
 
-- `Lost in the Middle: How Language Models Use Long Contexts` — https://arxiv.org/abs/2307.03172
-- `Lost in the Middle, and In-Between: Enhancing Language Models' Ability to Reason Over Long Contexts in Multi-Hop QA` — https://arxiv.org/abs/2412.10079
-- `Found in the Middle: How Language Models Use Long Contexts Better via Plug-and-Play Positional Encoding` — https://arxiv.org/abs/2403.04797
-- `Lost in the Middle: An Emergent Property from Information Retrieval Demands in LLMs` — https://arxiv.org/abs/2510.10276
+- URL: https://arxiv.org/abs/2408.04682
+- Type: academic evaluation benchmark
+- Status: inspected for Slice 13
+- Supports: state dependencies, intermediate milestones, and arbitrary multi-step trajectories are distinct from single-call tool selection.
+- Does not prove: exact prompt wording or a particular recovery state machine.
+- HSM implication: evaluate intermediate state and dependency boundaries separately from final outcome.
 
-Prompt-structure questions:
+### Cordon: Semantic Transactions for Tool-Using LLM Agents
 
-- Should critical acceptance criteria be repeated near the edit/finalization step?
-- Should long task briefs include local checklists immediately before action?
-- Does placing non-goals near file-edit instructions reduce accidental scope creep?
-- Can QuantZhai tests detect whether middle constraints are being dropped?
+- URL: https://arxiv.org/abs/2606.17573
+- Type: academic/runtime architecture
+- Status: inspected for Slice 13
+- Supports: individually plausible calls can compose into cross-step violations; staged effects, result lineage, commit, rollback, recovery, and audit may require task-level runtime support.
+- Does not prove: that every coding task should use formal transactions.
+- HSM implication: import dependency-aware state commitment and recovery, scaled by blast radius; reject universal transaction ceremony.
+
+### AgentProcessBench: Diagnosing Step-Level Process Quality in Tool-Using Agents
+
+- URL: https://arxiv.org/abs/2603.14465
+- Type: academic evaluation benchmark
+- Status: inspected for Slice 13
+- Supports: intermediate action quality, irreversible side effects, and error propagation should be scored separately from final answers.
+- Does not prove: the exact HSM worker loop.
+- HSM implication: identify the first unsupported state commitment where practical.
+
+### SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering
+
+- URL: https://arxiv.org/abs/2405.15793
+- Type: academic agent-interface research
+- Status: inspected previously and reused in Slice 13
+- Supports: environment and interface structure materially affect agent behaviour; prompt text is only one layer.
+- Does not prove: an explicit postcondition commit gate.
+- HSM implication: retain prompt/runtime placement discipline.
+
+### From Agent Traces to Trust: Evidence Tracing and Execution Provenance in LLM Agents
+
+- URL: https://arxiv.org/abs/2606.04990
+- Type: academic survey/synthesis
+- Status: inspected for Slice 13
+- Supports: evidence lineage, observability, debugging, audit, and recovery are connected reliability concerns; final-answer accuracy cannot explain why actions were taken or where state diverged.
+- Does not prove: a specific static prompt structure.
+- HSM implication: treat diagnostically useful execution evidence as a protected runtime surface; do not promise provenance guarantees without runtime support.
+
+### tau-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains
+
+- URL: https://arxiv.org/abs/2406.12045
+- Type: academic benchmark
+- Status: reviewed as supporting context
+- Supports: final-state evaluation and repeated-trial reliability matter; one successful run can hide inconsistency.
+- Does not prove: Slice 13's exact taxonomy.
+- HSM implication: distinguish final state from trajectory quality and avoid claims based on one hand-picked run.
+
+---
+
+## Previously Inspected Academic Foundations
+
+### ReAct
+
+Use: supports interleaving reasoning and environment observations rather than acting only from internal reasoning.
+
+Boundary: does not by itself define evidence sufficiency, state commitment, or recovery.
+
+### Chain-of-Verification
+
+Use: supports deriving verification checks from the claim being tested.
+
+Boundary: does not establish a complete coding-agent runtime contract.
+
+### Self-RAG
+
+Use: supports relevance/support/completeness critique and not treating retrieval as proof.
+
+Boundary: retrieval critique is not equivalent to action gating.
+
+### Reflexion
+
+Use: supports using feedback to change later behaviour.
+
+Boundary: HSM requires observable next-action change, not reflective prose alone.
+
+### CheckList
+
+Use: supports behavioural probes for capabilities and invariants rather than exact wording or exhaustive category lists.
+
+Boundary: dedicated EF13 fixture expansion was skipped; the structural/behavioural distinction remains active in the canonical checklist.
+
+### STORM and related broad-research systems
+
+Use: support orientation and multi-source mapping before premature narrowing.
+
+Boundary: broad research patterns must be blast-radius scaled for coding work.
+
+---
+
+## General Failure Observations
+
+### Middle-detail loss
+
+Observation: long prompts, files, and conversations can reduce the influence of important middle-context details.
+
+Sources:
+
+- Lost in the Middle — https://arxiv.org/abs/2307.03172
+- Lost in the Middle, and In-Between — https://arxiv.org/abs/2412.10079
+- Found in the Middle — https://arxiv.org/abs/2403.04797
+- Lost in the Middle as an IR-demand property — https://arxiv.org/abs/2510.10276
+
+Prompt questions:
+
+- repeat critical non-goals near editing;
+- repeat acceptance criteria near validation;
+- place forgettable high-value constraints near action boundaries;
+- preserve temporal sequence during compression.
 
 ### Instruction overshadowing
 
-Observation:
+Observation: later, concrete, or louder instructions can overpower earlier abstract rules.
 
-Later, more concrete, or louder instructions can overshadow earlier abstract constraints.
+Questions:
 
-Prompt-structure questions:
-
-- Which rules belong in durable base prompt versus task-local checklist?
-- Should safety/edit boundaries be repeated near tool-use instructions?
-- Should style/compression instructions be isolated from correctness instructions?
+- which rules require action-local reminders or runtime gates?
+- should safety/edit boundaries appear near mutation?
+- should recovery rules appear near failure handling?
+- can the model quote a rule while ignoring it at the relevant action point?
 
 ### Tool-result amnesia
 
-Observation:
+Observation: a worker may inspect a result, then drift from the observed fact.
 
-A coding agent may inspect a file or command result, then drift away from the exact observed fact later.
+Questions:
 
-Prompt-structure questions:
-
-- Should agents maintain a tiny explicit working-state summary for owner files, observed facts, and assumptions?
-- Should final answers require observed/fixed/untested separation?
-- Should implementation slices require naming the owning file/function before editing?
+- should runtime maintain compact observed-state summaries?
+- should action results carry observed/inferred/assumed/invalidated status?
+- should run identity and result lineage be explicit?
 
 ### Validation theatre
 
-Observation:
+Observation: partial, synthetic, or absent validation can be reported as stronger than it is.
 
-Agents can present partial, synthetic, or absent validation as stronger than it is.
+Questions:
 
-Prompt-structure questions:
+- retain explicit validation states;
+- require commands run/not run;
+- separate local postcondition checks from final task validation;
+- do not use eventual success to justify unsupported intermediate steps.
 
-- Should validation states be formalized as `not_run`, `focused_pass`, `full_pass`, `smoke_yellow`, `smoke_red`, and `blocked`?
-- Should final answer structure require commands run and commands not run?
-- Should docs avoid words like “green” unless live smoke is actually complete?
+### Semantic coverage without behavioural control
 
-## Academic / arXiv references to inspect later
+Observation: a rule may be present, understood, and quotable after failure but fail to control the next action.
+
+Questions:
+
+- what transition does the rule control?
+- where must it become active?
+- what observable action proves compliance?
+- does the mechanism require runtime support?
+
+### Open-loop state chaining
+
+Observation: a worker may assume action A produced state S1 and perform dependent action B without checking S1.
+
+Questions:
+
+- what postcondition does B require?
+- can A's output directly prove it?
+- what is the cheapest relevant observation?
+- when should dependent mutation pause?
+
+### Diagnostic-evidence destruction
+
+Observation: cleanup, retries, or ephemeral execution can destroy logs/artifacts/state still needed to diagnose or recover.
+
+Questions:
+
+- what evidence has current diagnostic value?
+- is it unique or reproducible?
+- when is cleanup safe?
+- what privacy, secret, storage, or retention constraints apply?
+
+---
+
+## Promptware And Prompt-Lifecycle Research
 
 ### Promptware Engineering
 
-Paper: `Promptware Engineering: Software Engineering for Prompt-Enabled Systems`  
-URL: https://arxiv.org/abs/2503.02400
+- URL: https://arxiv.org/abs/2503.02400
+- Use: prompts as first-class software artifacts with requirements, design, implementation, testing, debugging, evolution, deployment, and monitoring.
+- HSM implication: maintain versioned prompt requirements, source refs, changelog, tests, and explicit lifecycle states.
 
-Reason to inspect:
+### Understanding Prompt Management in GitHub Repositories
 
-- Treats prompts as first-class software artifacts.
-- Frames prompt development as a software-engineering lifecycle: requirements, design, implementation, testing, debugging, evolution, deployment, and monitoring.
-- Strong conceptual match for this subproject because the goal is not magic wording; it is prompt structures with maintainability and tests.
-
-Research questions:
-
-- What lifecycle concepts map cleanly onto QuantZhai prompt development?
-- Can prompt requirements, prompt tests, prompt debugging, and prompt evolution become explicit repo artifacts?
-- How should prompt changes be versioned and evaluated?
-- What parts are too general for coding-agent system prompts?
-
-### Prompt management in GitHub repositories
-
-Paper: `Understanding Prompt Management in GitHub Repositories: A Call for Best Practices`  
-URL: https://arxiv.org/abs/2509.12421
-
-Reason to inspect:
-
-- Empirical study of prompt organization and quality issues in GitHub repositories.
-- Useful for avoiding prompt sprawl, duplication, formatting drift, and unreadable prompt piles.
-
-Research questions:
-
-- What prompt repository anti-patterns should HSM/QuantZhai avoid?
-- Should prompt files have metadata headers, source refs, and explicit status fields?
-- How should duplicate or obsolete prompt fragments be marked?
-- What lint/checklist should apply to prompt files?
-
-### Lost-in-the-middle baseline
-
-Paper: `Lost in the Middle: How Language Models Use Long Contexts`  
-URL: https://arxiv.org/abs/2307.03172
-
-Reason to inspect:
-
-- Found that long-context models often perform best when relevant information appears at the beginning or end of context and worse when it appears in the middle.
-- Directly supports the flaw observation that middle details often get lost.
-
-Research questions:
-
-- What prompt structures compensate for position bias?
-- Should critical constraints appear near both top-level task framing and action/finalization points?
-- How can coding-agent benchmark tasks test for middle-detail retention?
-
-### Lost in the middle for multi-hop reasoning
-
-Paper: `Lost in the Middle, and In-Between: Enhancing Language Models' Ability to Reason Over Long Contexts in Multi-Hop QA`  
-URL: https://arxiv.org/abs/2412.10079
-
-Reason to inspect:
-
-- Extends middle-loss concern to multi-hop reasoning where multiple pieces of evidence are spread across context.
-- Relevant to software tasks that require connecting docs, tests, source code, logs, and runtime behaviour.
-
-Research questions:
-
-- How should coding-agent prompts force reconnection of separated evidence?
-- Should audit outputs include a compact evidence map before implementation?
-- Can source/test/doc/capture facts be converted into a short working packet before edits?
-
-### Positional encoding / middle-context mitigation
-
-Paper: `Found in the Middle: How Language Models Use Long Contexts Better via Plug-and-Play Positional Encoding`  
-URL: https://arxiv.org/abs/2403.04797
-
-Reason to inspect:
-
-- Model-level mitigation for middle-context weakness.
-- Not directly a prompt-engineering paper, but useful for understanding whether the flaw is prompt-solvable, model-solvable, or only partly mitigable by prompt structure.
-
-Research questions:
-
-- Which middle-context failures can prompt structure mitigate?
-- Which failures require model/runtime changes rather than prompt wording?
-- Does QuantZhai's local model/backend expose any positional behaviour worth testing?
+- URL: https://arxiv.org/abs/2509.12421
+- Use: prompt organization, duplication, drift, and repository best practices.
+- HSM implication: avoid sidecar sprawl; fold accepted findings into canonical documents and mark sidecars as provenance.
 
 ### Promptware attacks against production assistants
 
-Paper: `Invitation Is All You Need! Promptware Attacks Against LLM-Powered Assistants in Production Are Practical and Dangerous`  
-URL: https://arxiv.org/abs/2508.12175
+- URL: https://arxiv.org/abs/2508.12175
+- Use: indirect prompt injection, memory poisoning, tool misuse, and invocation risks.
+- HSM implication: preserve trusted-input and tool/mutation authority boundaries.
 
-Reason to inspect:
+### Promptware Kill Chain
 
-- Focuses on malicious promptware, indirect prompt injection, memory poisoning, tool misuse, and agent invocation risks.
-- Relevant for coding agents because tool-capable agents can execute high-impact actions.
+- URL: https://arxiv.org/abs/2601.09625
+- Use: multi-step prompt attacks across access, escalation, persistence, lateral movement, and objectives.
+- HSM implication: lightweight threat model around untrusted text, permissions, memory, and tool side effects.
 
-Research questions:
+---
 
-- What safety boundaries belong in a coding-agent system prompt?
-- How should external instructions found in files/webpages/logs be treated?
-- How should memory/retrieval poisoning risks map into HSM and QuantZhai prompt structures?
+## External Prompt And Agent-System Sources
 
-### Promptware kill chain
+### Claude / Anthropic coding-agent prompts
 
-Paper: `The Promptware Kill Chain: How Prompt Injections Gradually Evolved Into a Multi-Step Malware`  
-URL: https://arxiv.org/abs/2601.09625
+- URL: https://github.com/Piebald-AI/claude-code-system-prompts/tree/main/system-prompts
+- Use: tool discipline, planning, edit safety, subagent architecture, security/disclosure boundaries.
+- Boundary: vendor/harness-specific assumptions must not be copied blindly.
 
-Reason to inspect:
+### OpenAI Codex Max prompt reference
 
-- Frames prompt attacks as multi-step malware-like campaigns: initial access, privilege escalation, persistence, lateral movement, and actions on objective.
-- Useful for coding-agent safety because agents combine prompts, tools, repo access, network access, and sometimes memory.
-
-Research questions:
-
-- Can coding-agent prompts include a lightweight threat model without becoming paranoid sludge?
-- Which operations should always require explicit user approval?
-- How should agents treat instructions embedded in untrusted repository files, docs, issues, webpages, or logs?
-
-## External sources to inspect later
-
-### Claude / Anthropic system prompts
-
-URL: https://github.com/Piebald-AI/claude-code-system-prompts/tree/main/system-prompts
-
-Reason to inspect:
-
-- Reference system prompts for Claude / Anthropic-style coding agents.
-- Useful for comparing tool-use discipline, planning style, refusal/safety boundaries, and repo-edit behaviour.
-
-Research questions:
-
-- How does Claude Code split identity, tool use, safety, and edit discipline?
-- What parts are general coding-agent rules versus Anthropic-specific harness assumptions?
-- Which rules translate well to local Qwen/Codex-style operation?
-- Which rules are too verbose or too vendor-specific?
-
-### OpenAI Codex Max single prompt reference
-
-URL: https://gist.github.com/chigkim/ffed11a3e017d98698707dd24e78af51
-
-Reason to inspect:
-
-- Single reference prompt reportedly associated with OpenAI Codex Max.
-- Useful as a compact comparison target against QuantZhai's `codex-core-qwenified.md` baseline.
-
-Research questions:
-
-- What does it prioritize: autonomy, safety, patching, validation, final answer shape, or tool discipline?
-- Does it separate plan behaviour from implementation behaviour cleanly?
-- Does it contain patterns that explain Codex's observed runtime behaviour?
-- Can any rule be adapted into a Qwen-friendly shorter form?
+- URL: https://gist.github.com/chigkim/ffed11a3e017d98698707dd24e78af51
+- Use: compact comparison for autonomy, patching, validation, and tool discipline.
+- Boundary: provenance and runtime completeness may be uncertain.
 
 ### Curated ChatGPT system prompt list
 
-URL: https://github.com/mustvlad/ChatGPT-System-Prompts
+- URL: https://github.com/mustvlad/ChatGPT-System-Prompts
+- Use: recurring instruction shapes and negative examples.
+- Boundary: curated collections are not authoritative or necessarily current.
 
-Reason to inspect:
+### OpenCode prompt-system family
 
-- Broad curated list of system prompts.
-- Useful for comparing repeated instruction shapes across ChatGPT-like agents.
+Internal research artifacts:
 
-Research questions:
+- `research-opencode-source-map.md`
+- `comparison-opencode-*.md`
+- `comparison-opencode-runtime-assembly.md`
+- `comparison-opencode-plan-mode.md`
+- `comparison-opencode-agent-task-compaction.md`
+- `final-opencode-findings-synthesis.md`
 
-- Which patterns recur across strong prompts?
-- Which patterns are cargo-cult noise?
-- Which prompts distinguish tool behaviour from conversational behaviour?
-- Which prompts preserve uncertainty and evidence boundaries?
+Use: provider-selected base prompts, environment injection, plan/build reminders, permissions, subagent prompts, compaction, TUI state, rollback, diff, and todo workflow.
+
+Slice 13 boundary: current evidence does not establish formal postcondition gates, result lineage, evidence retention, dependency-aware mutation control, or recovery state. Do not assume these capabilities without source/runtime evidence.
+
+---
+
+## Model-Specific And Anecdotal Sources
 
 ### LocalLLaMA Qwen general-use prompt observation
 
-URL: https://www.reddit.com/r/LocalLLaMA/comments/1rxudf2/i_think_i_made_the_best_general_use_system_prompt/
-
-Reason to inspect:
-
-- Potentially useful observation about Qwen model prompting.
-- User flagged it as interesting for local-model behaviour.
-
-Research questions:
-
-- What specific Qwen behaviour does the author claim to improve?
-- Is the gain from identity framing, style, task decomposition, refusal handling, or verbosity control?
-- Is the observation compatible with QuantZhai's local Qwen3.6 setup?
-- Is it testable with coding-agent tasks rather than chat examples?
+- URL: https://www.reddit.com/r/LocalLLaMA/comments/1rxudf2/i_think_i_made_the_best_general_use_system_prompt/
+- Type: anecdotal/model-specific
+- Status: research input, not authority
+- Questions: what behaviour is claimed to improve, is it coding-agent relevant, and can it be reproduced on the local Qwen3.6 stack?
 
 ### Qwen 3.6 Plus coding prompt article
 
-URL: https://rephrase-it.com/blog/how-to-prompt-qwen-36-plus-for-coding
+- URL: https://rephrase-it.com/blog/how-to-prompt-qwen-36-plus-for-coding
+- Type: blog/model-specific
+- Status: research input
+- Questions: which recommendations survive local testing and translate from coding chat to tool-using agent work?
 
-Reason to inspect:
+---
 
-- User flagged it as potentially important for Qwen 3.6 coding prompts.
-- May contain model-specific prompting advice relevant to QuantZhai's Qwen3.6 baseline.
-
-Research questions:
-
-- Does it recommend prompt structures that match observed Qwen3.6 behaviour?
-- Does it emphasize role framing, explicit files, tests, examples, chain-of-thought suppression, or output formatting?
-- Which parts are coding-agent relevant rather than ordinary coding-chat relevant?
-- Can the advice be reduced into compact rules suitable for the QuantZhai prompt stack?
-
-## Local sources to inspect alongside external references
+## Local Authority And Prior Art
 
 ### QuantZhai packaged coding-agent prompt
 
-Local snapshot: `reference-quantzhai-codex-core-qwenified.md`  
-Source repo: `h4rm0n1c/quantzhai`  
-Source path: `prompts/codex-core-qwenified.md`
+- Snapshot: `reference-quantzhai-codex-core-qwenified.md`
+- Source repo: `h4rm0n1c/quantzhai`
+- Source path: `prompts/codex-core-qwenified.md`
+- Role: current local prompt baseline and semantic-compression prior art.
 
-Research use:
+### QuantZhai prompt-policy implementation
 
-- Current local baseline.
-- Compare every external prompt against this before proposing changes.
+- Source path: `proxy/qz_prompt_policy.py`
+- Role: explains prompt replacement, prepend/append policy, system assembly, and turn-harness definitions.
 
-### QuantZhai prompt policy implementation
+### QuantZhai model overrides
 
-Source repo: `h4rm0n1c/quantzhai`  
-Source path: `proxy/qz_prompt_policy.py`
+- Source path: `config/default/model-overrides.json`
+- Role: active prompt selection and model-specific harness configuration.
 
-Research use:
+### HSM workflow patterns
 
-- Explains how system prompt files, replacement policy, prompt append/prepend files, and turn harness definitions are assembled.
-- Needed before proposing live QuantZhai prompt stack changes.
+- File: `workflow-patterns.md`
+- Role: observed human/assistant/coding-worker arbitration and successful local development loops.
 
-### QuantZhai default model overrides
+### Canonical HSM prompt-research outputs
 
-Source repo: `h4rm0n1c/quantzhai`  
-Source path: `config/default/model-overrides.json`
+- `candidate-structures.md` through C47
+- `research-failure-mode-catalog.md` through FM14
+- `prompt-evaluation-checklist.md` through Slice 13
+- `final-findings-synthesis.md` through Slice 13
 
-Research use:
+These are current methodology outputs. Older extension and amendment files are provenance after consolidation.
 
-- Shows the default prompt file selection and active turn harness definitions.
+---
 
-### Prior conversation/workflow pattern captured here
+## Current Research Boundary
 
-Local file: `workflow-patterns.md`
+The source registry now distinguishes inspected Slice 13 evidence from pending research inputs.
 
-Research use:
+Do not overclaim:
 
-- Captures the human/assistant/coding-agent development loop that the prompt should support.
-- Treat as behavioural target material, not merely process notes.
+- papers support architecture, not exact wording;
+- benchmark success does not guarantee local-model behaviour;
+- static prompts cannot guarantee runtime contracts;
+- one successful run is not reliable behavioural control;
+- OpenCode UI/runtime strengths do not imply unverified state-management capabilities.
+
+New sources should be added here when they materially affect candidate structures, failure taxonomy, runtime placement, or synthesis—not merely because they are interesting.
