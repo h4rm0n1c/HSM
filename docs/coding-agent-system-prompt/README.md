@@ -1,6 +1,6 @@
 # Coding Agent System Prompt Subproject
 
-Status: active research workspace; canonical files merged through Slice 12 and evaluation preparation complete  
+Status: active research workspace; Slice 13 closed-loop execution research and synthesis are complete  
 Parent project: Human State Machine  
 Related source project: `h4rm0n1c/quantzhai`
 
@@ -11,111 +11,161 @@ system prompt awakening and improvement research, you tell an agent to read all 
 
 This directory is a dedicated HSM-side workspace for developing coding-agent system prompt structures.
 
-The goal is not to force a single model-internal reasoning style.
+The goal is not to force a single model-internal reasoning style. It is to provide external structure that improves software-development work:
 
-The goal is to provide external structure that helps a coding agent reason better over software-development tasks:
+- clearer task framing;
+- safely curious orientation before premature narrowing;
+- evidence promotion before action;
+- closed-loop execution after action;
+- safer edit and runtime boundaries;
+- evidence-preserving recovery;
+- better validation choices;
+- cleaner confidence-aware reporting;
+- more durable project memory.
 
-- clearer task framing
-- better source inspection
-- better handoff from suspicion to evidence
-- safely curious orientation before premature narrowing
-- evidence promotion before action
-- safer edit boundaries
-- better validation choices
-- cleaner final reporting
-- more durable project memory
-
-It is separate from the main HSM subject-state work, but related. HSM is interested in how models operate over structured state and task packets. A coding agent prompt is a narrower version of that problem:
+The current worker model is:
 
 ```text
-user intent + repo state + tool contract + workflow scaffold
+user intent + repo/runtime state + tool contract + workflow scaffold
   -> orientation / territory mapping
   -> bounded investigation
-  -> evidence-promotion gate
-  -> implementation slice
-  -> validation
+  -> precondition / evidence-promotion gate
+  -> one bounded state transition
+  -> postcondition / dependent-action gate
+  -> trusted-state update or recovery
+  -> final validation
   -> concise report
   -> durable project memory when warranted
 ```
 
-## Current boundary
+## Current research position
 
-Candidate prompt drafting is paused.
-
-Do not produce `candidate-system-prompt-v0.md`, `hsm-build-v1.md`, or any replacement prompt until the user explicitly resumes candidate prompt work.
-
-The research corpus is now canonically merged through Slice 12 in the main files, and I7 evaluation preparation exists:
+Slices 0-12 remain the integrated base. Slice 13 adds the missing back half of evidence-gated action:
 
 ```text
-slices 0-10
-  -> OpenCode resynthesis
-  -> hsm-build-v0.md evaluation
-  -> DeepSeek V4 Flash feedback
-  -> Fable5 distilled prompt comparison
-  -> CL4R1T4S Fable prompt architecture contrast
-  -> Slice 11 investigation imperative
-  -> Slice 12 evidence-gated action correction
-  -> project smell audit / abstraction pass
-  -> I1 research sidecar consolidation
-  -> I2 candidate structures merge
-  -> I3 failure catalog merge
-  -> I4 evaluation checklist merge
-  -> I5 final synthesis rewrite
-  -> I6 status / index update
-  -> I7 evaluation preparation
+verify the state that permits action
+  -> act once
+  -> verify the state produced before dependent action
+  -> if reality differs, preserve needed evidence and re-ground
 ```
 
-Remaining gated work:
+The key distinction is:
 
 ```text
-I8 candidate prompt drafting only if explicitly resumed
+FM12:
+  unverified current-state claim authorizes action
+
+FM13:
+  unverified action result authorizes dependent action
+
+FM14:
+  diagnostic evidence is destroyed before it can support recovery
 ```
+
+The dedicated EF13 fixture-design layer was skipped by user direction. This does not block synthesis or the next prompt-engineering pass.
+
+Read [`RESEARCH_STATUS.md`](RESEARCH_STATUS.md) for the current status matrix and next action.
+
+## Current source-of-truth stack
+
+The original monolithic canonical files remain the Slice 0-12 base. Slice 13 is an authoritative overlay until a later monolithic rewrite is useful.
+
+Read in this order:
+
+1. [`final-findings-synthesis.md`](final-findings-synthesis.md) — canonical synthesis through Slice 12.
+2. [`final-findings-synthesis-amendment-2026-06-23.md`](final-findings-synthesis-amendment-2026-06-23.md) — authoritative Slice 13 correction to the worker loop and synthesis.
+3. [`slice-13-closed-loop-execution.md`](slice-13-closed-loop-execution.md) — primary research source.
+4. [`candidate-structures-slice-13-extension.md`](candidate-structures-slice-13-extension.md) — C43-C47 disposition and C39/C41 revision.
+5. [`research-failure-mode-catalog-slice-13-extension.md`](research-failure-mode-catalog-slice-13-extension.md) — FM13/FM14 taxonomy and relationships.
+6. [`prompt-evaluation-checklist-slice-13-extension.md`](prompt-evaluation-checklist-slice-13-extension.md) — structural-versus-behavioural evaluation implications.
+7. [`candidate-structures.md`](candidate-structures.md), [`research-failure-mode-catalog.md`](research-failure-mode-catalog.md), and [`prompt-evaluation-checklist.md`](prompt-evaluation-checklist.md) — canonical Slice 0-12 bases.
 
 ## Why this belongs here
 
 QuantZhai is the runtime and prior-art source for local coding-agent behaviour, prompt compression, state injection, and harness experiments.
 
-HSM is the better home for the broader methodology work because this prompt research is about:
+HSM is the better home for the methodology because this research concerns:
 
-- task scaffolding for software-development reasoning
-- role and authority boundaries
-- evidence-first task structure
-- evidence-promotion before action
-- prompt compilation
-- instruction layering
-- durable memory discipline
-- human/assistant/coding-agent arbitration
-- safely curious execution without broad unsafe autonomy
+- task scaffolding for software-development reasoning;
+- role and authority boundaries;
+- evidence-first task structure;
+- precondition and postcondition control;
+- prompt compilation and semantic compression;
+- instruction layering;
+- trusted-state and recovery discipline;
+- human/assistant/coding-agent arbitration;
+- safely curious execution without broad unsafe autonomy.
 
-QuantZhai should stay focused on running the thing. This directory exists to design the structures that make the thing work better.
+QuantZhai should stay focused on running the thing. This directory designs the structures that make the thing work better.
 
 ## Directory map
 
+### Core protocol and status
+
 ```text
 README.md
-  This file. Scope, purpose, current boundary, and entry point.
+  This file. Scope, current research position, and entry point.
 
 AGENTS.md
   Local instructions for agents working inside this subproject.
 
 research-plan.md
-  Research protocol: sliced research tasks with verification, correction, and adversarial review gates.
+  Research protocol: sliced research with verification, adversarial review, correction, and confidence.
+
+RESEARCH_STATUS.md
+  Current status, authoritative artifacts, active failure boundaries, next action, and risk register.
 
 canonical-integration-pass-2026-06-17.md
-  Slice-by-slice integration plan. Current canonical merge position is I7 complete; I8 candidate drafting remains gated.
+  Historical controller for the Slice 12 integration pass.
+```
 
-workflow-patterns.md
-  Captured working structures from successful QuantZhai and coding-agent development loops.
+### Current research and synthesis
 
-reference-quantzhai-codex-core-qwenified.md
-  Snapshot copy of the packaged QuantZhai coding-agent system prompt.
+```text
+slice-11-investigation-imperative.md
+  Safely curious orientation before narrowing; C27-C35 and FM11.
 
-research-references.md
-  External prompt sources, academic references, internal project references, and flaw observations queued for later research.
+slice-12-evidence-gated-action.md
+  Action-critical current-state claims and evidence promotion before action; C36-C42 and FM12.
 
-internal-project-references.md
-  Slice 0 output: source matrix with authority classification, freshness, verification findings, and adversarial review.
+slice-13-closed-loop-execution.md
+  Postcondition verification, trusted-state commitment, dependent-action gating, recovery, and evidence preservation.
 
+candidate-structures-slice-13-extension.md
+  C43-C47 disposition; C39/C41 correction; prompt/runtime placement and compression.
+
+research-failure-mode-catalog-slice-13-extension.md
+  FM13 Open-Loop Execution and FM14 Diagnostic-Evidence Destruction.
+
+prompt-evaluation-checklist-slice-13-extension.md
+  Structural-versus-behavioural evaluation, intermediate state control, and recovery implications.
+
+final-findings-synthesis.md
+  Canonical synthesis through Slice 12.
+
+final-findings-synthesis-amendment-2026-06-23.md
+  Authoritative Slice 13 amendment and corrected worker architecture.
+```
+
+### Canonical base files
+
+```text
+candidate-structures.md
+  Canonical Slice 0-12 candidate structures C1-C42.
+
+research-failure-mode-catalog.md
+  Canonical Slice 0-12 failure catalog FM1-FM12.
+
+prompt-evaluation-checklist.md
+  Canonical Slice 0-12 checklist and EF11/EF12 material.
+
+evaluation-plan-ef11-ef12.md
+  Existing behavioural A/B plan. EF13 expansion is not required for the current research sequence.
+```
+
+### Earlier research and provenance
+
+```text
 slice-1-arbitration-loop.md
 slice-2-anti-agreement-self-critique.md
 slice-3-context-position-middle-loss.md
@@ -124,49 +174,22 @@ slice-5-identity-role-and-executor-boundaries.md
 slice-6-safety-untrusted-instructions.md
 slice-7-tool-stream-state-feedback.md
 slice-8-compaction-preservation.md
-  Earlier research slices that built the baseline structure set.
-
-slice-11-investigation-imperative.md
-  Slice 11 research correction: safely curious coding agents, territory mapping before narrowing, surface-signal discipline, assumption ledger, C27-C35, and EF11 fixtures.
-
-slice-12-evidence-gated-action.md
-  Slice 12 research correction: evidence promotion before action, action-critical world-state claims, clue-is-not-proof rule, FM12, C36-C42, and EF12 fixtures.
-
 project-smell-audit-2026-06-17.md
-  Audit of prompt-research bad smells: category-list-as-rule, example leakage, fixture leakage, sidecar drift, prompt/runtime boundary blur, and required abstraction pass before v1.
-
 i1a-arxiv-backing-orientation-evidence-gating.md
-  Full-paper research backing for Slice 11/12 structures and evaluation strategy. Supports architecture, not exact v1 wording.
-
-candidate-structures.md
-  Canonical candidate structures C1-C42, including Slice 11 C27-C35 and Slice 12 C36-C42. Use for future prompt drafting, but do not draft yet.
-
-research-failure-mode-catalog.md
-  Canonical failure-mode catalog FM1-FM12, including FM11 Premature Narrowing / Curiosity Collapse and FM12 Assumption-to-Action Without Evidence Promotion.
-
-prompt-evaluation-checklist.md
-  Canonical evaluation checklist through EF12, including EF11.1-EF11.6, EF12.1-EF12.6, critical non-regression checks, and v0/v1 pass criteria.
-
-evaluation-plan-ef11-ef12.md
-  I7 evaluation preparation plan: how to run v0/v1 A/B against EF11, EF12, and critical non-regression fixtures. No prompt draft.
-
-final-findings-synthesis.md
-  Canonical final synthesis through Slice 12: compact worker inside larger system; safely curious orientation plus evidence-gated action; practical implications for future v1 drafting.
-
-RESEARCH_STATUS.md
-  One-page status matrix, artifact list, fixture coverage, next actions, and risk register.
-
 candidate-structures-slice-11-extension.md
 research-failure-mode-catalog-slice-11-extension.md
 prompt-evaluation-checklist-slice-11-extension.md
 candidate-structures-slice-12-extension.md
 research-failure-mode-catalog-slice-12-extension.md
 prompt-evaluation-checklist-slice-12-extension.md
-  Provenance sidecars retained for audit trail. Canonical material is now merged into the main files above.
-
 final-findings-synthesis-amendment-2026-06-17.md
-  Provenance amendment used before the final synthesis was canonically updated.
+```
 
+These remain provenance and supporting evidence. The 2026-06-23 synthesis amendment supersedes the affected worker-loop conclusions.
+
+### Comparison and OpenCode material
+
+```text
 comparison-quantzhai-codex-core-qwenified.md
 comparison-codex-cli-max.md
 comparison-claude-code.md
@@ -177,14 +200,15 @@ comparison-opencode-plan-mode.md
 comparison-opencode-agent-task-compaction.md
 research-opencode-vs-cli-family.md
 final-opencode-findings-synthesis.md
-  Comparison and OpenCode resynthesis documents.
 ```
+
+Slice 13 preserves the OpenCode resynthesis but changes the interpretation of persistence: continue through grounded recovery, not through unverified state.
 
 ## Research protocol
 
-Start with [`research-plan.md`](research-plan.md) before conducting broad prompt research.
+Start with [`research-plan.md`](research-plan.md) before broad new research.
 
-Every research slice must include:
+Each research conclusion should include:
 
 ```text
 research
@@ -194,62 +218,58 @@ research
   -> conclusion with confidence
 ```
 
-Each conclusion must record:
+Record:
 
-- evidence for
-- evidence against
-- risk or uncertainty
-- whether the result belongs in prompt text, runtime/tooling, docs/process, tests, or nowhere
-- a local test or verification idea when possible
+- evidence for;
+- evidence against;
+- risk or uncertainty;
+- whether the result belongs in prompt text, runtime/tooling, docs/process, evaluation, or nowhere;
+- a local verification idea where useful.
 
-Adversarial review is mandatory. A conclusion that only argues for itself is not finished.
+Adversarial review remains mandatory. A conclusion that only argues for itself is unfinished.
 
 ## Current seed thesis
 
-The best coding-agent prompt should not be just a pile of rules, and it should not try to prescribe one true reasoning method.
+The best coding-agent prompt is neither a pile of rules nor a prescribed hidden reasoning ritual.
 
-It should offer useful task structures:
+It should provide a compact durable scaffold:
 
 ```text
 executor identity
   -> active investigator stance
+  -> authority and trusted-input boundary
   -> tool contract
-  -> repo authority rules
-  -> task-framing scaffold
-  -> orientation / territory-mapping scaffold
-  -> investigation scaffold
-  -> evidence-promotion scaffold
-  -> edit-boundary scaffold
-  -> validation scaffold
-  -> safety/risk handling
-  -> final answer contract
+  -> orientation / territory mapping
+  -> assumption and evidence-promotion scaffold
+  -> bounded state transition
+  -> postcondition / dependent-action scaffold
+  -> recovery and diagnostic-evidence preservation
+  -> edit and safety boundaries
+  -> final validation
+  -> confidence-aware final report
   -> optional style/compression layer
 ```
 
-Each structure should be testable.
+Observable goals include:
 
-If a structure cannot be tested directly, it should at least produce observable behaviour:
-
-- fewer broad sweeps
-- better use of `rg`
-- cleaner patch boundaries
-- fewer fake plans
-- fewer needless questions
-- better escalation behaviour
-- better preservation of user changes
-- more useful final summaries
-- more reliable territory mapping before narrowing
-- fewer wrong-path edits
-- better surfacing of relevant adjacent signal
-- fewer guessed action targets, such as API endpoints, model IDs, config paths, hardware/runtime states, or any equivalent world-state claim
-- better conversion of repeated user/runtime correction into the next operating rule
+- fewer fake plans and guessed action targets;
+- better mapping before narrowing;
+- fewer wrong-path or inactive-config edits;
+- better use of existing project surfaces;
+- verified state transitions before dependent action;
+- less blind retry and duplicate/conflicting work;
+- preservation of evidence required to diagnose failure;
+- correction that changes the next observable action;
+- recovery without task abandonment;
+- better preservation of user work and authority boundaries;
+- honest final validation and uncertainty reporting.
 
 ## Immediate working rule
 
-Build from evidence, not prompt-fashion.
+Build from evidence, not prompt fashion.
 
-Use the QuantZhai packaged prompt as the current local baseline. Compare it against Claude Code, Codex Max, ChatGPT prompt collections, Qwen-specific prompting notes, academic prompt/context-engineering papers, internal HSM/QuantZhai/NetTTS references, observed local QuantZhai behaviour, the repaired OpenCode prompt-system-family synthesis, the Fable5 distilled operating instructions, and the CL4R1T4S Fable prompt dump as an unverified architecture contrast.
+Use the QuantZhai packaged prompt as the local baseline and the complete HSM research stack as design input. External prompt dumps and agent frameworks are research evidence, not authority.
 
-Do not blindly merge all prompt sources. Extract useful structures, test them, and keep only what improves coding-agent behaviour on software-development tasks.
+Do not blindly merge all sources. Extract balanced structures, preserve temporal semantics during compression, and keep only what improves real coding-agent behaviour.
 
-Do not draft candidate prompt text until the user explicitly resumes that stage.
+The next prompt candidate should be rebuilt from the revised synthesis. The earlier chat-produced v2 is a design probe, not the source of truth.
