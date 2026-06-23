@@ -1,6 +1,6 @@
 # Research Status: Coding Agent System Prompt Subproject
 
-Summary: Slices 0-13 are now consolidated into the canonical candidate structures, failure catalogue, evaluation checklist, and final synthesis. Slice 13 sidecars remain provenance only. Dedicated EF13 fixture expansion was skipped by user direction. The next phase is a fresh prompt-engineering pass from the consolidated research stack.
+Summary: Slices 0-13 are consolidated into the canonical candidate structures, failure catalogue, evaluation checklist, final synthesis, research method, source registry, and OpenCode interpretation. Slice 13 sidecars are provenance only. Dedicated EF13 fixture expansion was skipped by user direction. The next phase is fresh prompt engineering from the consolidated research stack.
 
 ---
 
@@ -14,7 +14,7 @@ checklist consolidation                      DONE
 final-synthesis consolidation                DONE
 secondary methodology/source updates         DONE
 sidecar provenance record                    DONE
-consistency sweep                            IN PROGRESS
+consistency sweep                            DONE
 candidate prompt engineering                 NEXT
 ```
 
@@ -68,13 +68,13 @@ behavioural control:
 | `research-references.md` | Canonical source registry including inspected Slice 13 papers. |
 | `final-opencode-findings-synthesis.md` | OpenCode comparison corrected for state-grounded persistence and unproven runtime capabilities. |
 | `evaluation-plan-ef11-ef12.md` | Retained Slice 11/12 plan with explicit boundary; not complete Slice 13 coverage. |
-| `slice-13-consolidation-pass-2026-06-24.md` | Audit record of sidecar-to-canonical fold-in. |
+| `slice-13-consolidation-pass-2026-06-24.md` | Audit record of all seven consolidation passes. |
 
 ---
 
 ## Provenance Artifacts
 
-These remain useful for derivation, detailed adversarial review, and history, but are no longer required overlays:
+These remain useful for derivation and history but are no longer required overlays:
 
 - `slice-13-closed-loop-execution.md` — primary research source;
 - `candidate-structures-slice-13-extension.md` — merged provenance;
@@ -82,7 +82,7 @@ These remain useful for derivation, detailed adversarial review, and history, bu
 - `prompt-evaluation-checklist-slice-13-extension.md` — merged provenance;
 - `final-findings-synthesis-amendment-2026-06-23.md` — merged provenance.
 
-Earlier Slice 11/12 extensions and amendments are likewise provenance after their prior canonical merges.
+Earlier Slice 11/12 extensions and amendments are likewise historical provenance after their canonical merges.
 
 ---
 
@@ -153,7 +153,7 @@ candidate-structures.md
   + research-failure-mode-catalog.md
   + prompt-evaluation-checklist.md
   + final-findings-synthesis.md
-  -> fat coherent prototype
+  -> coherent fat prototype
   -> semantic compression
   -> behavioural review
 ```
