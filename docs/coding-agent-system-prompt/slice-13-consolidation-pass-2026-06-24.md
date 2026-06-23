@@ -135,7 +135,26 @@ The primary Slice 13 research source remains:
 
 Status: **research provenance / source evidence**.
 
-It should remain readable as the detailed derivation of the accepted finding, but future agents should use the canonical consolidated files for current doctrine.
+It remains readable as the detailed derivation of the accepted finding, but future agents should use the canonical consolidated files for current doctrine.
+
+Navigation and status files were updated to point directly at the canonical Slice 13 documents rather than requiring an overlay.
+
+### Pass 7 — Consistency sweep
+
+Verified active canonical headers and current entry points:
+
+- `candidate-structures.md` identifies Slice 13 and C47;
+- `research-failure-mode-catalog.md` identifies Slice 13 and FM14;
+- `prompt-evaluation-checklist.md` identifies Slice 13, C47, and FM14;
+- `final-findings-synthesis.md` identifies itself as the complete Slice 0-13 synthesis;
+- `research-plan.md` includes behavioural-control and downstream-integration requirements;
+- `research-references.md` includes inspected Slice 13 sources;
+- `README.md`, `RESEARCH_STATUS.md`, and `docs/README.md` point to the canonical files;
+- `evaluation-plan-ef11-ef12.md` explicitly limits its claims to Slice 11/12.
+
+Historical Slice 11/12 integration controllers, extension files, and amendments may still contain statements accurate to their original date. They are provenance, not active doctrine, and are labelled as such by current navigation and the consolidation record.
+
+Status: **complete**.
 
 ---
 
