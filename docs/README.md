@@ -13,12 +13,12 @@ Use it to find the current architecture notes, runtime/state design, source boun
 5. [Runtime state and integrity loop](runtime-and-integrity.md) — runtime packet, model boundary, update gate, and truth discipline.
 6. [Identity-as-data contract](identity-as-data-contract.md) — executor/subject separation; subject identity as state data, not model identity.
 7. [Source map and roadmap](source-map-and-roadmap.md) — nearby repositories, implementation phases, and next files.
-8. [Coding agent system prompt subproject](coding-agent-system-prompt/README.md) — separate-but-related workspace for coding-agent prompt development.
+8. [Coding agent system prompt subproject](coding-agent-system-prompt/README.md) — separate-but-related workspace for coding-agent prompt development, now updated through Slice 13 closed-loop execution.
 
 ## Documentation by area
 
 | Area | Document | Use it for |
-| --- | --- | --- |
+|---|---|---|
 | Project overview | [README](../README.md) | What HSM is, what belongs in this repo, source repos, architecture, and working standard. |
 | Agent workflow | [AGENTS](../AGENTS.md) | Operating rules for agents: repo authority, source boundaries, confidence, provenance, write discipline, and anti-agreement requirement. |
 | Truth discipline | [Anti-agreement harness](anti-agreement-harness.md) | Preventing agreement-machine drift; classifying claims; preserving uncertainty, contradictions, source boundaries, and falsification paths. |
@@ -29,16 +29,20 @@ Use it to find the current architecture notes, runtime/state design, source boun
 | Source planning | [Source map and roadmap](source-map-and-roadmap.md) | How `ech0-kn1ght`, `quantzhai`, and `NetTTS` relate to HSM; implementation roadmap and near-next files. |
 | Harness lessons | [Active state harness lessons](active-state-harness-lessons-2026-05-02.md) | Lessons from hosted AI runtime state injection and what HSM should make explicit, inspectable, and update-gated. |
 | Research seed | [Human analogy and memory research seed](human-analogy-and-memory-research-seed-2026-05-02.md) | Seed notes for human-human state maintenance, trust, memory, exhaustion, hyperfocus, and social integrity. |
-| Coding-agent prompt development | [Coding agent system prompt subproject](coding-agent-system-prompt/README.md) | Separate workspace for building a coding-agent system prompt from QuantZhai prior art, workflow observations, and external prompt references. |
-| Coding-agent prompt development | [Canonical integration pass](coding-agent-system-prompt/canonical-integration-pass-2026-06-17.md) | Slice-by-slice controller for integrating Slice 12 and smell-audit findings without giant rewrites. |
-| Coding-agent prompt development | [Final coding-agent prompt synthesis](coding-agent-system-prompt/final-findings-synthesis.md) | Canonical synthesis through Slice 12: compact worker inside larger system; safely curious orientation plus evidence-gated action. |
-| Coding-agent prompt development | [Candidate prompt structures](coding-agent-system-prompt/candidate-structures.md) | Canonical C1-C42 candidate structure set, including Slice 11 C27-C35 and Slice 12 C36-C42. |
-| Coding-agent prompt development | [Failure-mode catalog](coding-agent-system-prompt/research-failure-mode-catalog.md) | Canonical FM1-FM12 failure-mode catalog, including FM11 Premature Narrowing and FM12 Assumption-to-Action Without Evidence Promotion. |
-| Coding-agent prompt development | [Prompt evaluation checklist](coding-agent-system-prompt/prompt-evaluation-checklist.md) | Canonical evaluation checklist and fixtures through EF12, including EF11.1-EF11.6 and EF12.1-EF12.6. |
-| Coding-agent prompt development | [EF11 / EF12 evaluation plan](coding-agent-system-prompt/evaluation-plan-ef11-ef12.md) | I7 behavioural A/B preparation: how to test v0 and future v1 against EF11, EF12, and critical non-regression fixtures. |
-| Coding-agent prompt development | [Research status](coding-agent-system-prompt/RESEARCH_STATUS.md) | Current status matrix, fixture coverage, remaining work, and risk register. |
-| Coding-agent prompt development | [Investigation imperative](coding-agent-system-prompt/slice-11-investigation-imperative.md) | Slice 11 source research: safely curious coding agents, orientation before narrowing, surface-signal discipline, and C27-C35 derivation. |
-| Coding-agent prompt development | [Evidence-gated action](coding-agent-system-prompt/slice-12-evidence-gated-action.md) | Slice 12 source research: action-critical claims, clue-is-not-proof, evidence promotion before action, C36-C42, and EF12 fixtures. |
+| Coding-agent prompt development | [Subproject README](coding-agent-system-prompt/README.md) | Current entry point, source-of-truth stack, Slice 13 status, and prompt-engineering direction. |
+| Coding-agent prompt development | [Research status](coding-agent-system-prompt/RESEARCH_STATUS.md) | Current status matrix, active Slice 13 overlay, failure boundaries, next action, and risk register. |
+| Coding-agent prompt development | [Final coding-agent prompt synthesis](coding-agent-system-prompt/final-findings-synthesis.md) | Canonical synthesis through Slice 12; read with the Slice 13 amendment. |
+| Coding-agent prompt development | [Slice 13 synthesis amendment](coding-agent-system-prompt/final-findings-synthesis-amendment-2026-06-23.md) | Authoritative correction: closed-loop execution, trusted-state commitment, recovery, and diagnostic-evidence preservation. |
+| Coding-agent prompt development | [Slice 13 research](coding-agent-system-prompt/slice-13-closed-loop-execution.md) | Primary research on postconditions, dependent-action gating, state invalidation, and recovery. |
+| Coding-agent prompt development | [Slice 13 candidate structures](coding-agent-system-prompt/candidate-structures-slice-13-extension.md) | C43-C47 disposition, C39/C41 revision, placement, and semantic compression. |
+| Coding-agent prompt development | [Slice 13 failure taxonomy](coding-agent-system-prompt/research-failure-mode-catalog-slice-13-extension.md) | FM13 Open-Loop Execution and FM14 Diagnostic-Evidence Destruction. |
+| Coding-agent prompt development | [Slice 13 checklist extension](coding-agent-system-prompt/prompt-evaluation-checklist-slice-13-extension.md) | Structural-versus-behavioural evaluation implications. Dedicated EF13 fixture expansion was skipped. |
+| Coding-agent prompt development | [Candidate prompt structures](coding-agent-system-prompt/candidate-structures.md) | Canonical C1-C42 Slice 0-12 base; read with the Slice 13 extension. |
+| Coding-agent prompt development | [Failure-mode catalog](coding-agent-system-prompt/research-failure-mode-catalog.md) | Canonical FM1-FM12 Slice 0-12 base; read with the Slice 13 extension. |
+| Coding-agent prompt development | [Prompt evaluation checklist](coding-agent-system-prompt/prompt-evaluation-checklist.md) | Canonical Slice 0-12 checklist; read with the Slice 13 checklist extension. |
+| Coding-agent prompt development | [EF11 / EF12 evaluation plan](coding-agent-system-prompt/evaluation-plan-ef11-ef12.md) | Existing A/B plan. EF13 fixture design is not required for the current sequence. |
+| Coding-agent prompt development | [Investigation imperative](coding-agent-system-prompt/slice-11-investigation-imperative.md) | Slice 11 source research: safely curious coding agents and orientation before narrowing. |
+| Coding-agent prompt development | [Evidence-gated action](coding-agent-system-prompt/slice-12-evidence-gated-action.md) | Slice 12 source research: action-critical claims and evidence promotion before action. |
 
 ## Task-oriented entry points
 
@@ -75,46 +79,56 @@ Read:
 
 Focus on:
 
-- task-relevant state selection
-- readable packet first
-- provenance and confidence labels
-- executor/subject separation
-- subject identity as state data, not model identity
-- update gate after generation
-- no generated-memory contamination
-- preserving uncertainty and contradiction markers under compression
+- task-relevant state selection;
+- readable packet first;
+- provenance and confidence labels;
+- executor/subject separation;
+- subject identity as state data, not model identity;
+- update gate after generation;
+- no generated-memory contamination;
+- preserving uncertainty and contradiction markers under compression.
 
 ### I want to work on coding-agent system prompt development
 
 Read:
 
-- [Coding agent system prompt subproject](coding-agent-system-prompt/README.md)
-- [Coding agent subproject instructions](coding-agent-system-prompt/AGENTS.md)
-- [Research plan](coding-agent-system-prompt/research-plan.md)
-- [Workflow patterns](coding-agent-system-prompt/workflow-patterns.md)
-- [QuantZhai prompt reference snapshot](coding-agent-system-prompt/reference-quantzhai-codex-core-qwenified.md)
-- [Canonical integration pass](coding-agent-system-prompt/canonical-integration-pass-2026-06-17.md)
-- [Final coding-agent prompt synthesis](coding-agent-system-prompt/final-findings-synthesis.md)
-- [Candidate prompt structures](coding-agent-system-prompt/candidate-structures.md)
-- [Failure-mode catalog](coding-agent-system-prompt/research-failure-mode-catalog.md)
-- [Prompt evaluation checklist](coding-agent-system-prompt/prompt-evaluation-checklist.md)
-- [EF11 / EF12 evaluation plan](coding-agent-system-prompt/evaluation-plan-ef11-ef12.md)
+- [Subproject README](coding-agent-system-prompt/README.md)
+- [Subproject instructions](coding-agent-system-prompt/AGENTS.md)
 - [Research status](coding-agent-system-prompt/RESEARCH_STATUS.md)
-- [Investigation imperative](coding-agent-system-prompt/slice-11-investigation-imperative.md)
-- [Evidence-gated action](coding-agent-system-prompt/slice-12-evidence-gated-action.md)
+- [Research plan](coding-agent-system-prompt/research-plan.md)
+- [Final synthesis](coding-agent-system-prompt/final-findings-synthesis.md)
+- [Slice 13 synthesis amendment](coding-agent-system-prompt/final-findings-synthesis-amendment-2026-06-23.md)
+- [Slice 13 research](coding-agent-system-prompt/slice-13-closed-loop-execution.md)
+- [Slice 13 candidate structures](coding-agent-system-prompt/candidate-structures-slice-13-extension.md)
+- [Slice 13 failure taxonomy](coding-agent-system-prompt/research-failure-mode-catalog-slice-13-extension.md)
+- [Slice 13 checklist implications](coding-agent-system-prompt/prompt-evaluation-checklist-slice-13-extension.md)
 - [OpenCode prompt synthesis](coding-agent-system-prompt/final-opencode-findings-synthesis.md)
 
 Focus on:
 
-- building from observed coding-agent behaviour, not generic prompt fashion
-- keeping QuantZhai as runtime/prior art and HSM as the methodology workspace
-- separating core correctness rules from optional style/compression layers
-- treating external prompt dumps as research inputs, not authority
-- slicing research into research, verification, adversarial review, correction, and conclusion phases
-- producing candidate prompt structures that can be tested locally
-- preserving active investigation without letting it become broad unsafe autonomy
-- treating clues as leads, not proof, before action
-- turning repeated user/runtime correction into changed next-action behaviour
+- building from observed coding-agent behaviour, not generic prompt fashion;
+- keeping QuantZhai as runtime/prior art and HSM as the methodology workspace;
+- separating static prompt guidance from runtime guarantees;
+- orienting before narrowing;
+- treating clues as leads, not proof, before action;
+- verifying the state produced by an action before dependent action;
+- preserving evidence needed for diagnosis and recovery;
+- turning correction into changed next-action behaviour;
+- pausing dependent mutation without abandoning useful diagnosis;
+- preserving temporal semantics during prompt compression;
+- balancing correctness, scope, safety, efficiency, and honest reporting.
+
+Current corrected worker frame:
+
+```text
+orient
+  -> verify precondition
+  -> perform one bounded transition
+  -> verify postcondition before dependent action
+  -> continue or preserve evidence and re-ground
+  -> final validation
+  -> confidence-aware report
+```
 
 ### I want to work on quiescent/anchor/trigger state
 
@@ -127,12 +141,12 @@ Read:
 
 Focus on:
 
-- baseline/quiescent state
-- stabilising anchors
-- destabilising cues
-- reaction versus later explanation
-- state modes such as baseline, focused work, defensive, aftershock, integration, and recovery
-- not treating later explanation as automatic truth
+- baseline/quiescent state;
+- stabilising anchors;
+- destabilising cues;
+- reaction versus later explanation;
+- state modes such as baseline, focused work, defensive, aftershock, integration, and recovery;
+- not treating later explanation as automatic truth.
 
 ### I want to work on evidence/provenance/extraction
 
@@ -186,7 +200,7 @@ Working rule:
 - Treat `h4rm0n1c/ech0-kn1ght` as evidence/provenance input.
 - Treat `h4rm0n1c/quantzhai` as runtime/compression/harness prior art.
 - Treat `h4rm0n1c/NetTTS` as deterministic token weighting/segmentation prior art.
-- Treat `docs/coding-agent-system-prompt/` as a separate HSM subproject for coding-agent prompt methodology and research.
+- Treat `docs/coding-agent-system-prompt/` as the HSM subproject for coding-agent prompt methodology and research.
 
 ## Current document inventory
 
