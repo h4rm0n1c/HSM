@@ -1,27 +1,29 @@
 # Research Status: Coding Agent System Prompt Subproject
 
-Summary: slices 0-12 are canonically integrated across candidate structures, failure modes, evaluation checklist, final synthesis, indexes, and evaluation preparation. I7 is now complete: `evaluation-plan-ef11-ef12.md` defines how to test `hsm-build-v0.md` and a future v1 against EF11, EF12, and critical non-regression fixtures. Candidate prompt drafting remains paused until the user explicitly resumes it.
+Summary: Slices 0-12 remain canonically integrated in the original main files. Slice 13 has completed its research, candidate-structure, failure-taxonomy, checklist-impact, and final-synthesis layers. Dedicated EF13 fixture expansion was skipped by user direction. The active research conclusion is now closed-loop execution: verify the state that permits action, then verify the state produced before dependent action; if reality differs, preserve needed evidence and re-ground before mutation continues.
 
 ---
 
 ## Current Boundary
 
-Do not produce `candidate-system-prompt-v0.md`, `hsm-build-v1.md`, or any equivalent replacement prompt yet.
+Do not treat the earlier Slice 12 worker loop as the complete current synthesis.
 
-Current integration position:
+Read the original canonical files together with the Slice 13 amendments and sidecars listed below.
+
+Current update position:
 
 ```text
-I0 integration protocol             DONE
-I1A arXiv backing slice             DONE
-I1B research sidecar consolidation  DONE
-I2 candidate-structures merge       DONE
-I3 failure-mode catalog merge       DONE
-I4 evaluation checklist merge       DONE
-I5 final synthesis rewrite          DONE
-I6 status / index update            DONE
-I7 evaluation preparation           DONE
-I8 candidate prompt drafting        GATED: only if explicitly resumed
+Slice 13 research finding                    DONE
+Slice 13 candidate-structure analysis       DONE
+Slice 13 failure-taxonomy analysis          DONE
+Slice 13 checklist implications             DONE
+EF13 fixture expansion                       SKIPPED BY USER DIRECTION
+Slice 13 final synthesis amendment          DONE
+status / index propagation                   DONE
+candidate prompt engineering                 NEXT WHEN EXPLICITLY CONTINUED
 ```
+
+The project does not need to complete a dedicated EF13 fixture-design slice before using the research findings in the next prompt-engineering pass.
 
 ---
 
@@ -30,11 +32,14 @@ I8 candidate prompt drafting        GATED: only if explicitly resumed
 | Slice / Pass | Status | Key Artifacts | Next Action |
 |---|---|---|---|
 | 0-10 | Complete | earlier slice files | None |
-| 11 | Canonically integrated / needs behavioural eval | `slice-11-investigation-imperative.md`, canonical C27-C35/FM11/EF11 material | Run EF11 A/B during evaluation |
-| 12 | Canonically integrated / needs behavioural eval | `slice-12-evidence-gated-action.md`, canonical C36-C42/FM12/EF12 material | Run EF12 A/B during evaluation |
-| smell audit | Applied through canonical files and indexes | `project-smell-audit-2026-06-17.md` | Use as guard against example leakage during future drafting |
-| arXiv backing | I1A complete | `i1a-arxiv-backing-orientation-evidence-gating.md` | Use as evidence boundary; do not overclaim exact wording |
-| integration pass | I7 complete | `canonical-integration-pass-2026-06-17.md`, `evaluation-plan-ef11-ef12.md` | I8 only if user explicitly resumes candidate prompt drafting |
+| 11 | Integrated / behaviour not exhaustively tested | `slice-11-investigation-imperative.md`, canonical C27-C35/FM11 material | Preserve orientation-before-narrowing semantics |
+| 12 | Integrated / behaviour not exhaustively tested | `slice-12-evidence-gated-action.md`, canonical C36-C42/FM12 material | Preserve pre-action evidence gate |
+| 13 research | Complete | `slice-13-closed-loop-execution.md` | Use as primary new research source |
+| 13 candidate structures | Complete | `candidate-structures-slice-13-extension.md` | Merge semantics into next prompt architecture |
+| 13 failure taxonomy | Complete | `research-failure-mode-catalog-slice-13-extension.md` | Treat FM13/FM14 as active research findings |
+| 13 checklist impact | Complete | `prompt-evaluation-checklist-slice-13-extension.md` | Use dual structural/behavioural distinction; no dedicated fixture pass required now |
+| 13 synthesis | Complete | `final-findings-synthesis-amendment-2026-06-23.md` | Source of truth for affected synthesis claims |
+| EF13 fixtures | Skipped by user direction | none required for this pass | Do not block synthesis or prompt engineering on fixture expansion |
 
 ---
 
@@ -42,78 +47,140 @@ I8 candidate prompt drafting        GATED: only if explicitly resumed
 
 | File | Role |
 |---|---|
-| `canonical-integration-pass-2026-06-17.md` | Slice-by-slice integration controller. Current position: I7 complete; I8 gated. |
-| `candidate-structures.md` | Canonical C1-C42 candidate structures. Use for future prompt drafting, but do not draft v1 yet. |
-| `research-failure-mode-catalog.md` | Canonical FM1-FM12 failure catalog. |
-| `prompt-evaluation-checklist.md` | Canonical checklist through EF12, including v0/v1 pass criteria. |
-| `evaluation-plan-ef11-ef12.md` | I7 behavioural A/B plan for v0/future-v1 across EF11, EF12, and non-regression fixtures. |
-| `final-findings-synthesis.md` | Canonical synthesis through Slice 12: safely curious orientation plus evidence-gated action. |
-| `slice-11-investigation-imperative.md` | Slice 11 research source/provenance. |
-| `slice-12-evidence-gated-action.md` | Slice 12 research source/provenance. |
-| `project-smell-audit-2026-06-17.md` | Bad-smell audit: noun-list-as-rule, example leakage, fixture leakage, sidecar drift, prompt/runtime boundary blur. |
-| `i1a-arxiv-backing-orientation-evidence-gating.md` | Full-paper backing for Slice 11/12 structures and evaluation strategy. |
-| `docs/coding-agent-system-prompt/README.md` | Subproject entry point, updated through I7. |
-| `docs/README.md` | Repo documentation front door, updated through I7. |
+| `slice-13-closed-loop-execution.md` | Primary Slice 13 research: preconditions, postconditions, trusted-state commitment, recovery, and evidence preservation. |
+| `candidate-structures-slice-13-extension.md` | C43-C47 disposition and C39/C41 correction. Reduces the finding to compact prompt-relevant meanings. |
+| `research-failure-mode-catalog-slice-13-extension.md` | Adds FM13 Open-Loop Execution and FM14 Diagnostic-Evidence Destruction; rebalances FM7/FM10/FM12. |
+| `prompt-evaluation-checklist-slice-13-extension.md` | Adds structural-versus-behavioural evaluation and closed-loop checklist implications. Concrete EF13 fixture expansion is intentionally skipped. |
+| `final-findings-synthesis-amendment-2026-06-23.md` | Authoritative amendment to the final synthesis for all Slice 13-affected claims. |
+| `final-findings-synthesis.md` | Canonical synthesis through Slice 12. Read with the 2026-06-23 amendment. |
+| `candidate-structures.md` | Canonical C1-C42 base. Read with the Slice 13 candidate extension. |
+| `research-failure-mode-catalog.md` | Canonical FM1-FM12 base. Read with the Slice 13 FM13/FM14 extension. |
+| `prompt-evaluation-checklist.md` | Canonical checklist through Slice 12. Read with the Slice 13 checklist extension. |
+| `hsm-build-v0.md` or supplied equivalent | Existing prompt specimen whose live failure exposed the open-loop execution gap. |
 
-Provenance sidecars remain for audit trail, but canonical material is in the main files above.
+The Slice 13 sidecars are not speculative scratch notes. They are the current authoritative overlay until a future monolithic canonical rewrite is useful.
 
 ---
 
 ## Integrated Correction State
 
 ```text
-slices 0-10                                DONE
-  -> Slice 11 safely curious orientation    DONE
-  -> Slice 12 evidence-gated action         DONE
-  -> smell-audit abstraction repair         DONE
-  -> I1 research sidecar consolidation      DONE
-  -> I2 candidate structures merge          DONE
-  -> I3 failure catalog merge               DONE
-  -> I4 evaluation checklist merge          DONE
-  -> I5 final synthesis rewrite             DONE
-  -> I6 status / index update               DONE
-  -> I7 evaluation preparation              DONE
-  -> I8 candidate prompt drafting           GATED
+slices 0-10 baseline                         DONE
+  -> Slice 11 safely curious orientation      DONE
+  -> Slice 12 evidence-gated action           DONE
+  -> Slice 13 closed-loop execution           DONE
+       precondition verification
+         -> bounded state transition
+         -> postcondition verification
+         -> trusted-state update or recovery
+       diagnostic-evidence preservation
+       dependency-aware continuation
+```
+
+The corrected worker thesis is:
+
+```text
+orient before narrowing
+verify the state that permits action
+act in a bounded step
+verify the state produced before dependent action
+if reality differs, preserve needed evidence and re-ground
+preserve user work and authority boundaries
+validate the final result honestly
+report confidence sources without smoothing uncertainty
 ```
 
 ---
 
-## Fixture Coverage At Design Level
+## Active Failure-Mode Boundary
 
-| Fixture | FM tested | Research gap addressed |
-|---------|-----------|----------------------|
-| `fake-investigation` | FM3 | Agent must read enough to find which file actually owns the bug |
-| `destructive-git` | FM9 | Agent must avoid destructive git and preserve dirty state |
-| `assumption-cascade` | FM7 | Agent must verify assumptions before editing confusing but correct code |
-| `premature-commitment` | FM5 | Agent must trace enough before committing to a fix |
-| `over-paraphrasing` | FM6 | Agent must preserve exact high-value atoms |
-| `context-overload` | FM8 | Agent must orient without drowning context |
-| `task-abandonment` | FM10 | Agent must not give up after a partial failure |
-| `adversarial-prompt-injection` | FM4 | Agent must treat injected text as data, not instruction |
-| `EF11.1-EF11.6` | FM11 | Safely curious orientation before narrowing |
-| `EF12.1-EF12.6` | FM12 | Evidence promotion before action-critical claims become action |
+```text
+FM7:
+  unchecked assumption propagates through reasoning
 
-EF11/EF12 fixtures are canonical in the checklist and operationalized in `evaluation-plan-ef11-ef12.md`, but still need actual behavioural runs.
+FM12:
+  unverified current-state claim authorizes action
+
+FM13:
+  unverified action result authorizes dependent action
+
+FM14:
+  evidence needed for diagnosis or recovery is destroyed prematurely
+```
+
+Recovery balance:
+
+```text
+FM10:
+  abandon useful diagnosis too early
+
+FM13:
+  continue dependent mutation too early
+
+FM14:
+  destroy the evidence needed to diagnose or recover
+```
+
+Correct recovery:
+
+```text
+unexpected result
+  -> preserve materially useful evidence
+  -> invalidate affected state assumptions
+  -> stop dependent mutation
+  -> continue focused read-only diagnosis
+  -> resume from verified state
+```
 
 ---
 
-## Immediate Next Choices
+## Evaluation Position
 
-The project is back on track at the research layer. Next useful choices are:
+The project retains EF11/EF12 and critical non-regression material, but a dedicated EF13 fixture-design layer is not part of the current sequence.
 
-1. **Run v0 evaluation first** using `evaluation-plan-ef11-ef12.md`.
-2. **Resume candidate drafting explicitly** and create a future `hsm-build-v1.md`, then run v0/v1 A/B.
-3. **Prepare fixture files/scripts** if evaluation should be automated rather than manual.
+The current evaluation insight is still active:
 
-Do not draft v1 unless the user explicitly resumes candidate prompt work.
+```text
+rule present in prompt
+  !=
+rule controls action reliably
+```
+
+Where behavioural testing is performed, record separately:
+
+- semantic recognition;
+- next-action compliance;
+- multi-step trajectory compliance;
+- final outcome.
+
+Do not block research propagation or candidate drafting solely because EF13 fixture files were not created.
+
+---
+
+## Immediate Next Action
+
+The next useful layer is prompt engineering informed by the complete research stack:
+
+```text
+canonical Slice 0-12 corpus
+  + Slice 13 research and sidecars
+  + final synthesis amendment
+  -> fresh candidate prompt architecture
+  -> semantic compression pass
+```
+
+The earlier chat-produced v2 prompt is a design probe, not the source of truth. The next candidate should be rebuilt from the revised synthesis.
 
 ---
 
 ## Risk Register
 
-- **Evaluation theatre**: do not claim v1 improvement until EF11/EF12 and non-regression fixtures are actually run.
-- **Example leakage**: fixture nouns must not become baseline prompt wording.
-- **Paper overclaim**: arXiv evidence supports structures and evaluation strategy, not exact v1 wording or guaranteed DeepSeek behaviour.
-- **Prompt bloat**: Slice 11 and Slice 12 must be semantically merged, not appended wholesale.
-- **Safety regression**: curiosity and evidence-gating do not weaken mutation, privilege, git, or irreversible-action boundaries.
-- **Candidate prompt intentionally paused**: v1 drafting remains gated.
+- **Semantic coverage without control**: a rule may be present and understood but fail to govern the next action.
+- **Open-loop state chaining**: do not treat an attempted action's expected result as current state without relevant verification.
+- **Evidence destruction**: do not automatically clean up or overwrite artifacts still needed for diagnosis or recovery.
+- **Verification theatre**: dependency-aware postcondition checks must not become ceremony around trivial deterministic commands.
+- **Serialization regression**: independent work should remain parallel; only dependency-linked action is gated.
+- **Task-abandonment regression**: pausing mutation for re-grounding is not permission to stop useful read-only diagnosis.
+- **Prompt bloat**: C43-C47 should be compressed into the existing worker loop, not appended as five sermons.
+- **Runtime overclaim**: prompt guidance cannot guarantee formal contracts, rollback, or provenance the harness does not provide.
+- **Safety regression**: closed-loop execution does not weaken permission, destructive-action, user-work, secret, or authority boundaries.
